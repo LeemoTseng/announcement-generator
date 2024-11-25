@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+body {
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  color: #454545;
+  margin: 0;
+}
+
+.header {
+  background: #fff;
+  padding: 10px 50px;
+  border-bottom: 1px solid #BFBFBF;
+  display: flex;
+}
+.header .imgBox {
+  object-fit: contain;
+  width: 100px;
+}
+.header .imgBox img {
+  width: 100%;
+  height: 100%;
+}
+.header .Title {
+  font-size: 16px;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+.sidebar {
+  min-width: 300px;
+  height: 100vh;
+  overflow-y: scroll;
+  border-right: 1px solid #BFBFBF;
+}
+.sidebar .searchBar {
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  border-bottom: 1px solid #BFBFBF;
+  background-color: #fff;
+}
+.sidebar .searchBar input {
+  width: 230px;
+  background: #f4f4f4;
+  padding: 10px;
+  padding-left: 40px;
+  border: none;
+  border-radius: 5px;
+}
+.sidebar .searchBar input:focus {
+  outline: none;
+}
+.sidebar .searchBar .iconSearch {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(50%, -50%);
+  width: 20px;
+}
+.sidebar .searchBar .iconClose {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translate(50%, -50%);
+  width: 20px;
+}
+.sidebar .posters {
+  position: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding-top: 30px;
+}
+.sidebar .posters .sample {
+  margin-top: 20px;
+  overflow: hidden;
+  width: 220px;
+  height: 300px;
+  border-radius: 10px;
+}
+.sidebar .posters .sample .imgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+.mainContent {
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.mainContent .resizer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: 5px solid #838383;
+}
+.mainContent .resizer .icon {
+  cursor: pointer;
+  background: #838383;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  border: 5px solid #838383;
+  padding: 10px;
+  position: absolute;
+}
+.mainContent .resizer .icon:hover {
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
+}
+.mainContent .resizer .icon svg {
+  fill: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.mainContent .artBoard {
+  background: #f4f4f4;
+  width: 100%;
+  height: 200px;
+}
+.mainContent .artBoard .posterReview {
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  height: 100%;
+}
+.mainContent .artBoard .posterReview .imgBox {
+  border-radius: 10px;
+  padding: 30px 0px;
+  width: 700px;
+  height: 1200px;
+}
+.mainContent .artBoard .posterReview .imgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+/*# sourceMappingURL=output.css.map */

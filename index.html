@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Announcement generator</title>
+    <link rel="stylesheet" href="assets/output.css" />
+    <script src="assets/main.js" defer></script>
+  </head>
+  <body>
+    <!-- header start -->
+    <div class="header">
+      <div class="imgBox"><img src="assets/logo.svg" alt="" /></div>
+      <div class="Title"><p>Announcement generator</p></div>
+    </div>
+    <!-- header end -->
+
+    <div style="display: flex">
+      <!-- sidebar start -->
+      <div class="sidebar">
+        <div class="searchBar">
+          <input type="text" placeholder="Search for" />
+          <svg
+            class="iconSearch size-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+            />
+          </svg>
+          <svg
+            class="iconClose size-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </div>
+        <!-- poster start -->
+        <div class="posters">
+          <div class="sample">
+            <div class="imgBox">
+              <img src="https://picsum.photos/200/300" alt="" />
+            </div>
+          </div>
+          <div class="sample">
+            <div class="imgBox">
+              <img src="https://picsum.photos/200/300" alt="" />
+            </div>
+          </div>
+          <div class="sample">
+            <div class="imgBox">
+              <img src="https://picsum.photos/200/300" alt="" />
+            </div>
+          </div>
+        </div>
+        <!-- poster end -->
+      </div>
+      <!-- sidebar end -->
+
+      <!-- posterEdit start -->
+      <div id="dragableContainer" class="mainContent">
+        <div id="topPanel" class="artBoard">
+          <div class="posterReview">
+            <div class="imgBox">
+              <img src="https://picsum.photos/600/1200" alt="" />
+            </div>
+          </div>
+        </div>
+        <!-- $1. resizer -->
+        <div class="resizer">
+          <div id="dragTrigger" class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+            >
+              <path
+                d="M480-80 240-320l57-57 183 183 183-183 57 57L480-80ZM298-584l-58-56 240-240 240 240-58 56-182-182-182 182Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div id="bottomPanel" class="content">
+          <div>
+            <p>公告產生器</p>
+            <p>
+              請於左側選擇模板，並上下對照填妥下列表格，確認無誤後按送出，會將該公告寄送到您填寫的信箱。
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- posterEdit end -->
+    </div>
+  </body>
+</html>
