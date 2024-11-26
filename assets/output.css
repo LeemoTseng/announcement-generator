@@ -25,9 +25,10 @@ body {
 }
 
 .sidebar {
-  min-width: 300px;
+  min-width: fit-content;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: visible;
+  overflow-x: hidden;
   border-right: 1px solid #BFBFBF;
 }
 .sidebar .searchBar {
@@ -131,30 +132,36 @@ body {
 .mainContent .content .title {
   font-size: 20px;
   font-weight: 600;
+  margin: 10px 0;
 }
-.mainContent .content .inputBox {
+.mainContent .content .description {
+  font-weight: 300;
+  padding-top: 0;
+  margin: 0;
+}
+.mainContent .content .form .inputBox {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
 }
-.mainContent .content .inputBox input {
+.mainContent .content .form .inputBox input {
   padding: 10px;
   background: #f4f4f4;
   border: transparent;
   border-radius: 5px;
   margin-top: 10px;
 }
-.mainContent .content .inputBox input:focus {
+.mainContent .content .form .inputBox input:focus {
   outline: none;
 }
-.mainContent .content .inputBox textarea {
+.mainContent .content .form .inputBox textarea {
   padding: 10px;
   background: #f4f4f4;
   border: transparent;
   border-radius: 5px;
   margin-top: 10px;
 }
-.mainContent .content .inputBox textarea:focus {
+.mainContent .content .form .inputBox textarea:focus {
   outline: none;
 }
 

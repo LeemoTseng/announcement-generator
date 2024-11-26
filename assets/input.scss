@@ -41,10 +41,11 @@ body {
 }
 
 .sidebar {
-    min-width: 300px;
+    min-width: fit-content;
 
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: visible;
+    overflow-x: hidden;
     border-right: 1px solid $grey-200;
 
     .searchBar {
@@ -155,13 +156,13 @@ body {
     .artBoard {
         background-color: $grey-50;
         width: 100%;
-        height: auto; 
-        flex: none; 
+        height: auto;
+        flex: none;
         // justify-content: center;
-        
+
         .posterReview {
 
-            iframe{
+            iframe {
                 width: 100%;
                 height: 100%;
             }
@@ -174,36 +175,48 @@ body {
         .title {
             font-size: 20px;
             font-weight: 600;
+            margin: 10px 0;
         }
 
-        .inputBox {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
+        .description {
+            font-weight: 300;
+            padding-top: 0;
+            margin: 0;
+        }
 
-            input {
-                padding: 10px;
-                background: $grey-50;
-                border: transparent;
-                border-radius: 5px;
+        .form {
+
+
+            .inputBox {
                 margin-top: 10px;
+                display: flex;
+                flex-direction: column;
 
-                &:focus {
-                    outline: none;
+                input {
+                    padding: 10px;
+                    background: $grey-50;
+                    border: transparent;
+                    border-radius: 5px;
+                    margin-top: 10px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                textarea {
+                    padding: 10px;
+                    background: $grey-50;
+                    border: transparent;
+                    border-radius: 5px;
+                    margin-top: 10px;
+
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
 
-            textarea {
-                padding: 10px;
-                background: $grey-50;
-                border: transparent;
-                border-radius: 5px;
-                margin-top: 10px;
-
-                &:focus {
-                    outline: none;
-                }
-            }
         }
     }
 

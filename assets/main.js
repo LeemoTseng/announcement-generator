@@ -21,11 +21,9 @@ const smoothHeightChange = (currentHeight, targetHeight, speed = 0.1) => {
   return currentHeight + (targetHeight - currentHeight) * speed;
 };
 
-
 resizer.addEventListener('mousedown', () => {
   isDragging = true;
 });
-
 
 document.addEventListener('mousemove', (e) => {
   if (isDragging) {
