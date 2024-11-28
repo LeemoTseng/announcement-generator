@@ -22,18 +22,16 @@ body {
     background: $white;
     padding: 10px 50px;
     border-bottom: 1px solid $grey-200;
-
     display: flex;
 
     .imgBox {
         object-fit: contain;
-        display: flex;
         justify-content: center;
         align-items: center;
-
+        display: flex;
     }
 
-    .Title {
+    .title {
         font-size: 16px;
         font-weight: 600;
         padding-left: 20px;
@@ -42,11 +40,26 @@ body {
 
 .sidebar {
     min-width: fit-content;
-
     height: 100vh;
     overflow-y: visible;
     overflow-x: hidden;
     border-right: 1px solid $grey-200;
+
+    .imgBox {
+        object-fit: contain;
+        overflow: hidden;
+        display: flex;
+
+        padding-top: 10px;
+        width: fit-content;
+        height: 24px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+    }
 
     .searchBar {
         position: sticky;
@@ -54,6 +67,8 @@ body {
         padding: 10px;
         border-bottom: 1px solid $grey-200;
         background-color: #fff;
+
+
 
         input {
             width: 230px;
@@ -98,11 +113,14 @@ body {
             margin-top: 20px;
 
             overflow: hidden;
-            width: 220px;
-            height: 300px;
+
             border-radius: 10px;
 
             .imgBox {
+                object-fit: fill;
+                width: 220px;
+                height: 300px;
+                overflow: hidden;
 
                 img {
                     width: 100%;
@@ -116,9 +134,25 @@ body {
 
 .mainContent {
     width: 100%;
-    border-radius: 10px;
+    position: relative;
+    // border-radius: 10px;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+
+    .tag {
+        opacity: 0.5;
+        margin: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 5px 20px;
+        background-color: #454545;
+        border-radius: 20px;
+        color: #fff;
+
+    }
 
     .resizer {
         position: relative;
@@ -154,10 +188,10 @@ body {
     }
 
     .artBoard {
+        flex: 0 0 auto;
         background-color: $grey-50;
         width: 100%;
         height: auto;
-        flex: none;
         // justify-content: center;
 
         .posterReview {
@@ -170,7 +204,11 @@ body {
     }
 
     .content {
+        flex: 1;
+        overflow-y: auto;
+        background: #ffffff;
         padding: 10px 20px;
+        height: auto;
 
         .title {
             font-size: 20px;
@@ -184,11 +222,14 @@ body {
             margin: 0;
         }
 
-        .form {
-
+        .formGrid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+            padding-top: 20px;
 
             .inputBox {
-                margin-top: 10px;
+                margin-top: 0px;
                 display: flex;
                 flex-direction: column;
 
@@ -222,9 +263,140 @@ body {
 
 }
 
-// utilities
+.btnGroup {
+    padding: 40px 0;
+    ;
+}
+
+// Utilities
 .diver {
     border-bottom: 1px solid $grey-100;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.inputBox {
+    flex: 1;
+    min-width: 150px;
+}
+
+.label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f4f4f4;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+// Components
+.btnAddNewMember {
+    cursor: pointer;
+    background-color: #f4f4f4;
+
+    width: 100%;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: #454545;
+    padding: 12px 0;
+    margin: 10px 0;
+
+    &:hover {
+        background: #ebebeb;
+    }
+
+}
+
+.btnDefault {
+    padding: 0px 50px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+
+    background: #454545;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background: #333;
+    }
+
+}
+
+.btnOutlineDefault {
+    padding: 0px 50px;
+    height: 40px;
+    border: 1px solid #454545;
+    border-radius: 20px;
+
+    background: #ffffff;
+    color: #454545;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background: #f0f0f0;
+    }
+}
+
+.toaster-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 99;
+}
+
+.toaster {
+    display: flex;
+    align-items: center;
+    opacity: .8;
+    color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-in;
+
+    &.error {
+        background-color: #e54958;
+    }
+
+    &.info {
+        background-color: #3294a3;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
 }

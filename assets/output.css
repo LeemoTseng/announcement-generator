@@ -14,11 +14,11 @@ body {
 }
 .header .imgBox {
   object-fit: contain;
-  display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
 }
-.header .Title {
+.header .title {
   font-size: 16px;
   font-weight: 600;
   padding-left: 20px;
@@ -30,6 +30,18 @@ body {
   overflow-y: visible;
   overflow-x: hidden;
   border-right: 1px solid #BFBFBF;
+}
+.sidebar .imgBox {
+  object-fit: contain;
+  overflow: hidden;
+  display: flex;
+  padding-top: 10px;
+  width: fit-content;
+  height: 24px;
+}
+.sidebar .imgBox img {
+  width: 100%;
+  height: 100%;
 }
 .sidebar .searchBar {
   position: sticky;
@@ -72,9 +84,13 @@ body {
 .sidebar .posters .sample {
   margin-top: 20px;
   overflow: hidden;
+  border-radius: 10px;
+}
+.sidebar .posters .sample .imgBox {
+  object-fit: fill;
   width: 220px;
   height: 300px;
-  border-radius: 10px;
+  overflow: hidden;
 }
 .sidebar .posters .sample .imgBox img {
   width: 100%;
@@ -83,9 +99,22 @@ body {
 
 .mainContent {
   width: 100%;
-  border-radius: 10px;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+.mainContent .tag {
+  opacity: 0.5;
+  margin: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px 20px;
+  background-color: #454545;
+  border-radius: 20px;
+  color: #fff;
 }
 .mainContent .resizer {
   position: relative;
@@ -117,17 +146,21 @@ body {
   transform: translate(-50%, -50%);
 }
 .mainContent .artBoard {
+  flex: 0 0 auto;
   background-color: #f4f4f4;
   width: 100%;
   height: auto;
-  flex: none;
 }
 .mainContent .artBoard .posterReview iframe {
   width: 100%;
   height: 100%;
 }
 .mainContent .content {
+  flex: 1;
+  overflow-y: auto;
+  background: #ffffff;
   padding: 10px 20px;
+  height: auto;
 }
 .mainContent .content .title {
   font-size: 20px;
@@ -139,36 +172,158 @@ body {
   padding-top: 0;
   margin: 0;
 }
-.mainContent .content .form .inputBox {
-  margin-top: 10px;
+.mainContent .content .formGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  padding-top: 20px;
+}
+.mainContent .content .formGrid .inputBox {
+  margin-top: 0px;
   display: flex;
   flex-direction: column;
 }
-.mainContent .content .form .inputBox input {
+.mainContent .content .formGrid .inputBox input {
   padding: 10px;
   background: #f4f4f4;
   border: transparent;
   border-radius: 5px;
   margin-top: 10px;
 }
-.mainContent .content .form .inputBox input:focus {
+.mainContent .content .formGrid .inputBox input:focus {
   outline: none;
 }
-.mainContent .content .form .inputBox textarea {
+.mainContent .content .formGrid .inputBox textarea {
   padding: 10px;
   background: #f4f4f4;
   border: transparent;
   border-radius: 5px;
   margin-top: 10px;
 }
-.mainContent .content .form .inputBox textarea:focus {
+.mainContent .content .formGrid .inputBox textarea:focus {
   outline: none;
+}
+
+.btnGroup {
+  padding: 40px 0;
 }
 
 .diver {
   border-bottom: 1px solid #E7E7E7;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.inputBox {
+  flex: 1;
+  min-width: 150px;
+}
+
+.label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #f4f4f4;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.btnAddNewMember {
+  cursor: pointer;
+  background-color: #f4f4f4;
+  width: 100%;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #454545;
+  padding: 12px 0;
+  margin: 10px 0;
+}
+.btnAddNewMember:hover {
+  background: #ebebeb;
+}
+
+.btnDefault {
+  padding: 0px 50px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background: #454545;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+.btnDefault:hover {
+  background: #333;
+}
+
+.btnOutlineDefault {
+  padding: 0px 50px;
+  height: 40px;
+  border: 1px solid #454545;
+  border-radius: 20px;
+  background: #ffffff;
+  color: #454545;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+.btnOutlineDefault:hover {
+  background: #f0f0f0;
+}
+
+.toaster-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  z-index: 99;
+}
+
+.toaster {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  color: #fff;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-in;
+}
+.toaster.error {
+  background-color: #e54958;
+}
+.toaster.info {
+  background-color: #3294a3;
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /*# sourceMappingURL=output.css.map */
