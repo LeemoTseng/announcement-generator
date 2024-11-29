@@ -400,3 +400,21 @@ textarea {
         }
     }
 }
+
+.icon{
+    padding: 10px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: inline-block;
+
+    &:hover{
+        background: #f3f3f3;
+    }
+
+}
+    .delete{
+        color: rgb(165, 10, 10);
+    }

@@ -70,9 +70,28 @@ btnAddNewMember.addEventListener('click', () => {
   // member form template
   memberFormTemplate = `
   
-    <p style="grid-column: span 12; font-weight: 700; font-size: 16px">
-      新成員(<span>${memberCount}</span>)
-    </p>
+     <div
+      style="grid-column: span 12; font-weight: 700; font-size: 16px"
+    >
+      <p style="display: inline-block">
+        新成員(<span>${memberCount}</span>)<svg
+          onclick="deleteMember(event)"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="icon delete"
+          style="vertical-align: middle; width: 20px; height: 20px"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+          />
+        </svg>
+      </p>
+    </div>
     <div class="inputBox" style="grid-column: span 3">
       <label for="name">姓名</label>
       <input type="text" id="name-${memberCount}" />
@@ -121,6 +140,11 @@ btnAddNewMember.addEventListener('click', () => {
 })
 
 
+function deleteMember(e){
+  e.target.closest('.member').remove();
+}
+
+
 //----------------------//
 // $3. Update poster
 //----------------------//
@@ -137,9 +161,9 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
   const bottomPanel = document.querySelector('#bottomPanel');
   const greeting = document.getElementById('greeting').value;
 
-  // isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
-  // clearError(selectAllInputs(bottomPanel));
-  // console.log(isCompleted);
+  isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
+  clearError(selectAllInputs(bottomPanel));
+  console.log(isCompleted);
 
   if (isCompleted){
     container.innerHTML = '';
@@ -203,12 +227,10 @@ function membersForEach(members) {
       <!-- intro start -->`;
   });
 }
-
 function selectAllInputs(e){
   const allInputs = e.querySelectorAll('input, textarea');
   return allInputs;
 }
-
 function validateRequired(allInputs) {
   let isCompleted = true;
   allInputs.forEach((input)=>{
