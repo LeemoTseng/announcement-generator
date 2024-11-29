@@ -20,37 +20,38 @@ const posterReview = document.querySelector('.posterReview');
 const dragableContainer = document.querySelector('#dragableContainer');
 
 let isDragging = false;
-// console.log(isDragging);
+
+const onMouseMove = (e) => {
+  if (isDragging) {
+    const containerRect = dragableContainer.getBoundingClientRect();
+    const newHeight = e.clientY - containerRect.top;
+
+    const minHeight = 100;
+    const maxHeight = containerRect.height - 100;
+    const adjustedHeight = Math.max(minHeight, Math.min(newHeight, maxHeight));
+
+    topPanel.style.flex = `0 0 ${adjustedHeight}px`;
+    bottomPanel.style.flex = `0 0 ${containerRect.height - adjustedHeight}px`;
+    posterReview.style.height = `${adjustedHeight}px`;
+  }
+};
+
+const onMouseUp = () => {
+  isDragging = false;
+  // console.log(isDragging);
+  document.removeEventListener('mousemove', onMouseMove); 
+  document.removeEventListener('mouseup', onMouseUp); 
+};
 
 resizer.addEventListener('mousedown', () => {
   isDragging = true;
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      // e.preventDefault();
-      console.log(isDragging);
-      const containerRect = dragableContainer.getBoundingClientRect();
-      const newHeight = e.clientY - containerRect.top;
+  // console.log(isDragging);
 
-      const minHeight = 100;
-      const maxHeight = containerRect.height - 100;
-      const adjustedHeight = Math.max(minHeight, Math.min(newHeight, maxHeight));
-
-
-      topPanel.style.flex = `0 0 ${adjustedHeight}px`;
-      bottomPanel.style.flex = `0 0 ${containerRect.height - adjustedHeight}px`;
-      posterReview.style.height = `${adjustedHeight}px`;
-
-    } else {
-      isDragging = false;
-    }
-  });
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
 
-document.addEventListener('mouseup', (e) => {
-  if (isDragging) {
-    isDragging = false;
-  }
-});
+
 
 //----------------------//
 // $2. Insert member's form
@@ -140,7 +141,7 @@ btnAddNewMember.addEventListener('click', () => {
 })
 
 
-function deleteMember(e){
+function deleteMember(e) {
   e.target.closest('.member').remove();
 }
 
@@ -165,21 +166,21 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
   clearError(selectAllInputs(bottomPanel));
   console.log(isCompleted);
 
-  if (isCompleted){
+  if (isCompleted) {
     container.innerHTML = '';
     const members = document.querySelectorAll('.member');
     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
     // console.log(membersForEach(members));
-      iframeDoc.querySelector('#greeting').innerText = greeting;
-    } else{
-      showToaster('請將表單填寫完整', 'error', 2000);
-    }
+    iframeDoc.querySelector('#greeting').innerText = greeting;
+  } else {
+    showToaster('請將表單填寫完整', 'error', 2000);
+  }
 
   // console.log('update poster');
 });
 
 function membersForEach(members) {
-  return Array.from(members).map((member) => { 
+  return Array.from(members).map((member) => {
     const memberId = member.getAttribute('data-member-id');
     const name = document.getElementById(`name-${memberId}`).value;
     const email = document.getElementById(`email-${memberId}`).value;
@@ -227,14 +228,14 @@ function membersForEach(members) {
       <!-- intro start -->`;
   });
 }
-function selectAllInputs(e){
+function selectAllInputs(e) {
   const allInputs = e.querySelectorAll('input, textarea');
   return allInputs;
 }
 function validateRequired(allInputs) {
   let isCompleted = true;
-  allInputs.forEach((input)=>{
-    if(input.value.trim() === ''){
+  allInputs.forEach((input) => {
+    if (input.value.trim() === '') {
       error(input);
       isCompleted = false;
     }
@@ -246,14 +247,14 @@ function error(input) {
   input.style.border = '1px solid red';
 }
 
-function clearError(inputs){
-  inputs.forEach((input)=>{
-    input.addEventListener('input',(e)=>{
+function clearError(inputs) {
+  inputs.forEach((input) => {
+    input.addEventListener('input', (e) => {
       e.target.style.border = '1px solid #e0e0e0';
     })
   })
- 
-  
+
+
 }
 
 
