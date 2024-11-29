@@ -24,7 +24,7 @@
           <p style="font-size: 12px">Announcement</p>
         </div>
         <div class="searchBar">
-          <input type="text" placeholder="Search for" />
+          <input type="text" id="search" placeholder="Search for" />
           <svg
             class="iconSearch size-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
 
       <!-- posterEdit start -->
       <div id="dragableContainer" class="mainContent">
-        <div class="tag">Viewer</div>
+        <div class="tag">View</div>
         <div id="topPanel" class="artBoard">
           <div class="posterReview">
             <iframe id="poster" src="announcement-intro.html"></iframe>
@@ -109,15 +109,29 @@
           <!-- form start -->
           <div class="formGrid">
             <div class="inputBox" style="grid-column: span 5">
-              <label for="email">Your email</label>
-              <input type="email" id="email" />
+              <label for="email">您的信箱</label>
+              <input
+                type="email"
+                id="yourEmail"
+                placeholder="公告信件將發送至此信箱"
+              />
             </div>
             <div class="inputBox" style="grid-column: span 12">
-              <label for="greeting">招呼詞</label>
-              <textarea id="greeting" rows="4">
-各位同仁，
-我們誠摯歡迎下列新進同仁加入台驊集團，希望大家能給予他們溫暖的問候以及強而有力的幫助；在茶水間相遇時，不吝嗇與他們聊天，可分享你在台驊的經驗，讓他們感受到各位的熱情；中午用餐相遇時，可以邀請他們共進午餐唷！以下是他們的聯絡方式，趕緊邀約他們吧~
-              </textarea>
+              <label for="greeting">主旨</label>
+              <textarea id="greeting" rows="4"></textarea>
+            </div>
+            <div
+              style="
+                grid-column: span 12;
+                width: 100%;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <input type="checkbox" id="save" rows="4" />
+              <label for="save" style="font-size: 14px; margin-left: 5px"
+                >將本次內容儲存為固定範本</label
+              >
             </div>
           </div>
           <div style="grid-column: span 8"></div>
@@ -131,11 +145,15 @@
               </p>
               <div class="inputBox" style="grid-column: span 3">
                 <label for="name">姓名</label>
-                <input type="text" id="name-1" />
+                <input type="text" id="name-1" placeholder="姓名 Name" />
               </div>
               <div class="inputBox" style="grid-column: span 3">
                 <label for="email">Email</label>
-                <input type="email" id="email-1" />
+                <input
+                  type="email"
+                  id="email-1"
+                  placeholder="email@t3ex-thi.com"
+                />
               </div>
               <div class="inputBox" style="grid-column: span 2">
                 <label for="startDate">報到日</label>
@@ -143,27 +161,47 @@
               </div>
               <div class="inputBox" style="grid-column: span 2">
                 <label for="location">工作地點</label>
-                <input type="text" id="location-1" />
+                <input
+                  type="text"
+                  id="location-1"
+                  placeholder="台北12樓辦公室"
+                />
               </div>
               <div class="inputBox" style="grid-column: span 2">
                 <label for="extension">聯絡分機</label>
-                <input type="text" id="extension-1" />
+                <input type="text" id="extension-1" placeholder="000" />
               </div>
               <div class="inputBox" style="grid-column: span 4">
                 <label for="position">部門職位</label>
-                <input type="text" id="position-1" />
+                <input
+                  type="text"
+                  id="position-1"
+                  placeholder="公司_組別_職務"
+                />
               </div>
               <div class="inputBox" style="grid-column: span 4">
                 <label for="supervisor">部門主管</label>
-                <input type="text" id="supervisor-1" />
+                <input
+                  type="text"
+                  id="supervisor-1"
+                  placeholder="名字（管轄範圍）"
+                />
               </div>
               <div class="inputBox" style="grid-column: span 4">
                 <label for="dirSupervisor">直屬主管</label>
-                <input type="text" id="dirSupervisor-1" />
+                <input
+                  type="text"
+                  id="dirSupervisor-1"
+                  placeholder="名字（管轄範圍）"
+                />
               </div>
               <div class="inputBox" style="grid-column: span 12">
                 <label for="introduction">自我介紹</label>
-                <textarea id="introduction-1" rows="3"></textarea>
+                <textarea
+                  id="introduction-1"
+                  rows="3"
+                  placeholder="自我介紹區塊"
+                ></textarea>
               </div>
               <div class="inputBox" style="grid-column: span 4">
                 <label for="profile">圖片</label>
@@ -174,9 +212,8 @@
           </div>
           <button class="btnAddNewMember" id="btnAddNewMember">新增成員</button>
           <div class="btnGroup">
-            <button class="btnOutlineDefault" id="btnUpdate">
-              Update Viewer
-            </button>
+            <!-- $3. Update poster -->
+            <button class="btnOutlineDefault" id="btnUpdate">更新公告</button>
             <button class="btnDefault" id="btnSend">Send</button>
           </div>
 
@@ -185,7 +222,7 @@
       </div>
       <!-- posterEdit end -->
     </div>
-    <!-- toaster -->
+    <!-- $99. Toaster -->
     <div id="toaster-container" class="toaster-container"></div>
   </body>
 </html>

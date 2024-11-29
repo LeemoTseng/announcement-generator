@@ -6,9 +6,9 @@
 // $1. Resizer
 // $2. Insert member's form
 // $3. Update poster
-// 
+// $4. Save as sample
 //
-//  ??. Toaster
+//  $99. Toaster
 
 //----------------------//
 // $1. Resizer
@@ -125,91 +125,169 @@ btnAddNewMember.addEventListener('click', () => {
 // $3. Update poster
 //----------------------//
 
+
 document.getElementById('btnUpdate').addEventListener('click', () => {
+
+  let isCompleted = true;
 
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
   const container = iframeDoc.querySelector('#container');
+  const bottomPanel = document.querySelector('#bottomPanel');
+  const greeting = document.getElementById('greeting').value;
 
-  container.innerHTML = '';
+  // isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
+  // clearError(selectAllInputs(bottomPanel));
+  // console.log(isCompleted);
 
-  const members = document.querySelectorAll('.member');
+  if (isCompleted){
+    container.innerHTML = '';
+    const members = document.querySelectorAll('.member');
+    container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
+    // console.log(membersForEach(members));
+      iframeDoc.querySelector('#greeting').innerText = greeting;
+    } else{
+      showToaster('請將表單填寫完整', 'error', 2000);
+    }
 
-  members.forEach((member) => {
+  // console.log('update poster');
+});
+
+function membersForEach(members) {
+  return Array.from(members).map((member) => { 
     const memberId = member.getAttribute('data-member-id');
     const name = document.getElementById(`name-${memberId}`).value;
     const email = document.getElementById(`email-${memberId}`).value;
     const startDate = document.getElementById(`startDate-${memberId}`).value;
     const position = document.getElementById(`position-${memberId}`).value;
-    const dirSupervisor = document.getElementById(`position-${memberId}`).value;
-    const supervisor = document.getElementById(`position-${memberId}`).value;
+    const dirSupervisor = document.getElementById(`dirSupervisor-${memberId}`).value;
+    const supervisor = document.getElementById(`supervisor-${memberId}`).value;
     const location = document.getElementById(`location-${memberId}`).value;
     const extension = document.getElementById(`extension-${memberId}`).value;
+    const image = document.getElementById(`profile-${memberId}`).value;
+    const imageName = image.split('\\').pop();
     const introduction = document.getElementById(`introduction-${memberId}`).value;
 
-    const newRowTemplate = `
-          <!-- intro start -->
-          <table
-            style="padding: 0; margin: 0; margin-top: 10px"
-            border="0"
-            cellpadding="5"
-            cellspacing="0"
-          >
-            <tr>
-              <td>
-                <img
-                  style="border-radius: 10px"
-                  src="https://fakeimg.pl/300x320/eee/"
-                  alt=""
-                />
-              </td>
-              <td style="padding: 10px">
-                <p
-                  style="
-                    font-size: 14px;
-                    font-weight: 500;
-                    padding: 10px px;
-                    margin: 0;
-                  "
-                >
-                  自我介紹 Self-Introduction
-                </p>
-                <p
-                  style="
-                    font-size: 20px;
-                    font-weight: 800;
-                    padding-top: 10px;
-                    margin: 0;
-                  "
-                >
-                  ${name}
-                </p>
-                <p style="font-size: 16px; line-height: 24px">
-                  ${introduction}
-                </p>
-                <hr />
-                <p style="font-size: 14px;">報到日期: ${startDate}</p>
-                <p style="font-size: 14px;">部門職位: ${position}</p>
-                <p style="font-size: 14px;">直屬主管: ${dirSupervisor}</p>
-                <p style="font-size: 14px;">部門主管: ${supervisor}</p>
-                <p style="font-size: 14px;">工作地點: ${location}</p>
-                <p style="font-size: 14px;">聯絡分機: ${extension}</p>
-                <p style="font-size: 14px;">E-mail: ${email}</p>
-              </td>
-            </tr>
-          </table>
-          <!-- intro end -->
-    `;
-    container.insertAdjacentHTML('beforeend', newRowTemplate)
+    return `
+      <!-- intro start -->
+      <table
+        style="padding: 0; margin: 0; margin-top: 10px"
+        border="0"
+        cellpadding="5"
+        cellspacing="0"
+      >
+        <tr>
+          <td>
+            <img
+              style="border-radius: 10px; width: 350px"
+              src="assets/${imageName}"
+              alt=""
+            />
+          </td>
+          <td style="padding: 10px">
+            <p style="font-size: 14px; font-weight: 500;">自我介紹 Self-Introduction</p>
+            <p style="font-size: 20px; font-weight: 800;">${name}</p>
+            <p style="font-size: 16px;">${introduction}</p>
+            <div style="border-top: 1px solid #e0e0e0; width: 100%; margin: 10px 0;"></div>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">報到日期 <span style="color: rgb(134, 134, 134);">${startDate}</span></p>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">部門職位 <span style="color: rgb(134, 134, 134);">${position}</span></p>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">直屬主管 <span style="color: rgb(134, 134, 134);">${dirSupervisor}</span></p>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">部門主管 <span style="color: rgb(134, 134, 134);">${supervisor}</span></p>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">工作地點 <span style="color: rgb(134, 134, 134);">${location}</span></p>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">聯絡分機 <span style="color: rgb(134, 134, 134);">${extension}</span></p>
+            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">E-mail <span style="color: rgb(134, 134, 134);">${email}</span></p>
+          </td>
+        </tr>
+      </table>
+      <!-- intro start -->`;
+  });
+}
 
+function selectAllInputs(e){
+  const allInputs = e.querySelectorAll('input, textarea');
+  return allInputs;
+}
+
+function validateRequired(allInputs) {
+  let isCompleted = true;
+  allInputs.forEach((input)=>{
+    if(input.value.trim() === ''){
+      error(input);
+      isCompleted = false;
+    }
   })
+  return isCompleted;
+}
 
-  console.log('update poster');
-});
+function error(input) {
+  input.style.border = '1px solid red';
+}
+
+function clearError(inputs){
+  inputs.forEach((input)=>{
+    input.addEventListener('input',(e)=>{
+      e.target.style.border = '1px solid #e0e0e0';
+    })
+  })
+ 
+  
+}
+
+
+
 
 
 //----------------------//
-// ??. Toaster
+// $4. Save as sample
+//----------------------//
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const greeting = document.getElementById('greeting');
+//   const saveCheckbox = document.getElementById('save');
+//   const btnUpdate = document.getElementById('btnUpdate');
+
+//   const savedGreeting = getCookies('greeting');
+//   if (savedGreeting) {
+//     greeting.value = savedGreeting;
+//   } else {
+//     console.log('xxx');
+//   }
+//   btnUpdate.addEventListener('click', () => {
+//     const currentGreeting = greeting.value;
+//     if (saveCheckbox.checked) {
+//       setCookies("greeting", savedGreeting, 30);
+//       console.log(currentGreeting);
+//     } else {
+//       console.log('xxx');
+//     }
+
+//   })
+
+// });
+
+// function setCookies(name, value, days) {
+//   const date = new Date();
+//   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+//   const expires = `expires=${date.toUTCString()}`
+//   document.cookie = `${name}=${value};${expires};path=/`;
+// }
+
+// function getCookies(name) {
+//   const nameEQ = `${name}=`;
+//   const cookies = document.cookie.split(";"); 
+//   for (let cookie of cookies) {
+//     while (cookie.charAt(0) === " ") cookie = cookie.substring(1);
+//     if (cookie.indexOf(nameEQ) === 0) return cookie.substring(nameEQ.length);
+//   }
+
+// }
+
+
+
+
+//----------------------//
+// $99. Toaster
 //----------------------//
 
 
@@ -230,8 +308,8 @@ function showToaster(message, type = "info", duration = 3000) {
 }
 
 document.getElementById("btnUpdate").addEventListener("click", async () => {
-  showToaster("公告已成功更新！", "info", 3000);
-  showToaster("失敗！請洽管理員", "error", 3000);
+  // showToaster("公告已成功更新！", "info", 3000);
+  // showToaster("失敗！請洽管理員", "error", 3000);
 
   // try {
   //   const res = await fetch("...", { method: "POST" });
