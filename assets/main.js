@@ -38,15 +38,14 @@ const onMouseMove = (e) => {
 
 const onMouseUp = () => {
   isDragging = false;
-  // console.log(isDragging);
+  console.log("isDragging:", isDragging);
   document.removeEventListener('mousemove', onMouseMove); 
   document.removeEventListener('mouseup', onMouseUp); 
 };
 
 resizer.addEventListener('mousedown', () => {
   isDragging = true;
-  // console.log(isDragging);
-
+  console.log("isDragging:",isDragging);
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
@@ -164,7 +163,7 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
 
   isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
   clearError(selectAllInputs(bottomPanel));
-  console.log(isCompleted);
+  console.log("isCompleted:",isCompleted);
 
   if (isCompleted) {
     container.innerHTML = '';
@@ -172,11 +171,11 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
     // console.log(membersForEach(members));
     iframeDoc.querySelector('#greeting').innerText = greeting;
+    showToaster('更新完成','info',2000);
   } else {
-    showToaster('請將表單填寫完整', 'error', 2000);
+    showToaster('表單未完成。', 'error', 2000);
   }
 
-  // console.log('update poster');
 });
 
 function membersForEach(members) {
