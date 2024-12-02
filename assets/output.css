@@ -13,8 +13,81 @@ li {
   margin: 0;
 }
 
+#steps .step-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: none;
+}
+#steps .step-highlight {
+  position: absolute;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 1001;
+  display: none;
+  pointer-events: none;
+}
+#steps .step-tooltip {
+  position: absolute;
+  width: 400px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1002;
+  display: none;
+  margin: 5px;
+  padding: 5px 10px;
+}
+#steps .step-tooltip .stepBtn {
+  text-align: center;
+  border: 1px solid #454545;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+#steps .step-tooltip .stepBtn:hover {
+  cursor: pointer;
+  background: #f4f4f4;
+}
+
+#sidebar2 {
+  display: none;
+  min-width: 50px;
+  height: 100vh;
+  overflow-y: visible;
+  overflow-x: hidden;
+  border-right: 1px solid #BFBFBF;
+}
+#sidebar2 .title .iconOpened {
+  width: 18px;
+  color: #838383;
+  margin: 5px;
+  padding: 10px;
+}
+#sidebar2 .title .iconOpened:hover {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  animation: hoverAnimation 0.2s ease-in-out forwards;
+}
+@keyframes hoverAnimation {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #f4f4f4;
+  }
+}
+
 .sidebar {
-  min-width: fit-content;
   min-width: 250px;
   height: 100vh;
   overflow-y: visible;
@@ -31,7 +104,7 @@ li {
   align-items: center;
   gap: 5px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-  padding: 10px 5px;
+  padding: 10px 10px;
   width: 100%;
   height: 26px;
 }
@@ -45,30 +118,10 @@ li {
   font-size: 16px;
   font-weight: 600;
 }
-.sidebar .title .iconMenu {
-  width: 40px;
-  left: 20px;
-  color: #838383;
-  padding: 5px;
-}
-.sidebar .title .iconMenu:hover {
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 5px;
-  animation: hoverAnimation 0.2s ease-in-out forwards;
-}
-@keyframes hoverAnimation {
-  0% {
-    background-color: transparent;
-  }
-  100% {
-    background-color: #f4f4f4;
-  }
-}
 .sidebar .title .iconFold {
   position: absolute;
   width: 18px;
-  right: 20px;
+  right: 25px;
   color: #838383;
   padding: 5px;
 }
@@ -93,7 +146,7 @@ li {
   padding: 5px;
 }
 .sidebar .allPosters .poster .title {
-  padding: 0px 5px;
+  padding: 10px 0 5px 10px;
   margin: 0;
   font-weight: 600;
   color: #454545;

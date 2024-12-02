@@ -2,13 +2,83 @@
 // INDEX
 //----------------------//
 //
-// $0. Poster
+// $0. Tips
 // $1. Resizer
 // $2. Insert member's form
 // $3. Update poster
 // $4. Save as sample
-//
+// $5. isVisible sidebar
 // $99. Toaster
+
+//----------------------//
+// $0. Tips
+//----------------------//
+
+const steps = [
+  { element: "#step1", text: "1/3 - 於側邊欄選擇公告模板。" },
+  { element: "#step2", text: "2/3 - 瀏覽公告模板。可點選中央圖示拉伸畫面區域。" },
+  { element: "#step3", text: "3/3 - 編輯表單後，點選「更新」按鈕，可更新上翻瀏覽公告模板；點選「寄出」則寄出至填寫的信箱。" },
+];
+
+let currentStep = 0;
+
+const mask = document.querySelector(".step-mask");
+const highlight = document.querySelector(".step-highlight");
+const tooltip = document.querySelector(".step-tooltip");
+const stepText = document.getElementById("stepText");
+const nextButton = document.getElementById("nextStep");
+const closeButton = document.getElementById("closeGuide");
+
+
+const guideButton = document.getElementById("guideButton");
+guideButton.addEventListener("click", startGuide);
+
+
+
+function showStep(stepIndex) {
+  const step = steps[stepIndex];
+  if (!step) return;
+
+  const target = document.querySelector(step.element);
+  const rect = target.getBoundingClientRect();
+
+
+  highlight.style.top = `${rect.top}px`;
+  highlight.style.left = `${rect.left}px`;
+  highlight.style.width = `${rect.width}px`;
+  highlight.style.height = `${rect.height}px`;
+  highlight.style.display = "block";
+
+
+  stepText.textContent = step.text;
+  tooltip.style.top = `${rect.bottom + 10}px`;
+  tooltip.style.left = `${rect.left}px`;
+  tooltip.style.display = "block";
+}
+
+function hideGuide() {
+  mask.style.display = "none";
+  highlight.style.display = "none";
+  tooltip.style.display = "none";
+}
+
+function startGuide() {
+  currentStep = 0;
+  mask.style.display = "block";
+  showStep(currentStep);
+}
+
+nextButton.addEventListener("click", () => {
+  currentStep++;
+  if (currentStep < steps.length) {
+    showStep(currentStep);
+  } else {
+    hideGuide();
+  }
+});
+
+closeButton.addEventListener("click", hideGuide);
+
 
 //----------------------//
 // $1. Resizer
@@ -37,8 +107,8 @@ const onMouseMove = (e) => {
 };
 
 const onMouseUp = () => {
-  document.removeEventListener('mousemove', onMouseMove); 
-  document.removeEventListener('mouseup', onMouseUp); 
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
   isDragging = false;
   console.log("isDragging:", isDragging);
 };
@@ -47,7 +117,7 @@ resizer.addEventListener('mousedown', () => {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
   isDragging = true;
-  console.log("isDragging:",isDragging);
+  console.log("isDragging:", isDragging);
 });
 
 
@@ -163,7 +233,7 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
 
   isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
   clearError(selectAllInputs(bottomPanel));
-  console.log("isCompleted:",isCompleted);
+  console.log("isCompleted:", isCompleted);
 
   if (isCompleted) {
     container.innerHTML = '';
@@ -171,7 +241,7 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
     // console.log(membersForEach(members));
     iframeDoc.querySelector('#greeting').innerText = greeting;
-    showToaster('更新完成','info',2000);
+    showToaster('更新完成', 'info', 2000);
   } else {
     showToaster('表單未完成。', 'error', 2000);
   }
@@ -256,6 +326,43 @@ function clearError(inputs) {
 
 }
 
+//----------------------//
+// $5. isVisible sidebar
+//----------------------//
+
+const iconFold = document.querySelectorAll('.iconFold');
+
+let isVisible = true;
+
+iconFold.forEach((icon) => {
+  icon.addEventListener('click', () => {
+    isVisible = !isVisible;
+    isVisibleSidebar(isVisible);
+    console.log(isVisible);
+  })
+})
+
+function isVisibleSidebar(isVisible) {
+  const sidebar = document.querySelector('#sidebar');
+  const sidebar2 = document.querySelector('#sidebar2');
+
+  if (isVisible) {
+    sidebar.style.display = 'block';
+    sidebar2.style.display = 'none';
+
+  } else {
+    sidebar.style.display = 'none';
+    sidebar2.style.display = 'block';
+  }
+
+
+
+}
+
+
+
+
+
 
 
 
@@ -330,24 +437,24 @@ function showToaster(message, type = "info", duration = 3000) {
 }
 
 // document.getElementById("btnUpdate").addEventListener("click", async () => {
-  // showToaster("公告已成功更新！", "info", 3000);
-  // showToaster("失敗！請洽管理員", "error", 3000);
+// showToaster("公告已成功更新！", "info", 3000);
+// showToaster("失敗！請洽管理員", "error", 3000);
 
-  // try {
-  //   const res = await fetch("...", { method: "POST" });
-  //   if (!res.ok) {
-  //     throw new Error(`HTTP error! status: ${res.status}`);
-  //   }
-  //   const data = await res.json();
+// try {
+//   const res = await fetch("...", { method: "POST" });
+//   if (!res.ok) {
+//     throw new Error(`HTTP error! status: ${res.status}`);
+//   }
+//   const data = await res.json();
 
-  //   if (data.success) {
-  //     showToaster("公告已成功更新！", "info", 3000);
-  //   } else {
-  //     showToaster("失敗！請洽管理員", "error", 3000);
-  //   }
-  // } catch (error) {
-  //   showToaster("失敗！請洽管理員", "error", 3000);
-  //   console.error(error);
-  // }
+//   if (data.success) {
+//     showToaster("公告已成功更新！", "info", 3000);
+//   } else {
+//     showToaster("失敗！請洽管理員", "error", 3000);
+//   }
+// } catch (error) {
+//   showToaster("失敗！請洽管理員", "error", 3000);
+//   console.error(error);
+// }
 
 // });

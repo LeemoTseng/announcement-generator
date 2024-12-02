@@ -13,35 +13,50 @@
   <!-- 1.2. posterEdit start -->
 
   <body>
+    <div id="steps">
+      <div class="step-mask"></div>
+      <div class="step-highlight"></div>
+
+      <div class="step-tooltip" id="stepTooltip">
+        <p id="stepText"></p>
+        <div class="stepBtn" id="nextStep">下一步</div>
+        <div class="stepBtn" id="closeGuide">結束導覽</div>
+      </div>
+    </div>
+
     <!-- 1. header start -->
     <!-- <div class="header">
       <div class="imgBox"><img src="assets/logo.svg" alt="" /></div>
       <div class="Title"><p>Announcement generator</p></div>
     </div> -->
     <!-- header end -->
-
     <div style="display: flex">
       <!-- 1.1. sidebar start -->
-      <div class="sidebar">
+      <div id="sidebar2">
         <div class="title">
           <svg
-            class="iconMenu size-6"
+            id="iconOpened"
+            class="iconOpened iconFold size-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            stroke-width="2"
             stroke="currentColor"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
             />
           </svg>
-
+        </div>
+      </div>
+      <div id="sidebar" class="sidebar">
+        <div class="title step">
           <img src="assets/logo.svg" alt="" />
           <p>公告產生</p>
           <svg
+            id="iconFold"
             class="iconFold size-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -58,15 +73,46 @@
         </div>
 
         <!-- poster start -->
-        <div class="allPosters">
+        <div class="allPosters" id="step1">
           <div class="poster">
-            <p class="title">選單</p>
+            <div class="title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#5f6368"
+              >
+                <path
+                  d="M280-400q17 0 28.5-11.5T320-440q0-17-11.5-28.5T280-480q-17 0-28.5 11.5T240-440q0 17 11.5 28.5T280-400Zm0-120q17 0 28.5-11.5T320-560q0-17-11.5-28.5T280-600q-17 0-28.5 11.5T240-560q0 17 11.5 28.5T280-520Zm0-120q17 0 28.5-11.5T320-680q0-17-11.5-28.5T280-720q-17 0-28.5 11.5T240-680q0 17 11.5 28.5T280-640Zm120 240h200v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"
+                />
+              </svg>
+              <p>公告類型</p>
+            </div>
             <ul>
               <li><p>新進成員公告</p></li>
               <li><p>文字公告</p></li>
             </ul>
+            <div class="title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#5f6368"
+              >
+                <path
+                  d="M280-400q17 0 28.5-11.5T320-440q0-17-11.5-28.5T280-480q-17 0-28.5 11.5T240-440q0 17 11.5 28.5T280-400Zm0-120q17 0 28.5-11.5T320-560q0-17-11.5-28.5T280-600q-17 0-28.5 11.5T240-560q0 17 11.5 28.5T280-520Zm0-120q17 0 28.5-11.5T320-680q0-17-11.5-28.5T280-720q-17 0-28.5 11.5T240-680q0 17 11.5 28.5T280-640Zm120 240h200v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"
+                />
+              </svg>
+              <p>其他</p>
+            </div>
+            <ul>
+              <li id="guideButton"><p>使用說明</p></li>
+            </ul>
           </div>
         </div>
+
         <!-- poster end -->
       </div>
       <!-- sidebar end -->
@@ -74,7 +120,7 @@
       <div id="dragableContainer" class="mainContent">
         <div class="tag">View</div>
         <div id="topPanel" class="artBoard">
-          <div class="posterReview">
+          <div id="step2" class="posterReview">
             <iframe id="poster" src="announcement-intro.html"></iframe>
           </div>
         </div>
@@ -94,14 +140,14 @@
           </div>
         </div>
         <div id="bottomPanel" class="content">
-          <div>
-            <p class="title">新成員公告</p>
+          <div id="type">
+            <!-- <p class="title">新成員公告</p>
             <p class="description">
               請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。
-            </p>
+            </p> -->
           </div>
           <!-- form start -->
-          <div class="formGrid">
+          <div class="formGrid" id="step3">
             <div class="inputBox" style="grid-column: span 5">
               <label for="email">您的信箱</label>
               <input

@@ -25,9 +25,112 @@ li {
     margin: 0;
 }
 
+// Steps
+#steps{
+    .step-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: none;
+}
+.step-highlight {
+    position: absolute;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 1001;
+    display: none;
+    pointer-events: none;
+}
+
+.step-tooltip {
+    position: absolute;
+    width: 400px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    display: none;
+
+    .stepBtn {
+        text-align: center;
+        border: 1px solid #454545;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 10px;
+
+        &:hover{
+            cursor: pointer;
+            background: #f4f4f4;
+        }
+    }
+
+    margin: 5px;
+    padding: 5px 10px;
+
+
+}
+
+}
+
+
+
+
+
+
+
+#sidebar2 {
+    display: none;
+    min-width: 50px;
+    height: 100vh;
+    overflow-y: visible;
+    overflow-x: hidden;
+    border-right: 1px solid $grey-200;
+
+    .title {
+        .iconOpened {
+            width: 18px;
+
+            color: $grey-400;
+            margin: 5px;
+            padding: 10px;
+
+            &:hover {
+                cursor: pointer;
+                padding: 10px;
+
+                border-radius: 5px;
+                animation: hoverAnimation .2s ease-in-out forwards;
+
+            }
+
+            @keyframes hoverAnimation {
+                0% {
+                    background-color: transparent;
+                }
+
+                100% {
+                    background-color: $grey-50;
+                }
+
+            }
+
+
+        }
+    }
+
+}
+
 
 .sidebar {
-    min-width: fit-content;
+    // display: none;
     min-width: 250px;
     height: 100vh;
     overflow-y: visible;
@@ -45,7 +148,7 @@ li {
         align-items: center;
         gap: 5px;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-        padding: 10px 5px;
+        padding: 10px 10px;
         width: 100%;
         height: 26px;
 
@@ -62,37 +165,11 @@ li {
 
         }
 
-        .iconMenu {
-            width: 40px;
-            left: 20px;
-            color: $grey-400;
-            padding: 5px;
-
-            &:hover {
-                cursor: pointer;
-                padding: 5px;
-                border-radius: 5px;
-                animation: hoverAnimation .2s ease-in-out forwards;
-
-            }
-
-            @keyframes hoverAnimation {
-                0% {
-                    background-color: transparent;
-                }
-
-                100% {
-                    background-color: $grey-50;
-                }
-
-            }
-        }
-
 
         .iconFold {
             position: absolute;
             width: 18px;
-            right: 20px;
+            right: 25px;
             color: $grey-400;
             padding: 5px;
 
@@ -123,8 +200,9 @@ li {
 
         .poster {
             padding: 5px;
+
             .title {
-                padding: 0px 5px;
+                padding: 10px 0 5px 10px;
                 margin: 0;
                 font-weight: 600;
                 color: $black-800;
@@ -335,6 +413,7 @@ textarea {
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
 
 // Components
 .btnAddNewMember {
