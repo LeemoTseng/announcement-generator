@@ -13,6 +13,49 @@ li {
   margin: 0;
 }
 
+.loading-spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+#selectSideMenu {
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  transform: translate(-60%, -50%);
+}
+#selectSideMenu p {
+  font-size: 18px;
+  color: #838383;
+  font-weight: 400;
+}
+
 #steps .step-mask {
   position: fixed;
   top: 0;
@@ -161,7 +204,6 @@ li {
 .sidebar .allPosters .poster ul li:hover {
   cursor: pointer;
   background: #f4f4f4;
-  font-weight: 600;
   transition: all 0.2s ease-in-out;
 }
 .sidebar .allPosters .poster ul li p {
@@ -227,54 +269,55 @@ li {
   width: 100%;
   height: 100%;
 }
-.mainContent .content {
+.mainContent #bottomPanel {
   flex: 1;
   overflow-y: auto;
   background: #ffffff;
   padding: 10px 20px;
   height: auto;
+  min-height: 100px;
   position: relative;
 }
-.mainContent .content .title {
+.mainContent #bottomPanel .title {
   font-size: 20px;
   font-weight: 600;
   margin: 10px 0;
   position: sticky;
 }
-.mainContent .content .description {
+.mainContent #bottomPanel .description {
   font-weight: 300;
   padding-top: 0;
   margin: 0;
 }
-.mainContent .content .formGrid {
+.mainContent #bottomPanel .formGrid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 16px;
   padding-top: 20px;
 }
-.mainContent .content .formGrid .inputBox {
+.mainContent #bottomPanel .formGrid .inputBox {
   margin-top: 0px;
   display: flex;
   flex-direction: column;
 }
-.mainContent .content .formGrid .inputBox input {
+.mainContent #bottomPanel .formGrid .inputBox input {
   padding: 10px;
   background: #f4f4f4;
   border: transparent;
   border-radius: 5px;
   margin-top: 10px;
 }
-.mainContent .content .formGrid .inputBox input:focus {
+.mainContent #bottomPanel .formGrid .inputBox input:focus {
   outline: none;
 }
-.mainContent .content .formGrid .inputBox textarea {
+.mainContent #bottomPanel .formGrid .inputBox textarea {
   padding: 10px;
   background: #f4f4f4;
   border: transparent;
   border-radius: 5px;
   margin-top: 10px;
 }
-.mainContent .content .formGrid .inputBox textarea:focus {
+.mainContent #bottomPanel .formGrid .inputBox textarea:focus {
   outline: none;
 }
 

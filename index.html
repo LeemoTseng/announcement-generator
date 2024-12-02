@@ -13,6 +13,7 @@
   <!-- 1.2. posterEdit start -->
 
   <body>
+    <!-- step start -->
     <div id="steps">
       <div class="step-mask"></div>
       <div class="step-highlight"></div>
@@ -23,6 +24,13 @@
         <div class="stepBtn" id="closeGuide">結束導覽</div>
       </div>
     </div>
+    <!-- step end -->
+
+    <!-- loading start -->
+    <div id="loading" class="loading-spinner">
+      <div class="spinner"></div>
+    </div>
+    <!-- loading end -->
 
     <!-- 1. header start -->
     <!-- <div class="header">
@@ -73,6 +81,7 @@
         </div>
 
         <!-- poster start -->
+
         <div class="allPosters" id="step1">
           <div class="poster">
             <div class="title">
@@ -89,9 +98,8 @@
               </svg>
               <p>公告類型</p>
             </div>
-            <ul>
-              <li><p>新進成員公告</p></li>
-              <li><p>文字公告</p></li>
+            <ul id="announcementType">
+              <!-- $6. Annoucement types -->
             </ul>
             <div class="title">
               <svg
@@ -116,14 +124,21 @@
         <!-- poster end -->
       </div>
       <!-- sidebar end -->
+      <!-- select side menu start -->
+      <div id="selectSideMenu" style="display: block">
+        <img style="width: 220px" src="assets/select.svg" alt="" />
+        <p>請於左側選單選擇公告模板</p>
+      </div>
+      <!-- select side menu end -->
       <!-- 1.2. posterEdit start -->
-      <div id="dragableContainer" class="mainContent">
+      <div id="dragableContainer" class="mainContent" style="display: none">
         <div class="tag">View</div>
         <div id="topPanel" class="artBoard">
           <div id="step2" class="posterReview">
             <iframe id="poster" src="announcement-intro.html"></iframe>
           </div>
         </div>
+
         <!-- $1. Resizer -->
         <div class="resizer">
           <div id="dragTrigger" class="icon">
@@ -139,120 +154,140 @@
             </svg>
           </div>
         </div>
+
         <div id="bottomPanel" class="content">
-          <div id="type">
-            <!-- <p class="title">新成員公告</p>
-            <p class="description">
-              請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。
-            </p> -->
+          <div id="announcementContainer">
+            <p id="typeTitle" class="title">測試</p>
+            <p id="typeDescription" class="description">測試</p>
           </div>
+
           <!-- form start -->
-          <div class="formGrid" id="step3">
-            <div class="inputBox" style="grid-column: span 5">
-              <label for="email">您的信箱</label>
-              <input
-                type="email"
-                id="yourEmail"
-                placeholder="公告信件將發送至此信箱"
-              />
-            </div>
-            <div class="inputBox" style="grid-column: span 12">
-              <label for="greeting">主旨</label>
-              <textarea id="greeting" rows="4"></textarea>
-            </div>
-          </div>
-          <div style="grid-column: span 8"></div>
-          <div class="diver" style="grid-column: span 12"></div>
-          <div id="members">
-            <div class="member formGrid" data-member-id="1">
-              <div
-                style="grid-column: span 12; font-weight: 700; font-size: 16px"
-              >
-                <p style="display: inline-block">新成員(<span>1</span>)</p>
-              </div>
-              <div class="inputBox" style="grid-column: span 3">
-                <label for="name">姓名</label>
-                <input type="text" id="name-1" placeholder="姓名 Name" />
-              </div>
-              <div class="inputBox" style="grid-column: span 3">
-                <label for="email">Email</label>
+          <div id="formContainer">
+            <div class="formGrid" id="step3">
+              <div class="inputBox" style="grid-column: span 5">
+                <label for="email">您的信箱</label>
                 <input
                   type="email"
-                  id="email-1"
-                  placeholder="email@t3ex-thi.com"
-                />
-              </div>
-              <div class="inputBox" style="grid-column: span 2">
-                <label for="startDate">報到日</label>
-                <input type="date" id="startDate-1" />
-              </div>
-              <div class="inputBox" style="grid-column: span 2">
-                <label for="location">工作地點</label>
-                <input
-                  type="text"
-                  id="location-1"
-                  placeholder="台北12樓辦公室"
-                />
-              </div>
-              <div class="inputBox" style="grid-column: span 2">
-                <label for="extension">聯絡分機</label>
-                <input type="text" id="extension-1" placeholder="000" />
-              </div>
-              <div class="inputBox" style="grid-column: span 4">
-                <label for="position">部門職位</label>
-                <input
-                  type="text"
-                  id="position-1"
-                  placeholder="公司_組別_職務"
-                />
-              </div>
-              <div class="inputBox" style="grid-column: span 4">
-                <label for="supervisor">部門主管</label>
-                <input
-                  type="text"
-                  id="supervisor-1"
-                  placeholder="名字（管轄範圍）"
-                />
-              </div>
-              <div class="inputBox" style="grid-column: span 4">
-                <label for="dirSupervisor">直屬主管</label>
-                <input
-                  type="text"
-                  id="dirSupervisor-1"
-                  placeholder="名字（管轄範圍）"
+                  id="yourEmail"
+                  placeholder="公告信件將發送至此信箱"
                 />
               </div>
               <div class="inputBox" style="grid-column: span 12">
-                <label for="introduction">自我介紹</label>
-                <textarea
-                  id="introduction-1"
-                  rows="3"
-                  placeholder="自我介紹區塊"
-                ></textarea>
-              </div>
-              <div class="inputBox" style="grid-column: span 4">
-                <label for="profile">圖片</label>
-                <input type="file" id="profile-1" style="background: #ffffff" />
+                <label for="greeting">主旨</label>
+                <textarea id="greeting" rows="4"></textarea>
               </div>
             </div>
-            <!-- $2. Insert member's form -->
-          </div>
-          <button class="btnAddNewMember" id="btnAddNewMember">新增成員</button>
+            <div style="grid-column: span 8"></div>
+            <div class="diver" style="grid-column: span 12"></div>
+            <div id="members">
+              <div class="member formGrid" data-member-id="1">
+                <div
+                  style="
+                    grid-column: span 12;
+                    font-weight: 700;
+                    font-size: 16px;
+                  "
+                >
+                  <p style="display: inline-block">新成員(<span>1</span>)</p>
+                </div>
+                <div class="inputBox" style="grid-column: span 3">
+                  <label for="name">姓名</label>
+                  <input type="text" id="name-1" placeholder="姓名 Name" />
+                </div>
+                <div class="inputBox" style="grid-column: span 3">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email-1"
+                    placeholder="email@t3ex-thi.com"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 2">
+                  <label for="startDate">報到日</label>
+                  <input type="date" id="startDate-1" />
+                </div>
+                <div class="inputBox" style="grid-column: span 2">
+                  <label for="location">工作地點</label>
+                  <input
+                    type="text"
+                    id="location-1"
+                    placeholder="台北12樓辦公室"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 2">
+                  <label for="extension">聯絡分機</label>
+                  <input type="text" id="extension-1" placeholder="000" />
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="position">部門職位</label>
+                  <input
+                    type="text"
+                    id="position-1"
+                    placeholder="公司_組別_職務"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="supervisor">部門主管</label>
+                  <input
+                    type="text"
+                    id="supervisor-1"
+                    placeholder="名字（管轄範圍）"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="dirSupervisor">直屬主管</label>
+                  <input
+                    type="text"
+                    id="dirSupervisor-1"
+                    placeholder="名字（管轄範圍）"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 12">
+                  <label for="introduction">自我介紹</label>
+                  <textarea
+                    id="introduction-1"
+                    rows="3"
+                    placeholder="自我介紹區塊"
+                  ></textarea>
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="profile">圖片</label>
+                  <input
+                    type="file"
+                    id="profile-1"
+                    style="background: #ffffff"
+                  />
+                </div>
+              </div>
+              <!-- $2. Insert member's form -->
+            </div>
+            <button class="btnAddNewMember" id="btnAddNewMember">
+              新增成員
+            </button>
 
-          <div class="btnGroup">
-            <!-- $3. Update poster -->
-            <button class="btnOutlineDefault" id="btnUpdate">更新公告</button>
-            <button class="btnDefault" id="btnSend">寄出</button>
-            <div
-              style="display: flex; padding-bottom: 20px; align-items: center"
-            >
-              <input type="checkbox" id="save" rows="4" />
-              <label for="save" style="font-size: 14px; margin-left: 5px"
-                >將本次內容儲存為固定範本</label
-              >
+            <div class="btnGroup" id="btnGroup">
+              <!-- $3. Update poster -->
+              <div class="btnGroup" id="btnGroup">
+                <button id="btnUpdate" class="btnOutlineDefault">
+                  更新公告
+                </button>
+                <!-- $3. Update poster -->
+                <button class="btnDefault" id="btnSend">寄出</button>
+                <div
+                  style="
+                    display: flex;
+                    padding-bottom: 20px;
+                    align-items: center;
+                  "
+                >
+                  <input type="checkbox" id="save" rows="4" />
+                  <label for="save" style="font-size: 14px; margin-left: 5px"
+                    >將本次內容儲存為固定範本</label
+                  >
+                </div>
+              </div>
             </div>
           </div>
-
           <!-- form end -->
         </div>
       </div>

@@ -8,6 +8,8 @@
 // $3. Update poster
 // $4. Save as sample
 // $5. isVisible sidebar
+// $6. Annoucement types
+// $7. Loading
 // $99. Toaster
 
 //----------------------//
@@ -103,14 +105,18 @@ const onMouseMove = (e) => {
     topPanel.style.flex = `0 0 ${adjustedHeight}px`;
     bottomPanel.style.flex = `0 0 ${containerRect.height - adjustedHeight}px`;
     posterReview.style.height = `${adjustedHeight}px`;
+
+    // console.log('bottomPanel height:', containerRect.height - adjustedHeight);
   }
+
+
 };
 
-const onMouseUp = () => {
+const onMouseUp = (e) => {
   document.removeEventListener('mousemove', onMouseMove);
   document.removeEventListener('mouseup', onMouseUp);
   isDragging = false;
-  console.log("isDragging:", isDragging);
+
 };
 
 resizer.addEventListener('mousedown', () => {
@@ -118,6 +124,7 @@ resizer.addEventListener('mousedown', () => {
   document.addEventListener('mouseup', onMouseUp);
   isDragging = true;
   console.log("isDragging:", isDragging);
+
 });
 
 
@@ -130,35 +137,96 @@ let memberCount = 1;
 const members = document.getElementById('members');
 
 const btnAddNewMember = document.getElementById('btnAddNewMember');
-btnAddNewMember.addEventListener('click', () => {
-  memberCount++;
+// btnAddNewMember.addEventListener('click', () => {
+//   memberCount++;
 
+//   const member = document.createElement('div');
+//   member.className = 'member formGrid';
+//   member.setAttribute('data-member-id', memberCount)
+
+//   // member form template
+//   memberTemplate = `
+//      <div
+//       style="grid-column: span 12; font-weight: 700; font-size: 16px"
+//     >
+//       <p style="display: inline-block">
+//         新成員(<span>${memberCount}</span>)<svg
+//           onclick="deleteMember(event)"
+//           xmlns="http://www.w3.org/2000/svg"
+//           fill="none"
+//           viewBox="0 0 24 24"
+//           stroke-width="1.5"
+//           stroke="currentColor"
+//           class="icon delete"
+//           style="vertical-align: middle; width: 20px; height: 20px"
+//         >
+//           <path
+//             stroke-linecap="round"
+//             stroke-linejoin="round"
+//             d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+//           />
+//         </svg>
+//       </p>
+//     </div>
+//     <div class="inputBox" style="grid-column: span 3">
+//       <label for="name">姓名</label>
+//       <input type="text" id="name-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 3">
+//       <label for="email">Email</label>
+//       <input type="email" id="email-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 2">
+//       <label for="startDate">報到日</label>
+//       <input type="date" id="startDate-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 2">
+//       <label for="location">工作地點</label>
+//       <input type="text" id="location-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 2">
+//       <label for="extension">聯絡分機</label>
+//       <input type="text" id="extension-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 4">
+//       <label for="position">部門職位</label>
+//       <input type="text" id="position-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 4">
+//       <label for="supervisor">部門主管</label>
+//       <input type="text" id="supervisor-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 4">
+//       <label for="dirSupervisor">直屬主管</label>
+//       <input type="text" id="dirSupervisor-${memberCount}" />
+//     </div>
+//     <div class="inputBox" style="grid-column: span 12">
+//       <label for="introduction">自我介紹</label>
+//       <textarea id="introduction-${memberCount}" rows="3"></textarea>
+//     </div>
+//     <div class="inputBox" style="grid-column: span 4">
+//       <label for="profile">圖片</label>
+//       <input type="file" id="profile-${memberCount}" style="background: #ffffff" />
+//     </div>
+//     `;
+
+//   member.innerHTML = memberTemplate;
+//   members.appendChild(member);
+
+// })
+
+function addNewMember() {
+
+  memberCount++;
   const member = document.createElement('div');
   member.className = 'member formGrid';
-  member.setAttribute('data-member-id', memberCount)
+  member.setAttribute('data-member-id', memberCount);
 
-  // member form template
-  memberFormTemplate = `
-  
-     <div
-      style="grid-column: span 12; font-weight: 700; font-size: 16px"
-    >
-      <p style="display: inline-block">
-        新成員(<span>${memberCount}</span>)<svg
-          onclick="deleteMember(event)"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="icon delete"
-          style="vertical-align: middle; width: 20px; height: 20px"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-          />
+  const memberTemplate = `
+    <div style="grid-column: span 12; font-weight: 700; font-size: 16px">
+      <p style="display: inline-block">新成員(<span>${memberCount}</span>)
+        <svg onclick="deleteMember(event)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon delete" style="vertical-align: middle; width: 20px; height: 20px">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9L14.394 18H9.606L9.26 9m9.968-3.21a2.25 2.25 0 00-2.244-2.077H8.084a2.25 2.25 0 00-2.244 2.077L4.772 5.79" />
         </svg>
       </p>
     </div>
@@ -202,13 +270,21 @@ btnAddNewMember.addEventListener('click', () => {
       <label for="profile">圖片</label>
       <input type="file" id="profile-${memberCount}" style="background: #ffffff" />
     </div>
-    `;
+  `;
 
-  member.innerHTML = memberFormTemplate;
-  members.appendChild(member);
+  member.innerHTML = memberTemplate;
+  members.append(member);
 
-})
 
+}
+
+
+document.getElementById('formContainer').addEventListener('click', (event) => {
+  if (event.target && event.target.id === 'btnAddNewMember') {
+    console.log(members);
+    addNewMember();
+  }
+});
 
 function deleteMember(e) {
   e.target.closest('.member').remove();
@@ -219,9 +295,36 @@ function deleteMember(e) {
 // $3. Update poster
 //----------------------//
 
+const btnUpdate = document.getElementById('btnUpdate');
+// btnUpdate.addEventListener('click', () => {
 
-document.getElementById('btnUpdate').addEventListener('click', () => {
+//   let isCompleted = true;
 
+//   const iframe = document.getElementById('poster');
+//   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+//   const container = iframeDoc.querySelector('#container');
+//   const bottomPanel = document.querySelector('#bottomPanel');
+//   const greeting = document.getElementById('greeting').value;
+
+//   isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
+//   clearError(selectAllInputs(bottomPanel));
+//   console.log("isCompleted:", isCompleted);
+
+//   if (isCompleted) {
+//     container.innerHTML = '';
+//     const members = document.querySelectorAll('.member');
+//     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
+//     // console.log(membersForEach(members));
+//     iframeDoc.querySelector('#greeting').innerText = greeting;
+//     showToaster('更新完成', 'info', 2000);
+//   } else {
+//     showToaster('表單未完成。', 'error', 2000);
+//   }
+
+// });
+
+function updateAnnouncement() {
   let isCompleted = true;
 
   const iframe = document.getElementById('poster');
@@ -231,22 +334,20 @@ document.getElementById('btnUpdate').addEventListener('click', () => {
   const bottomPanel = document.querySelector('#bottomPanel');
   const greeting = document.getElementById('greeting').value;
 
-  isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
+  isCompleted = validateRequired(selectAllInputs(bottomPanel));
   clearError(selectAllInputs(bottomPanel));
-  console.log("isCompleted:", isCompleted);
+  console.log('isCompleted:', isCompleted);
 
   if (isCompleted) {
     container.innerHTML = '';
     const members = document.querySelectorAll('.member');
     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
-    // console.log(membersForEach(members));
     iframeDoc.querySelector('#greeting').innerText = greeting;
     showToaster('更新完成', 'info', 2000);
   } else {
     showToaster('表單未完成。', 'error', 2000);
   }
-
-});
+}
 
 function membersForEach(members) {
   return Array.from(members).map((member) => {
@@ -311,11 +412,9 @@ function validateRequired(allInputs) {
   })
   return isCompleted;
 }
-
 function error(input) {
   input.style.border = '1px solid red';
 }
-
 function clearError(inputs) {
   inputs.forEach((input) => {
     input.addEventListener('input', (e) => {
@@ -325,6 +424,12 @@ function clearError(inputs) {
 
 
 }
+
+document.getElementById('formContainer').addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'btnUpdate') {
+    updateAnnouncement();
+  }
+});
 
 //----------------------//
 // $5. isVisible sidebar
@@ -338,7 +443,7 @@ iconFold.forEach((icon) => {
   icon.addEventListener('click', () => {
     isVisible = !isVisible;
     isVisibleSidebar(isVisible);
-    console.log(isVisible);
+    console.log("sidebar:", isVisible);
   })
 })
 
@@ -358,11 +463,6 @@ function isVisibleSidebar(isVisible) {
 
 
 }
-
-
-
-
-
 
 
 
@@ -413,7 +513,257 @@ function isVisibleSidebar(isVisible) {
 // }
 
 
+//----------------------//
+// $6. Annoucement types
+//----------------------//
 
+
+const announcementTypes = document.getElementById('announcementType');
+const list = document.createElement('li');
+const types = [
+  {
+    type: "新進成員公告",
+    title: "新成員公告",
+    description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
+    iframeSrc: "announcement-intro.html",
+  },
+  {
+    type: "文字公告",
+    title: "文字公告",
+    description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
+    iframeSrc: "assets/test.html",
+
+  },
+  // {
+  //   type: "測試用",
+  //   title: "測試用title",
+  //   description: "測試用description"
+  //   iframeSrc: "assets/newMember.html",
+  // }
+];
+
+types.forEach((type) => {
+  const li = list.cloneNode();
+  li.className = 'type';
+  li.innerText = type.type;
+  announcementTypes.appendChild(li);
+
+})
+
+selectedType = "";
+document.querySelectorAll('.type').forEach((type) => {
+  type.addEventListener('click', () => {
+    showContent();
+    selectedType = type.innerText;
+    console.log("selectedType:", selectedType);
+    renderTypeGreeting(selectedType);
+    renderTypeForm(selectedType);
+  })
+})
+
+
+function renderTypeGreeting(selectedType) {
+  const type = types.find((type) => {
+    return type.type === selectedType;
+  })
+  const typeTitle = document.getElementById('typeTitle');
+  const typeDescription = document.getElementById('typeDescription');
+  typeTitle.innerText = type.title;
+  typeDescription.innerText = type.description;
+  const iframe = document.getElementById('poster');
+  iframe.src = type.iframeSrc;
+  // console.log("iframe.src::", iframe.src);
+
+}
+
+const newMemberTemplate = `
+
+            <div class="formGrid" id="step3">
+              <div class="inputBox" style="grid-column: span 5">
+                <label for="email">您的信箱</label>
+                <input
+                  type="email"
+                  id="yourEmail"
+                  placeholder="公告信件將發送至此信箱"
+                />
+              </div>
+              <div class="inputBox" style="grid-column: span 12">
+                <label for="greeting">主旨</label>
+                <textarea id="greeting" rows="4"></textarea>
+              </div>
+            </div>
+            <div style="grid-column: span 8"></div>
+            <div class="diver" style="grid-column: span 12"></div>
+            <div id="members">
+              <div class="member formGrid" data-member-id="1">
+                <div
+                  style="
+                    grid-column: span 12;
+                    font-weight: 700;
+                    font-size: 16px;
+                  "
+                >
+                  <p style="display: inline-block">新成員(<span>1</span>)</p>
+                </div>
+                <div class="inputBox" style="grid-column: span 3">
+                  <label for="name">姓名</label>
+                  <input type="text" id="name-1" placeholder="姓名 Name" />
+                </div>
+                <div class="inputBox" style="grid-column: span 3">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email-1"
+                    placeholder="email@t3ex-thi.com"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 2">
+                  <label for="startDate">報到日</label>
+                  <input type="date" id="startDate-1" />
+                </div>
+                <div class="inputBox" style="grid-column: span 2">
+                  <label for="location">工作地點</label>
+                  <input
+                    type="text"
+                    id="location-1"
+                    placeholder="台北12樓辦公室"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 2">
+                  <label for="extension">聯絡分機</label>
+                  <input type="text" id="extension-1" placeholder="000" />
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="position">部門職位</label>
+                  <input
+                    type="text"
+                    id="position-1"
+                    placeholder="公司_組別_職務"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="supervisor">部門主管</label>
+                  <input
+                    type="text"
+                    id="supervisor-1"
+                    placeholder="名字（管轄範圍）"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="dirSupervisor">直屬主管</label>
+                  <input
+                    type="text"
+                    id="dirSupervisor-1"
+                    placeholder="名字（管轄範圍）"
+                  />
+                </div>
+                <div class="inputBox" style="grid-column: span 12">
+                  <label for="introduction">自我介紹</label>
+                  <textarea
+                    id="introduction-1"
+                    rows="3"
+                    placeholder="自我介紹區塊"
+                  ></textarea>
+                </div>
+                <div class="inputBox" style="grid-column: span 4">
+                  <label for="profile">圖片</label>
+                  <input
+                    type="file"
+                    id="profile-1"
+                    style="background: #ffffff"
+                  />
+                </div>
+              </div>
+              <!-- $2. Insert member's form -->
+            </div>
+            <button class="btnAddNewMember" id="btnAddNewMember">
+              新增成員
+            </button>
+
+            <div class="btnGroup">
+              <!-- $3. Update poster -->
+              <button class="btnOutlineDefault" id="btnUpdate">更新公告</button>
+              <button class="btnDefault" id="btnSend">寄出</button>
+              <div
+                style="display: flex; padding-bottom: 20px; align-items: center"
+              >
+                <input type="checkbox" id="save" rows="4" />
+                <label for="save" style="font-size: 14px; margin-left: 5px"
+                  >將本次內容儲存為固定範本</label
+                >
+              </div>
+            </div>
+`;
+const textTemplate = `
+Text Template`;
+const testTemplate = `testTemplate`;
+
+const formContainer = document.getElementById('formContainer');
+
+function renderTypeForm(selectedType) {
+  formContainer.innerHTML = '';
+  if (selectedType === "新進成員公告") {
+    formContainer.innerHTML = newMemberTemplate;
+    resetPoster()
+
+  } else if (selectedType === "文字公告") {
+    formContainer.innerHTML = textTemplate;
+    resetPoster()
+
+  } else if (selectedType === "測試用") {
+    formContainer.innerHTML = testTemplate;
+    resetPoster();
+
+  }
+}
+
+function showContent() {
+  showLoading();
+  dragableContainer.style.display = 'flex';
+  const selectSideMenu = document.getElementById('selectSideMenu');
+  selectSideMenu.style.display = 'none';
+}
+
+function resetPoster() {
+  const iframe = document.getElementById('poster');
+
+  const currentSrc = iframe.src;
+  iframe.src = '';
+  iframe.src = currentSrc;
+
+}
+
+
+//----------------------//
+// $7. Loading
+//----------------------//
+
+
+// function loadData() {
+//   fetch('#')
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//     })
+//     .catch((error) => {
+//       showToaster("資料讀取錯誤，請稍後再試或洽管理員", "error", 2000);
+//     })
+// }
+
+showLoading();
+
+function showLoading() {
+  const loading = document.getElementById("loading");
+  loading.style.display = "flex";
+  setTimeout(() => {
+    hideLoading();
+  }, 500);
+}
+
+function hideLoading() {
+  const loading = document.getElementById("loading");
+  loading.style.display = "none";
+}
 
 //----------------------//
 // $99. Toaster
