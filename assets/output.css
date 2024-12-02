@@ -6,24 +6,6 @@ body {
   margin: 0;
 }
 
-.header {
-  background: #fff;
-  padding: 10px 50px;
-  border-bottom: 1px solid #BFBFBF;
-  display: flex;
-}
-.header .imgBox {
-  object-fit: contain;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-.header .title {
-  font-size: 16px;
-  font-weight: 600;
-  padding-left: 20px;
-}
-
 .sidebar {
   min-width: fit-content;
   height: 100vh;
@@ -31,17 +13,70 @@ body {
   overflow-x: hidden;
   border-right: 1px solid #BFBFBF;
 }
-.sidebar .imgBox {
+.sidebar .title {
+  position: sticky;
+  top: 0;
+  background: white;
   object-fit: contain;
   overflow: hidden;
   display: flex;
-  padding-top: 10px;
-  width: fit-content;
-  height: 24px;
-}
-.sidebar .imgBox img {
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 10px 5px;
   width: 100%;
+  height: 26px;
+}
+.sidebar .title img {
   height: 100%;
+}
+.sidebar .title p {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+}
+.sidebar .title .iconMenu {
+  width: 40px;
+  left: 20px;
+  color: #838383;
+  padding: 5px;
+}
+.sidebar .title .iconMenu:hover {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  animation: hoverAnimation 0.2s ease-in-out forwards;
+}
+@keyframes hoverAnimation {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #f4f4f4;
+  }
+}
+.sidebar .title .iconFold {
+  position: absolute;
+  width: 18px;
+  right: 20px;
+  color: #838383;
+  padding: 5px;
+}
+.sidebar .title .iconFold:hover {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  animation: hoverAnimation 0.2s ease-in-out forwards;
+}
+@keyframes hoverAnimation {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #f4f4f4;
+  }
 }
 .sidebar .searchBar {
   position: sticky;
@@ -64,13 +99,13 @@ body {
 .sidebar .searchBar .iconSearch {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 35px;
   transform: translate(50%, -50%);
   width: 20px;
 }
 .sidebar .searchBar .iconClose {
   position: absolute;
-  top: 50%;
+  top: 55%;
   right: 30px;
   transform: translate(50%, -50%);
   width: 20px;
@@ -161,11 +196,13 @@ body {
   background: #ffffff;
   padding: 10px 20px;
   height: auto;
+  position: relative;
 }
 .mainContent .content .title {
   font-size: 20px;
   font-weight: 600;
   margin: 10px 0;
+  position: sticky;
 }
 .mainContent .content .description {
   font-weight: 300;

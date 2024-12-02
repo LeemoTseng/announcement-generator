@@ -18,25 +18,6 @@ body {
     margin: 0;
 }
 
-.header {
-    background: $white;
-    padding: 10px 50px;
-    border-bottom: 1px solid $grey-200;
-    display: flex;
-
-    .imgBox {
-        object-fit: contain;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-    }
-
-    .title {
-        font-size: 16px;
-        font-weight: 600;
-        padding-left: 20px;
-    }
-}
 
 .sidebar {
     min-width: fit-content;
@@ -45,21 +26,89 @@ body {
     overflow-x: hidden;
     border-right: 1px solid $grey-200;
 
-    .imgBox {
+    .title {
+        position: sticky;
+        top: 0;
+        background: white;
+
         object-fit: contain;
         overflow: hidden;
         display: flex;
-
-        padding-top: 10px;
-        width: fit-content;
-        height: 24px;
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+        padding: 10px 5px;
+        width: 100%;
+        height: 26px;
 
         img {
-            width: 100%;
             height: 100%;
         }
 
+        p {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+
+        }
+
+        .iconMenu {
+            width: 40px;
+            left: 20px;
+            color: $grey-400;
+            padding: 5px;
+
+            &:hover {
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 5px;
+                animation: hoverAnimation .2s ease-in-out forwards;
+
+            }
+
+            @keyframes hoverAnimation {
+                0% {
+                    background-color: transparent;
+                }
+
+                100% {
+                    background-color: $grey-50;
+                }
+
+            }
+        }
+
+
+        .iconFold {
+            position: absolute;
+            width: 18px;
+            right: 20px;
+            color: $grey-400;
+            padding: 5px;
+
+            &:hover {
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 5px;
+                animation: hoverAnimation .2s ease-in-out forwards;
+
+            }
+
+            @keyframes hoverAnimation {
+                0% {
+                    background-color: transparent;
+                }
+
+                100% {
+                    background-color: $grey-50;
+                }
+
+            }
+        }
     }
+
 
     .searchBar {
         position: sticky;
@@ -67,8 +116,6 @@ body {
         padding: 10px;
         border-bottom: 1px solid $grey-200;
         background-color: #fff;
-
-
 
         input {
             width: 230px;
@@ -84,10 +131,11 @@ body {
             }
         }
 
+
         .iconSearch {
             position: absolute;
             top: 50%;
-            left: 10px;
+            left: 35px;
             transform: translate(50%, -50%);
 
             width: 20px;
@@ -95,7 +143,7 @@ body {
 
         .iconClose {
             position: absolute;
-            top: 50%;
+            top: 55%;
             right: 30px;
             transform: translate(50%, -50%);
 
@@ -210,10 +258,15 @@ body {
         padding: 10px 20px;
         height: auto;
 
+        position: relative;
+
         .title {
             font-size: 20px;
             font-weight: 600;
             margin: 10px 0;
+
+            position: sticky;
+
         }
 
         .description {
@@ -400,7 +453,7 @@ textarea {
     }
 }
 
-.icon{
+.icon {
     padding: 10px;
     border-radius: 50%;
     width: 20px;
@@ -409,11 +462,12 @@ textarea {
     cursor: pointer;
     display: inline-block;
 
-    &:hover{
+    &:hover {
         background: #f3f3f3;
     }
 
 }
-    .delete{
-        color: rgb(165, 10, 10);
-    }
+
+.delete {
+    color: rgb(165, 10, 10);
+}

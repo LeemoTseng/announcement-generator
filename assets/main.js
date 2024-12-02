@@ -8,7 +8,7 @@
 // $3. Update poster
 // $4. Save as sample
 //
-//  $99. Toaster
+// $99. Toaster
 
 //----------------------//
 // $1. Resizer
@@ -37,17 +37,17 @@ const onMouseMove = (e) => {
 };
 
 const onMouseUp = () => {
-  isDragging = false;
-  console.log("isDragging:", isDragging);
   document.removeEventListener('mousemove', onMouseMove); 
   document.removeEventListener('mouseup', onMouseUp); 
+  isDragging = false;
+  console.log("isDragging:", isDragging);
 };
 
 resizer.addEventListener('mousedown', () => {
-  isDragging = true;
-  console.log("isDragging:",isDragging);
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+  isDragging = true;
+  console.log("isDragging:",isDragging);
 });
 
 
@@ -329,7 +329,7 @@ function showToaster(message, type = "info", duration = 3000) {
 
 }
 
-document.getElementById("btnUpdate").addEventListener("click", async () => {
+// document.getElementById("btnUpdate").addEventListener("click", async () => {
   // showToaster("公告已成功更新！", "info", 3000);
   // showToaster("失敗！請洽管理員", "error", 3000);
 
@@ -350,4 +350,4 @@ document.getElementById("btnUpdate").addEventListener("click", async () => {
   //   console.error(error);
   // }
 
-});
+// });

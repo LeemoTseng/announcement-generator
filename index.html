@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="assets/output.css" />
     <script src="assets/main.js" defer></script>
   </head>
+  <!-- INDEX -->
+  <!-- 1. header start -->
+  <!-- 1.1. sidebar start -->
+  <!-- 1.2. posterEdit start -->
+
   <body>
-    <!-- header start -->
+    <!-- 1. header start -->
     <!-- <div class="header">
       <div class="imgBox"><img src="assets/logo.svg" alt="" /></div>
       <div class="Title"><p>Announcement generator</p></div>
@@ -16,9 +21,64 @@
     <!-- header end -->
 
     <div style="display: flex">
+      <!-- 1.1. sidebar start -->
+      <div class="sidebar">
+        <div class="title">
+          <svg
+            class="iconMenu size-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
 
+          <img src="assets/logo.svg" alt="" />
+          <p>公告產生</p>
+          <svg
+            class="iconFold size-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
+            />
+          </svg>
+        </div>
 
-      <!-- posterEdit start -->
+        <!-- poster start -->
+        <div class="posters">
+          <div class="sample">
+            <div class="imgBox">
+              <img src="https://fakeimg.pl/200x200/eee/" alt="" />
+            </div>
+          </div>
+          <div class="sample">
+            <div class="imgBox">
+              <img src="https://fakeimg.pl/200x200/eee/" alt="" />
+            </div>
+          </div>
+          <div class="sample">
+            <div class="imgBox">
+              <img src="https://fakeimg.pl/200x200/eee/" alt="" />
+            </div>
+          </div>
+        </div>
+        <!-- poster end -->
+      </div>
+      <!-- sidebar end -->
+      <!-- 1.2. posterEdit start -->
       <div id="dragableContainer" class="mainContent">
         <div class="tag">View</div>
         <div id="topPanel" class="artBoard">
@@ -62,7 +122,6 @@
               <label for="greeting">主旨</label>
               <textarea id="greeting" rows="4"></textarea>
             </div>
-
           </div>
           <div style="grid-column: span 8"></div>
           <div class="diver" style="grid-column: span 12"></div>
@@ -141,24 +200,19 @@
             <!-- $2. Insert member's form -->
           </div>
           <button class="btnAddNewMember" id="btnAddNewMember">新增成員</button>
-          
-          <div class="btnGroup">
 
+          <div class="btnGroup">
             <!-- $3. Update poster -->
             <button class="btnOutlineDefault" id="btnUpdate">更新公告</button>
-            <button class="btnDefault" id="btnSend">寄出</button>            <div
-            style="
-              
-              display: flex;
-              padding-bottom:20px ;
-              align-items: center;
-            "
-          >
-            <input type="checkbox" id="save" rows="4" />
-            <label for="save" style="font-size: 14px; margin-left: 5px"
-              >將本次內容儲存為固定範本</label
+            <button class="btnDefault" id="btnSend">寄出</button>
+            <div
+              style="display: flex; padding-bottom: 20px; align-items: center"
             >
-          </div>
+              <input type="checkbox" id="save" rows="4" />
+              <label for="save" style="font-size: 14px; margin-left: 5px"
+                >將本次內容儲存為固定範本</label
+              >
+            </div>
           </div>
 
           <!-- form end -->
