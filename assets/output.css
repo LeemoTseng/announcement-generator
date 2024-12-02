@@ -6,8 +6,16 @@ body {
   margin: 0;
 }
 
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .sidebar {
   min-width: fit-content;
+  min-width: 250px;
   height: 100vh;
   overflow-y: visible;
   overflow-x: hidden;
@@ -78,58 +86,34 @@ body {
     background-color: #f4f4f4;
   }
 }
-.sidebar .searchBar {
-  position: sticky;
-  top: 0;
-  padding: 10px;
-  border-bottom: 1px solid #BFBFBF;
-  background-color: #fff;
+.sidebar .allPosters {
+  padding-top: 10px;
 }
-.sidebar .searchBar input {
-  width: 230px;
-  background: #f4f4f4;
-  padding: 10px;
-  padding-left: 40px;
-  border: none;
+.sidebar .allPosters .poster {
+  padding: 5px;
+}
+.sidebar .allPosters .poster .title {
+  padding: 0px 5px;
+  margin: 0;
+  font-weight: 600;
+  color: #454545;
+  box-shadow: none;
+}
+.sidebar .allPosters .poster ul li {
+  padding: 5px 20px;
+  margin: 0;
   border-radius: 5px;
+  color: #454545;
 }
-.sidebar .searchBar input:focus {
-  outline: none;
+.sidebar .allPosters .poster ul li:hover {
+  cursor: pointer;
+  background: #f4f4f4;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
 }
-.sidebar .searchBar .iconSearch {
-  position: absolute;
-  top: 50%;
-  left: 35px;
-  transform: translate(50%, -50%);
-  width: 20px;
-}
-.sidebar .searchBar .iconClose {
-  position: absolute;
-  top: 55%;
-  right: 30px;
-  transform: translate(50%, -50%);
-  width: 20px;
-}
-.sidebar .posters {
-  position: flex;
-  flex-direction: column;
-  justify-items: center;
-  padding-top: 30px;
-}
-.sidebar .posters .sample {
-  margin-top: 20px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-.sidebar .posters .sample .imgBox {
-  object-fit: fill;
-  width: 220px;
-  height: 300px;
-  overflow: hidden;
-}
-.sidebar .posters .sample .imgBox img {
-  width: 100%;
-  height: 100%;
+.sidebar .allPosters .poster ul li p {
+  padding: 0;
+  margin: 0;
 }
 
 .mainContent {
@@ -152,7 +136,7 @@ body {
   color: #fff;
 }
 .mainContent .resizer {
-  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
