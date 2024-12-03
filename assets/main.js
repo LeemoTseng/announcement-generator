@@ -280,34 +280,45 @@ function membersForEach(members) {
     return `
       <!-- intro start -->
       <table
-        style="padding: 0; margin: 0; margin-top: 10px"
+        width="700"
+        style="font-family: '微軟正黑體', sans-serif;padding: 0; margin: 0; margin-top: 10px"
         border="0"
         cellpadding="5"
         cellspacing="0"
       >
         <tr>
-          <td>
+          <td
+            width="300"
+            valign="top"
+            style="background-color: #fff; text-align: center"
+          >
+            <!-- 300x320 -->
             <img
-              style="border-radius: 10px; width: 350px"
-              src="assets/${imageName}"
+              width="300"
+              height="auto"
+              style="border-radius: 10px; max-width: 280px"
+              src="${imageName}"
               alt=""
             />
           </td>
-          <td style="padding: 10px">
-            <p style="font-size: 14px; font-weight: 500;">自我介紹 Self-Introduction</p>
-            <p style="font-size: 20px; font-weight: 800;">${name}</p>
-            <p style="font-size: 16px;">${introduction}</p>
+
+          <td width="300" valign="top" style="padding: 10px; background-color: #fff";>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;font-size: 14px; font-weight: 500;">自我介紹 Self-Introduction</p>
+            <p style="padding: 10px 0px;margin: 0;font-family: '微軟正黑體', sans-serif;font-size: 20px; font-weight: 800;">${name}</p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;font-size: 16px;">${introduction}</p>
             <div style="border-top: 1px solid #e0e0e0; width: 100%; margin: 10px 0;"></div>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">報到日期 <span style="color: rgb(134, 134, 134);">${startDate}</span></p>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">部門職位 <span style="color: rgb(134, 134, 134);">${position}</span></p>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">直屬主管 <span style="color: rgb(134, 134, 134);">${dirSupervisor}</span></p>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">部門主管 <span style="color: rgb(134, 134, 134);">${supervisor}</span></p>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">工作地點 <span style="color: rgb(134, 134, 134);">${location}</span></p>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">聯絡分機 <span style="color: rgb(134, 134, 134);">${extension}</span></p>
-            <p style="color: rgb(66, 66, 66); font-weight: 700; font-size: 14px;">E-mail <span style="color: rgb(134, 134, 134);">${email}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">報到日期 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${startDate}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">部門職位 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${position}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">直屬主管 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${dirSupervisor}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">部門主管 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${supervisor}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">工作地點 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${location}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">聯絡分機 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${extension}</span></p>
+            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">E-mail <span style="color: rgb(134, 134, 134);padding-left: 8px;">${email}</span></p>
           </td>
         </tr>
+
       </table>
+      <div style="border-top: 1px solid #e0e0e0; width: 100%; margin: 10px 0;"></div>
       <!-- intro start -->`;
   });
 }
