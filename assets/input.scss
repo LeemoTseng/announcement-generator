@@ -379,6 +379,7 @@ li {
     #bottomPanel {
         flex: 1;
         overflow-y: auto;
+        overflow-x: auto;
         background: #ffffff;
         padding: 10px 20px;
         height: auto;
@@ -439,7 +440,6 @@ li {
 
         }
     }
-
 }
 
 .btnGroup {

@@ -33,10 +33,10 @@ const closeButton = document.getElementById("closeGuide");
 
 
 const guideButton = document.getElementById("guideButton");
-guideButton.addEventListener("click",()=>{
-  if (itemSelected){
+guideButton.addEventListener("click", () => {
+  if (itemSelected) {
     startGuide();
-  } 
+  }
 }
 
 );
@@ -77,7 +77,7 @@ function startGuide() {
   showStep(currentStep);
 }
 
-function updateItemStatus(){
+function updateItemStatus() {
   itemSelected = true;
   guideButton.classList.remove("guideDisabled");
   guideButton.classList.add("guideActive");
@@ -228,7 +228,7 @@ function deleteMember(e) {
 
 const btnUpdate = document.getElementById('btnUpdate');
 
-function sendHTML(){
+function sendHTML() {
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
   const container = iframeDoc.documentElement.outerHTML
@@ -303,18 +303,18 @@ function membersForEach(members) {
           </td>
 
           <td width="450" valign="top" style="padding: 10px; background-color: #fff";>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;font-size: 14px; font-weight: 500;">自我介紹 Self-Introduction</p>
-            <p style="padding: 10px 0px;margin: 0;font-family: '微軟正黑體', sans-serif;font-size: 20px; font-weight: 800;">${name}</p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;font-size: 16px;">${introduction}</p>
-            <div style="border-top: 1px solid #e0e0e0; width: 100%; margin: 10px 0;"></div>
+            <p style="padding: 0; margin: 0; font-family: '微軟正黑體', sans-serif; font-size: 16px; font-weight: 500;">自我介紹 Self-Introduction</p>
+            <p style="padding: 0; margin: 0; margin-top: 10px; font-family: '微軟正黑體', sans-serif; font-size: 24px; font-weight: 800;">${name}</p>
+            <p style="padding: 0; margin: 0; margin-top: 10px; font-family: '微軟正黑體', sans-serif; font-size: 18px;line-height: 32px;">${introduction}</p>
+            <div style="border-top: 1px solid #e0e0e0; width: 300px; margin: 10px 0;"></div>
             <p></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">報到日期 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${startDate}</span></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">部門職位 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${position}</span></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">直屬主管 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${dirSupervisor}</span></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">部門主管 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${supervisor}</span></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">工作地點 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${location}</span></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">聯絡分機 <span style="color: rgb(134, 134, 134);padding-left: 8px;">${extension}</span></p>
-            <p style="padding: 0;margin: 0;font-family: '微軟正黑體', sans-serif;color: rgb(66, 66, 66); font-weight: 500; font-size: 14px;">E-mail <span style="color: rgb(134, 134, 134);padding-left: 8px;">${email}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin-top: 20px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">到職日期 <span style="color: rgb(134, 134, 134);padding-left: 10px;font-weight: 400">${startDate}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門職位 <span style="color: rgb(134, 134, 134);padding-left: 8px;font-weight: 400">${position}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">直屬主管 <span style="color: rgb(134, 134, 134);padding-left: 8px;font-weight: 400">${dirSupervisor}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門主管 <span style="color: rgb(134, 134, 134);padding-left: 8px;font-weight: 400">${supervisor}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">工作地點 <span style="color: rgb(134, 134, 134);padding-left: 8px;font-weight: 400">${location}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">聯絡分機 <span style="color: rgb(134, 134, 134);padding-left: 8px;font-weight: 400">${extension}</span></p>
+            <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">E-mail <span style="color: rgb(134, 134, 134);padding-left: 8px;font-weight: 400">${email}</span></p>
           </td>
         </tr>
 
@@ -392,47 +392,6 @@ function isVisibleSidebar(isVisible) {
 // $4. Save as sample
 //----------------------//
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const greeting = document.getElementById('greeting');
-//   const saveCheckbox = document.getElementById('save');
-//   const btnUpdate = document.getElementById('btnUpdate');
-
-//   const savedGreeting = getCookies('greeting');
-//   if (savedGreeting) {
-//     greeting.value = savedGreeting;
-//   } else {
-//     console.log('xxx');
-//   }
-//   btnUpdate.addEventListener('click', () => {
-//     const currentGreeting = greeting.value;
-//     if (saveCheckbox.checked) {
-//       setCookies("greeting", savedGreeting, 30);
-//       console.log(currentGreeting);
-//     } else {
-//       console.log('xxx');
-//     }
-
-//   })
-
-// });
-
-// function setCookies(name, value, days) {
-//   const date = new Date();
-//   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-//   const expires = `expires=${date.toUTCString()}`
-//   document.cookie = `${name}=${value};${expires};path=/`;
-// }
-
-// function getCookies(name) {
-//   const nameEQ = `${name}=`;
-//   const cookies = document.cookie.split(";"); 
-//   for (let cookie of cookies) {
-//     while (cookie.charAt(0) === " ") cookie = cookie.substring(1);
-//     if (cookie.indexOf(nameEQ) === 0) return cookie.substring(nameEQ.length);
-//   }
-
-// }
-
 
 //----------------------//
 // $6. Annoucement types
@@ -448,13 +407,13 @@ const types = [
     description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
     iframeSrc: "announcement-intro.html",
   },
-  {
-    type: "測試",
-    title: "測試公告",
-    description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
-    iframeSrc: "assets/test.html",
+  // {
+  //   type: "測試",
+  //   title: "測試公告",
+  //   description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
+  //   iframeSrc: "assets/test.html",
 
-  },
+  // },
   // {
   //   type: "測試用",
   //   title: "測試用title",
@@ -605,16 +564,15 @@ const newMemberTemplate = `
               <button class="btnOutlineDefault" id="btnUpdate">更新公告</button>
               <button class="btnDefault" id="btnSend">寄出</button>
               <div
-                style="display: flex; padding-bottom: 20px; align-items: center"
+                style="display: flex; padding-bottom: 20px; align-items: center; margin-top: 15px"
               >
                   <input
                     type="checkbox"
                     id="save"
-                    rows="4"
-                    style="margin-top: 10px"
+                    style="margin-top: 0px"
                   />
                   <label for="save" style="font-size: 14px; margin-left: 5px"
-                    >將本次內容儲存為固定範本</label
+                    >寄出後將本次內容儲存為固定範本</label
                   >
               </div>
             </div>
@@ -631,21 +589,6 @@ function renderTypeForm(selectedType) {
     formContainer.innerHTML = newMemberTemplate;
     resetPoster();
     updateItemStatus();
-    
-
-  } else if (selectedType === "文字公告") {
-    formContainer.innerHTML = textTemplate;
-    resetPoster()
-    updateItemStatus();
-
-
-
-  } else if (selectedType === "測試用") {
-    formContainer.innerHTML = testTemplate;
-    resetPoster();
-    updateItemStatus();
-
-
   }
 }
 
