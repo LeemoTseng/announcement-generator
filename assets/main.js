@@ -33,9 +33,15 @@ const closeButton = document.getElementById("closeGuide");
 
 
 const guideButton = document.getElementById("guideButton");
-guideButton.addEventListener("click", startGuide);
+guideButton.addEventListener("click",()=>{
+  if (itemSelected){
+    startGuide();
+  } 
+}
 
+);
 
+let itemSelected = false;
 
 function showStep(stepIndex) {
   const step = steps[stepIndex];
@@ -65,9 +71,16 @@ function hideGuide() {
 }
 
 function startGuide() {
+
   currentStep = 0;
   mask.style.display = "block";
   showStep(currentStep);
+}
+
+function updateItemStatus(){
+  itemSelected = true;
+  guideButton.classList.remove("guideDisabled");
+  guideButton.classList.add("guideActive");
 }
 
 nextButton.addEventListener("click", () => {
@@ -137,86 +150,8 @@ let memberCount = 1;
 const members = document.getElementById('members');
 
 const btnAddNewMember = document.getElementById('btnAddNewMember');
-// btnAddNewMember.addEventListener('click', () => {
-//   memberCount++;
-
-//   const member = document.createElement('div');
-//   member.className = 'member formGrid';
-//   member.setAttribute('data-member-id', memberCount)
-
-//   // member form template
-//   memberTemplate = `
-//      <div
-//       style="grid-column: span 12; font-weight: 700; font-size: 16px"
-//     >
-//       <p style="display: inline-block">
-//         新成員(<span>${memberCount}</span>)<svg
-//           onclick="deleteMember(event)"
-//           xmlns="http://www.w3.org/2000/svg"
-//           fill="none"
-//           viewBox="0 0 24 24"
-//           stroke-width="1.5"
-//           stroke="currentColor"
-//           class="icon delete"
-//           style="vertical-align: middle; width: 20px; height: 20px"
-//         >
-//           <path
-//             stroke-linecap="round"
-//             stroke-linejoin="round"
-//             d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-//           />
-//         </svg>
-//       </p>
-//     </div>
-//     <div class="inputBox" style="grid-column: span 3">
-//       <label for="name">姓名</label>
-//       <input type="text" id="name-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 3">
-//       <label for="email">Email</label>
-//       <input type="email" id="email-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 2">
-//       <label for="startDate">報到日</label>
-//       <input type="date" id="startDate-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 2">
-//       <label for="location">工作地點</label>
-//       <input type="text" id="location-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 2">
-//       <label for="extension">聯絡分機</label>
-//       <input type="text" id="extension-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 4">
-//       <label for="position">部門職位</label>
-//       <input type="text" id="position-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 4">
-//       <label for="supervisor">部門主管</label>
-//       <input type="text" id="supervisor-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 4">
-//       <label for="dirSupervisor">直屬主管</label>
-//       <input type="text" id="dirSupervisor-${memberCount}" />
-//     </div>
-//     <div class="inputBox" style="grid-column: span 12">
-//       <label for="introduction">自我介紹</label>
-//       <textarea id="introduction-${memberCount}" rows="3"></textarea>
-//     </div>
-//     <div class="inputBox" style="grid-column: span 4">
-//       <label for="profile">圖片</label>
-//       <input type="file" id="profile-${memberCount}" style="background: #ffffff" />
-//     </div>
-//     `;
-
-//   member.innerHTML = memberTemplate;
-//   members.appendChild(member);
-
-// })
 
 function addNewMember() {
-
   memberCount++;
   const member = document.createElement('div');
   member.className = 'member formGrid';
@@ -224,9 +159,9 @@ function addNewMember() {
 
   const memberTemplate = `
     <div style="grid-column: span 12; font-weight: 700; font-size: 16px">
-      <p style="display: inline-block">新成員(<span>${memberCount}</span>)
-        <svg onclick="deleteMember(event)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon delete" style="vertical-align: middle; width: 20px; height: 20px">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9L14.394 18H9.606L9.26 9m9.968-3.21a2.25 2.25 0 00-2.244-2.077H8.084a2.25 2.25 0 00-2.244 2.077L4.772 5.79" />
+      <p style="display:flex; align-items:center">新成員(<span>${memberCount}</span>)
+        <svg onclick="deleteMember(event)" class="icon delete size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+          <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
         </svg>
       </p>
     </div>
@@ -271,21 +206,17 @@ function addNewMember() {
       <input type="file" id="profile-${memberCount}" style="background: #ffffff" />
     </div>
   `;
-
   member.innerHTML = memberTemplate;
-  members.append(member);
 
-
+  return member;
 }
-
 
 document.getElementById('formContainer').addEventListener('click', (event) => {
   if (event.target && event.target.id === 'btnAddNewMember') {
-    console.log(members);
-    addNewMember();
+    const members = document.getElementById('members');
+    members.appendChild(addNewMember());
   }
 });
-
 function deleteMember(e) {
   e.target.closest('.member').remove();
 }
@@ -296,33 +227,14 @@ function deleteMember(e) {
 //----------------------//
 
 const btnUpdate = document.getElementById('btnUpdate');
-// btnUpdate.addEventListener('click', () => {
 
-//   let isCompleted = true;
+function sendHTML(){
+  const iframe = document.getElementById('poster');
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+  const container = iframeDoc.documentElement.outerHTML
+  console.log(container);
 
-//   const iframe = document.getElementById('poster');
-//   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-//   const container = iframeDoc.querySelector('#container');
-//   const bottomPanel = document.querySelector('#bottomPanel');
-//   const greeting = document.getElementById('greeting').value;
-
-//   isCompleted = (validateRequired(selectAllInputs(bottomPanel)));
-//   clearError(selectAllInputs(bottomPanel));
-//   console.log("isCompleted:", isCompleted);
-
-//   if (isCompleted) {
-//     container.innerHTML = '';
-//     const members = document.querySelectorAll('.member');
-//     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
-//     // console.log(membersForEach(members));
-//     iframeDoc.querySelector('#greeting').innerText = greeting;
-//     showToaster('更新完成', 'info', 2000);
-//   } else {
-//     showToaster('表單未完成。', 'error', 2000);
-//   }
-
-// });
+}
 
 function updateAnnouncement() {
   let isCompleted = true;
@@ -343,6 +255,7 @@ function updateAnnouncement() {
     const members = document.querySelectorAll('.member');
     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
     iframeDoc.querySelector('#greeting').innerText = greeting;
+    console.log(iframeDoc)
     showToaster('更新完成', 'info', 2000);
   } else {
     showToaster('表單未完成。', 'error', 2000);
@@ -428,6 +341,7 @@ function clearError(inputs) {
 document.getElementById('formContainer').addEventListener('click', (e) => {
   if (e.target && e.target.id === 'btnUpdate') {
     updateAnnouncement();
+    sendHTML();
   }
 });
 
@@ -459,12 +373,7 @@ function isVisibleSidebar(isVisible) {
     sidebar.style.display = 'none';
     sidebar2.style.display = 'block';
   }
-
-
-
 }
-
-
 
 
 //----------------------//
@@ -528,8 +437,8 @@ const types = [
     iframeSrc: "announcement-intro.html",
   },
   {
-    type: "文字公告",
-    title: "文字公告",
+    type: "測試",
+    title: "測試公告",
     description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
     iframeSrc: "assets/test.html",
 
@@ -572,12 +481,11 @@ function renderTypeGreeting(selectedType) {
   typeDescription.innerText = type.description;
   const iframe = document.getElementById('poster');
   iframe.src = type.iframeSrc;
-  // console.log("iframe.src::", iframe.src);
+  // console.log("iframe.src:: ", iframe.src);
 
 }
 
 const newMemberTemplate = `
-
             <div class="formGrid" id="step3">
               <div class="inputBox" style="grid-column: span 5">
                 <label for="email">您的信箱</label>
@@ -687,10 +595,15 @@ const newMemberTemplate = `
               <div
                 style="display: flex; padding-bottom: 20px; align-items: center"
               >
-                <input type="checkbox" id="save" rows="4" />
-                <label for="save" style="font-size: 14px; margin-left: 5px"
-                  >將本次內容儲存為固定範本</label
-                >
+                  <input
+                    type="checkbox"
+                    id="save"
+                    rows="4"
+                    style="margin-top: 10px"
+                  />
+                  <label for="save" style="font-size: 14px; margin-left: 5px"
+                    >將本次內容儲存為固定範本</label
+                  >
               </div>
             </div>
 `;
@@ -704,15 +617,22 @@ function renderTypeForm(selectedType) {
   formContainer.innerHTML = '';
   if (selectedType === "新進成員公告") {
     formContainer.innerHTML = newMemberTemplate;
-    resetPoster()
+    resetPoster();
+    updateItemStatus();
+    
 
   } else if (selectedType === "文字公告") {
     formContainer.innerHTML = textTemplate;
     resetPoster()
+    updateItemStatus();
+
+
 
   } else if (selectedType === "測試用") {
     formContainer.innerHTML = testTemplate;
     resetPoster();
+    updateItemStatus();
+
 
   }
 }

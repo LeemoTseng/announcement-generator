@@ -116,7 +116,7 @@
               <p>其他</p>
             </div>
             <ul>
-              <li id="guideButton"><p>使用說明</p></li>
+              <li id="guideButton" class="guideDisabled"><p>使用說明</p></li>
             </ul>
           </div>
         </div>
@@ -274,13 +274,14 @@
                 <!-- $3. Update poster -->
                 <button class="btnDefault" id="btnSend">寄出</button>
                 <div
-                  style="
-                    display: flex;
-                    padding-bottom: 20px;
-                    align-items: center;
-                  "
+                  style="display: flex; padding-top: 10px; align-items: center"
                 >
-                  <input type="checkbox" id="save" rows="4" />
+                  <input
+                    type="checkbox"
+                    id="save"
+                    rows="4"
+                    style="margin-top: 10px"
+                  />
                   <label for="save" style="font-size: 14px; margin-left: 5px"
                     >將本次內容儲存為固定範本</label
                   >

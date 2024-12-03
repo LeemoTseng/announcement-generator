@@ -28,45 +28,47 @@ li {
 //spinner
 
 .loading-spinner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3); 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; 
-  display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none;
 }
 
 
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-top: 5px solid #fff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 
-#selectSideMenu{
+#selectSideMenu {
     position: absolute;
     top: 40%;
     left: 60%;
     transform: translate(-60%, -50%);
-    p{
+
+    p {
         font-size: 18px;
         color: $grey-400;
         font-weight: 400;
@@ -75,6 +77,28 @@ li {
 
 
 // Steps
+
+.guideDisabled {
+    background: white!important;
+    &:hover {
+        cursor: default!important;
+    }
+    p {
+        color: $grey-200!important;
+    }
+}
+.guideActive{
+    &:hover {
+        cursor: pointer!important;;
+        background: $grey-50!important;;
+
+    }
+            p{
+            color: $black-800!important;;
+        }
+}
+
+
 #steps {
     .step-mask {
         position: fixed;

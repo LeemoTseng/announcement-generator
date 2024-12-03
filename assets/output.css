@@ -56,6 +56,24 @@ li {
   font-weight: 400;
 }
 
+.guideDisabled {
+  background: white !important;
+}
+.guideDisabled:hover {
+  cursor: default !important;
+}
+.guideDisabled p {
+  color: #BFBFBF !important;
+}
+
+.guideActive:hover {
+  cursor: pointer !important;
+  background: #f4f4f4 !important;
+}
+.guideActive p {
+  color: #454545 !important;
+}
+
 #steps .step-mask {
   position: fixed;
   top: 0;
