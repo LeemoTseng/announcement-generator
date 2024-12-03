@@ -280,7 +280,7 @@ function membersForEach(members) {
     return `
       <!-- intro start -->
       <table
-        width="700"
+        width="600"
         style="font-family: '微軟正黑體', sans-serif;padding: 0; margin: 0; margin-top: 10px"
         border="0"
         cellpadding="5"
@@ -294,9 +294,9 @@ function membersForEach(members) {
           >
             <!-- 300x320 -->
             <img
-              width="300"
+              width="250"
               height="auto"
-              style="border-radius: 10px; max-width: 280px"
+              style="border-radius: 10px;"
               src="${imageName}"
               alt=""
             />
