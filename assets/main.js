@@ -236,7 +236,7 @@ function sendHTML() {
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
   const container = iframeDoc.documentElement.outerHTML
-  // console.log(container);
+  console.log(container);
 
 }
 
@@ -278,8 +278,9 @@ function membersForEach(members) {
     const supervisor = document.getElementById(`supervisor-${memberId}`).value;
     const location = document.getElementById(`location-${memberId}`).value;
     const extension = document.getElementById(`extension-${memberId}`).value;
-    const image = document.getElementById(`profile-${memberId}`).value;
-    const imageName = image.split('\\').pop();
+    // const image = document.getElementById(`profile-${memberId}`).value;
+    // const imageName = image.split('\\').pop();
+    const imageSrc = document.getElementById(`profile-${memberId}`).dataset.guid;
     const introduction = document.getElementById(`introduction-${memberId}`).value;
 
     return `
@@ -302,7 +303,7 @@ function membersForEach(members) {
               width="450"
               height="auto"
               style="border-radius: 10px;"
-              src="${imageName}"
+              src="${imageSrc}"
               alt=""
             />
           </td>
@@ -699,7 +700,7 @@ function uploadFile(event) {
       if (checkFiles(file)) {
         changeFileName(file); // ---> return a guid
         sendImgToServer(file, guid);
-        findImageInput(inputElement, guid);
+        inputElement.setAttribute('data-guid', guid);
       }
 
     });
@@ -753,18 +754,14 @@ function sendImgToServer(file, guid) {
   formData.append('file', file);
   formData.append('fileName', guid);
 
-  fetch('https://api.imgur.com/3/image', {
-    method: 'POST',
-    body: formData,
-  })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error))
+  // fetch('https://api.imgur.com/3/image', {
+  //   method: 'POST',
+  //   body: formData,
+  // })
+  //   .then(res => res.json())
+  //   .then(data => console.log(data))
+  //   .catch(error => console.error(error))
 }
-
-
-
-
 
 
 
