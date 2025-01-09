@@ -764,9 +764,6 @@ function sendImgToServer(file, guid) {
 }
 
 
-
-
-
 //----------------------//
 // $99. Toaster
 //----------------------//
