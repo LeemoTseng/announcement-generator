@@ -10,6 +10,9 @@
 // $5. isVisible sidebar
 // $6. Annoucement types
 // $7. Loading
+// $8. generate guid
+// $9. send
+// $10. upload image
 // $99. Toaster
 
 //----------------------//
@@ -203,7 +206,7 @@ function addNewMember() {
     </div>
     <div class="inputBox" style="grid-column: span 4">
       <label for="profile">圖片</label>
-      <input type="file" id="profile-${memberCount}" style="background: #ffffff" />
+      <input onclick="uploadFile(event)" type="file" class="uploadedFiles" id="profile-${memberCount}" style="background: #ffffff" />
     </div>
   `;
   member.innerHTML = memberTemplate;
@@ -215,6 +218,7 @@ document.getElementById('formContainer').addEventListener('click', (event) => {
   if (event.target && event.target.id === 'btnAddNewMember') {
     const members = document.getElementById('members');
     members.appendChild(addNewMember());
+
   }
 });
 function deleteMember(e) {
@@ -232,7 +236,7 @@ function sendHTML() {
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
   const container = iframeDoc.documentElement.outerHTML
-  console.log(container);
+  // console.log(container);
 
 }
 
@@ -257,6 +261,7 @@ function updateAnnouncement() {
     iframeDoc.querySelector('#greeting').innerText = greeting;
     console.log(iframeDoc)
     showToaster('更新完成', 'info', 2000);
+
   } else {
     showToaster('表單未完成。', 'error', 2000);
   }
@@ -441,7 +446,6 @@ document.querySelectorAll('.type').forEach((type) => {
   })
 })
 
-
 function renderTypeGreeting(selectedType) {
   const type = types.find((type) => {
     return type.type === selectedType;
@@ -466,13 +470,13 @@ const newMemberTemplate = `
                   placeholder="公告信件將發送至此信箱"
                 />
               </div>
-              <div class="inputBox" style="grid-column: span 12">
-                <label for="greeting">主旨</label>
-                <textarea id="greeting" rows="4"></textarea>
-              </div>
             </div>
             <div style="grid-column: span 8"></div>
             <div class="diver" style="grid-column: span 12"></div>
+            <div class="inputBox" style="grid-column: span 12">
+              <label for="greeting">介紹主旨</label>
+              <textarea id="greeting" rows="4"></textarea>
+            </div>
             <div id="members">
               <div class="member formGrid" data-member-id="1">
                 <div
@@ -547,7 +551,9 @@ const newMemberTemplate = `
                 <div class="inputBox" style="grid-column: span 4">
                   <label for="profile">圖片</label>
                   <input
-                    type="file"
+                    onclick="uploadFile(event)"
+                    type="file" 
+                    class="uploadedFiles"
                     id="profile-1"
                     style="background: #ffffff"
                   />
@@ -589,6 +595,8 @@ function renderTypeForm(selectedType) {
     formContainer.innerHTML = newMemberTemplate;
     resetPoster();
     updateItemStatus();
+    bindingBtnSend();
+
   }
 }
 
@@ -639,6 +647,128 @@ function hideLoading() {
   const loading = document.getElementById("loading");
   loading.style.display = "none";
 }
+
+
+//----------------------//
+// $8. generate guid
+//----------------------//
+
+
+function _generateGuid() {
+  var date = Date.now();
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+    date += performance.now(); //use high-precision timer if available
+  }
+  return 'xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (date + Math.random() * 16) % 16 | 0;
+    date = Math.floor(date / 16);
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
+// for (let i = 0; i < 5; i++) {
+//   console.log(_generateGuid());
+// }
+
+
+//----------------------//
+// $9. send
+//----------------------//
+
+function bindingBtnSend() {
+  const btnSend = document.getElementById('btnSend');
+  // console.log("btnSend:", btnSend);
+  btnSend.addEventListener('click', () => {
+    sendHTML();
+  })
+}
+
+
+//----------------------//
+// $10. upload image
+//----------------------//
+
+isValidateImg = false;
+
+function uploadFile(event) {
+  const inputElement = event.target;
+  if (!inputElement.dataset.changeBound) {
+    inputElement.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      // console.log("file:", file);
+      if (checkFiles(file)) {
+        changeFileName(file); // ---> return a guid
+        sendImgToServer(file, guid);
+        findImageInput(inputElement, guid);
+      }
+
+    });
+    inputElement.dataset.changeBound = true;
+    // sendImgToServer(file, guid);
+
+
+  }
+}
+
+function checkFiles(file) {
+  if (file) {
+    const fileName = file.name;
+    const fileType = file.type;
+    const fileSize = file.size;
+
+    // check files size
+    if (fileSize > 2000000) {
+      showToaster(`${fileName}檔案大小超過2MB`, "error", 2000);
+      return isValidateImg = false;
+    } else {
+      isValidateImg = true;
+      // console.log(`File Name: ${fileName}, File Type: ${fileType}, File Size: ${fileSize} bytes`);
+    }
+    // check files type
+    if (fileType === 'image/jpeg' || fileType === 'image/png' || fileType === 'image/jpg') {
+      isValidateImg = true;
+      // console.log("fileType:", fileType);
+    } else {
+      showToaster(`${fileName}檔案格式錯誤，請上傳jpg, jpeg或png檔案`, "error", 2000);
+      return isValidateImg = false;
+    }
+  } else {
+    showToaster("請上傳正確圖片", "error", 2000);
+    return isValidateImg = false;
+  }
+  return isValidateImg;
+
+};
+
+function changeFileName(file) {
+  const fileName = file.name;
+  const newFileName = `${_generateGuid()}.${fileName.split('.').pop()}`;
+  // console.log("guid", newFileName);
+  return guid = newFileName;
+}
+
+function sendImgToServer(file, guid) {
+  console.log("file:", file, 'guid:', guid);
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('fileName', guid);
+
+  fetch('https://api.imgur.com/3/image', {
+    method: 'POST',
+    body: formData,
+  })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error))
+}
+
+
+
+
+
+
+
+
 
 //----------------------//
 // $99. Toaster

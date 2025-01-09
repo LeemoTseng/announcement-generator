@@ -479,4 +479,16 @@ textarea {
   color: rgb(165, 10, 10);
 }
 
+.inputBox #greeting {
+  width: 100%;
+  border: none;
+}
+.inputBox #greeting::outline {
+  border: none;
+}
+.inputBox #greeting:focus {
+  border: none;
+  outline: none;
+}
+
 /*# sourceMappingURL=output.css.map */

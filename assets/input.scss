@@ -79,23 +79,30 @@ li {
 // Steps
 
 .guideDisabled {
-    background: white!important;
+    background: white !important;
+
     &:hover {
-        cursor: default!important;
+        cursor: default !important;
     }
+
     p {
-        color: $grey-200!important;
+        color: $grey-200 !important;
     }
 }
-.guideActive{
+
+.guideActive {
     &:hover {
-        cursor: pointer!important;;
-        background: $grey-50!important;;
+        cursor: pointer !important;
+        ;
+        background: $grey-50 !important;
+        ;
 
     }
-            p{
-            color: $black-800!important;;
-        }
+
+    p {
+        color: $black-800 !important;
+        ;
+    }
 }
 
 
@@ -597,4 +604,21 @@ textarea {
 
 .delete {
     color: rgb(165, 10, 10);
+}
+
+.inputBox {
+
+    #greeting {
+        width: 100%;
+        border:none;
+        &::outline {
+            border: none;
+        }
+        &:focus{
+            border: none;
+            outline: none;
+        }
+
+    }
+
 }
