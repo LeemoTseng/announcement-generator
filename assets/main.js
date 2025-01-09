@@ -13,6 +13,7 @@
 // $8. generate guid
 // $9. send
 // $10. upload image
+// $11. Save to cookie
 // $99. Toaster
 
 //----------------------//
@@ -144,7 +145,6 @@ resizer.addEventListener('mousedown', () => {
 });
 
 
-
 //----------------------//
 // $2. Insert member's form
 //----------------------//
@@ -155,6 +155,11 @@ const members = document.getElementById('members');
 const btnAddNewMember = document.getElementById('btnAddNewMember');
 
 function addNewMember() {
+  // send btn style - disable
+  const btnSend = document.getElementById('btnSend');
+  btnSend.style.backgroundColor = '#b2b2b2';
+  btnSend.style.cursor = 'default';
+
   memberCount++;
   const member = document.createElement('div');
   member.className = 'member formGrid';
@@ -226,6 +231,8 @@ function deleteMember(e) {
 }
 
 
+
+
 //----------------------//
 // $3. Update poster
 //----------------------//
@@ -256,14 +263,25 @@ function updateAnnouncement() {
 
   if (isCompleted) {
     container.innerHTML = '';
+
+    // send btn style - active
+    const btnSend = document.getElementById('btnSend');
+    btnSend.style.backgroundColor = '#454545';
+    btnSend.style.cursor = 'pointer';
+
+    // update iframe
     const members = document.querySelectorAll('.member');
     container.insertAdjacentHTML('beforeend', membersForEach(members).join(''));
     iframeDoc.querySelector('#greeting').innerText = greeting;
-    console.log(iframeDoc)
+    // console.log(iframeDoc)
     showToaster('更新完成', 'info', 2000);
 
   } else {
     showToaster('表單未完成。', 'error', 2000);
+    // send btn style - disable
+    const btnSend = document.getElementById('btnSend');
+    btnSend.style.backgroundColor = '#b2b2b2';
+    btnSend.style.cursor = 'default';
   }
 }
 
@@ -470,13 +488,37 @@ const newMemberTemplate = `
                   id="yourEmail"
                   placeholder="公告信件將發送至此信箱"
                 />
+                              <div
+                style="display: flex; padding-bottom: 20px; align-items: center"
+              >
+                  <input
+                    type="checkbox"
+                    id="saveEmailChecked"
+                    style="margin-top: 5px"
+                  />
+                  <label for="saveEmailChecked" style="font-size: 14px; margin-top: 5px; margin-left: 5px"
+                    >寄出後暫存此信箱</label
+                  >
+              </div>
               </div>
             </div>
             <div style="grid-column: span 8"></div>
             <div class="diver" style="grid-column: span 12"></div>
-            <div class="inputBox" style="grid-column: span 12">
+            <div class="inputBox" style="grid-column: span 12; padding-right:10px">
               <label for="greeting">介紹主旨</label>
-              <textarea id="greeting" rows="4"></textarea>
+              <textarea id="greeting" rows="4" style="margin-right:10px;"></textarea>
+              <div
+                style="display: flex; padding-bottom: 20px; align-items: center"
+              >
+                  <input
+                    type="checkbox"
+                    id="saveGreetingChecked"
+                    style="margin-top: 0px"
+                  />
+                  <label for="saveGreetingChecked" style="font-size: 14px; margin-left: 5px"
+                    >寄出後暫存此介紹主旨</label
+                  >
+              </div>
             </div>
             <div id="members">
               <div class="member formGrid" data-member-id="1">
@@ -569,19 +611,7 @@ const newMemberTemplate = `
             <div class="btnGroup">
               <!-- $3. Update poster -->
               <button class="btnOutlineDefault" id="btnUpdate">更新公告</button>
-              <button class="btnDefault" id="btnSend">寄出</button>
-              <div
-                style="display: flex; padding-bottom: 20px; align-items: center; margin-top: 15px"
-              >
-                  <input
-                    type="checkbox"
-                    id="save"
-                    style="margin-top: 0px"
-                  />
-                  <label for="save" style="font-size: 14px; margin-left: 5px"
-                    >寄出後將本次內容儲存為固定範本</label
-                  >
-              </div>
+              <button class="btnDefault" style="background-color:#b2b2b2; cursor:default" id="btnSend">寄出</button>
             </div>
 `;
 const textTemplate = `
@@ -597,7 +627,7 @@ function renderTypeForm(selectedType) {
     resetPoster();
     updateItemStatus();
     bindingBtnSend();
-
+    getFromLocalStorage();
   }
 }
 
@@ -680,7 +710,10 @@ function bindingBtnSend() {
   const btnSend = document.getElementById('btnSend');
   // console.log("btnSend:", btnSend);
   btnSend.addEventListener('click', () => {
-    sendHTML();
+    if (btnSend.style.cursor === 'pointer') {
+      sendHTML();
+      saveToLocalStorage();
+    } else { }
   })
 }
 
@@ -762,6 +795,81 @@ function sendImgToServer(file, guid) {
   //   .then(data => console.log(data))
   //   .catch(error => console.error(error))
 }
+
+
+//----------------------//
+// $11. Save to LocalStorage
+//----------------------//
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // getFromLocalStorage();
+});
+
+function saveToLocalStorage() {
+  const greetingInput = document.getElementById('greeting');
+  const saveGreetingChecked = document.getElementById('saveGreetingChecked');
+  const yourEmailInput = document.getElementById('yourEmail');
+  const saveEmailChecked = document.getElementById('saveEmailChecked');
+  // Save greeting
+  if (saveGreetingChecked?.checked) {
+    localStorage.setItem('greeting', greetingInput.value);
+    localStorage.setItem('saveGreetingChecked', true);
+    // console.log('greeting saved:', greetingInput.value);
+  } else {
+    localStorage.removeItem('greeting');
+    localStorage.removeItem('saveGreetingChecked');
+    // console.log('greeting removed');
+  }
+
+  // Save email
+  if (saveEmailChecked?.checked) { // 檢查是否成功取得元素
+    localStorage.setItem('yourEmail', yourEmailInput.value);
+    localStorage.setItem('saveEmailChecked', true);
+    // console.log('yourEmail saved:', yourEmailInput.value);
+  } else {
+    localStorage.removeItem('yourEmail');
+    localStorage.removeItem('saveEmailChecked');
+    // console.log('yourEmail removed');
+  }
+}
+
+function getFromLocalStorage() {
+  const greetingInput = document.getElementById('greeting');
+  const saveGreetingChecked = document.getElementById('saveGreetingChecked');
+  const yourEmailInput = document.getElementById('yourEmail');
+  const saveEmailChecked = document.getElementById('saveEmailChecked');
+  // Get greeting
+  if (greetingInput && saveGreetingChecked) { // 確保元素存在
+    const greetingFromLocalStorage = localStorage.getItem('greeting');
+    const saveGreetingCheckedFromLocalStorage = localStorage.getItem('saveGreetingChecked') === 'true';
+
+    if (greetingFromLocalStorage) {
+      greetingInput.value = greetingFromLocalStorage;
+      saveGreetingChecked.checked = saveGreetingCheckedFromLocalStorage;
+      // console.log('greeting loaded:', greetingFromLocalStorage);
+    } else {
+      // console.log('no greeting data');
+    }
+  } else {
+    // console.log('no greeting data');
+  }
+
+  // Get email
+  if (yourEmailInput && saveEmailChecked) { // 確保元素存在
+    const yourEmailFromLocalStorage = localStorage.getItem('yourEmail');
+    const saveEmailCheckedFromLocalStorage = localStorage.getItem('saveEmailChecked') === 'true';
+
+    if (yourEmailFromLocalStorage) {
+      yourEmailInput.value = yourEmailFromLocalStorage;
+      saveEmailChecked.checked = saveEmailCheckedFromLocalStorage;
+      // console.log('yourEmail loaded:', yourEmailFromLocalStorage);
+    } else {
+      // console.log('no Email data');
+    }
+  }
+}
+
 
 
 //----------------------//
