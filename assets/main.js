@@ -20,10 +20,13 @@
 // $0. Tips
 //----------------------//
 
+
 const steps = [
-  { element: "#step1", text: "1/3 - 於側邊欄選擇公告模板。" },
-  { element: "#step2", text: "2/3 - 瀏覽公告模板。可點選中央圖示拉伸畫面區域。" },
-  { element: "#step3", text: "3/3 - 編輯表單後，點選「更新」按鈕，可更新上翻瀏覽公告模板；點選「寄出」則寄出至填寫的信箱。" },
+  { element: "#step1", text: "1/5 - 於側邊欄選擇公告模板。" },
+  { element: "#step2", text: "2/5 - 瀏覽公告模板。可點選中間箭頭拉伸畫面區域。" },
+  { element: "#step3", text: "3/5 - 可於瀏覽器儲存您的信箱及公告介紹文字。" },
+  { element: "#step4", text: "4/5 - 編輯表單後，點選最下方的「更新公告」按鈕，可更新上翻瀏覽公告模板。" },
+  { element: "#step5", text: "5/5 - 更新公告成功後，即可按「寄出」。" },
 ];
 
 let currentStep = 0;
@@ -210,8 +213,9 @@ function addNewMember() {
       <textarea id="introduction-${memberCount}" rows="3"></textarea>
     </div>
     <div class="inputBox" style="grid-column: span 4">
-      <label for="profile">圖片</label>
+      <label for="profile">圖片</label><span style="font-size:12px; color:gray">檔案可為png, jpeg或jpg，檔案大小不超過2MB</span>
       <input onclick="uploadFile(event)" type="file" class="uploadedFiles" id="profile-${memberCount}" style="background: #ffffff" />
+
     </div>
   `;
   member.innerHTML = memberTemplate;
@@ -428,7 +432,7 @@ const types = [
   {
     type: "新進成員公告",
     title: "新成員公告",
-    description: "請於左側選擇模板，並上下對照填妥下列表格，可點選「更新」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
+    description: "請於左側選擇模板，並上下對照填妥下列表格，點選「更新公告」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。",
     iframeSrc: "announcement-intro.html",
   },
   // {
@@ -497,7 +501,7 @@ const newMemberTemplate = `
                     style="margin-top: 5px"
                   />
                   <label for="saveEmailChecked" style="font-size: 14px; margin-top: 5px; margin-left: 5px"
-                    >寄出後暫存此信箱</label
+                    >寄出後儲存此信箱</label
                   >
               </div>
               </div>
@@ -516,7 +520,7 @@ const newMemberTemplate = `
                     style="margin-top: 0px"
                   />
                   <label for="saveGreetingChecked" style="font-size: 14px; margin-left: 5px"
-                    >寄出後暫存此介紹主旨</label
+                    >寄出後儲存此介紹主旨</label
                   >
               </div>
             </div>
@@ -593,6 +597,7 @@ const newMemberTemplate = `
                 </div>
                 <div class="inputBox" style="grid-column: span 4">
                   <label for="profile">圖片</label>
+                  <span style="font-size:12px; color:gray">檔案可為png, jpeg或jpg，檔案大小不超過2MB</span>
                   <input
                     onclick="uploadFile(event)"
                     type="file" 
@@ -802,9 +807,7 @@ function sendImgToServer(file, guid) {
 //----------------------//
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  // getFromLocalStorage();
-});
+
 
 function saveToLocalStorage() {
   const greetingInput = document.getElementById('greeting');

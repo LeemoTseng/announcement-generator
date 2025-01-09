@@ -68,7 +68,7 @@ li {
 
 .guideActive:hover {
   cursor: pointer !important;
-  background: #f4f4f4 !important;
+  background-color: #f4f4f4 !important;
 }
 .guideActive p {
   color: #454545 !important;
@@ -80,15 +80,15 @@ li {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: none;
   z-index: 1000;
   display: none;
 }
 #steps .step-highlight {
   position: absolute;
-  border: 2px solid #fff;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.5);
+  border: 3px solid rgb(255, 172, 47);
+  border-radius: 10px;
+  background: none;
   z-index: 1001;
   display: none;
   pointer-events: none;
