@@ -835,8 +835,7 @@ function checkFiles(file) {
 
 function changeFileName(file) {
   const fileName = file.name;
-  const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/
- ${_generateGuid()}.${fileName.split('.').pop()}`;
+  const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/${_generateGuid()}.${fileName.split('.').pop()}`;
   // console.log("guid", newFileName);
   return guid = newFileName;
 }
