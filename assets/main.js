@@ -13,7 +13,7 @@
 // $8. generate guid
 // $9. send
 // $10. upload image
-// $11. Save to cookie
+// $11. Save to LocalStorage
 // $99. Toaster
 
 //----------------------//
@@ -246,12 +246,14 @@ const btnUpdate = document.getElementById('btnUpdate');
 function sendHTML() {
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-  const container = iframeDoc.documentElement.outerHTML
-  console.log(container);
+  let container = iframeDoc.documentElement.outerHTML
+  console.log('sendHTML', container);
+  return container;
 
 }
 
 function updateAnnouncement() {
+
   let isCompleted = true;
 
   const iframe = document.getElementById('poster');
@@ -263,11 +265,10 @@ function updateAnnouncement() {
 
   isCompleted = validateRequired(selectAllInputs(bottomPanel));
   clearError(selectAllInputs(bottomPanel));
-  console.log('isCompleted:', isCompleted);
+  // console.log('isCompleted:', isCompleted);
 
   if (isCompleted) {
     container.innerHTML = '';
-
     // send btn style - active
     const btnSend = document.getElementById('btnSend');
     btnSend.style.backgroundColor = '#454545';
@@ -300,10 +301,13 @@ function membersForEach(members) {
     const supervisor = document.getElementById(`supervisor-${memberId}`).value;
     const location = document.getElementById(`location-${memberId}`).value;
     const extension = document.getElementById(`extension-${memberId}`).value;
-    // const image = document.getElementById(`profile-${memberId}`).value;
-    // const imageName = image.split('\\').pop();
-    const imageSrc = document.getElementById(`profile-${memberId}`).dataset.guid;
     const introduction = document.getElementById(`introduction-${memberId}`).value;
+    // const imageSrc = document.getElementById(`profile-${memberId}`).value;
+    // const imageName = image.split('\\').pop();
+    // let imageSrc = document.getElementById(`profile-${memberId}`).dataset.fileReaderUrl;
+    // let imageSrc = document.getElementById(`profile-${memberId}`).getAttribute('data-fileReaderUrl');
+    let imageSrc = document.getElementById(`profile-${memberId}`).dataset.guid;
+    // let imageSrc = inputElement.getAttribute('data-fileReaderUrl');
 
     return `
       <!-- intro start -->
@@ -482,7 +486,6 @@ function renderTypeGreeting(selectedType) {
   // console.log("iframe.src:: ", iframe.src);
 
 }
-
 const newMemberTemplate = `
             <div class="formGrid" id="step3">
               <div class="inputBox" style="grid-column: span 5">
@@ -501,7 +504,7 @@ const newMemberTemplate = `
                     style="margin-top: 5px"
                   />
                   <label for="saveEmailChecked" style="font-size: 14px; margin-top: 5px; margin-left: 5px"
-                    >寄出後儲存此信箱</label
+                    >寄出後暫存此信箱</label
                   >
               </div>
               </div>
@@ -520,7 +523,7 @@ const newMemberTemplate = `
                     style="margin-top: 0px"
                   />
                   <label for="saveGreetingChecked" style="font-size: 14px; margin-left: 5px"
-                    >寄出後儲存此介紹主旨</label
+                    >寄出後暫存此介紹主旨</label
                   >
               </div>
             </div>
@@ -633,6 +636,7 @@ function renderTypeForm(selectedType) {
     updateItemStatus();
     bindingBtnSend();
     getFromLocalStorage();
+
   }
 }
 
@@ -707,6 +711,8 @@ function _generateGuid() {
 // }
 
 
+
+
 //----------------------//
 // $9. send
 //----------------------//
@@ -716,11 +722,31 @@ function bindingBtnSend() {
   // console.log("btnSend:", btnSend);
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
+      // sendToServer();
+      updateAnnouncement();
       sendHTML();
       saveToLocalStorage();
     } else { }
   })
 }
+
+function sendToServer() {
+
+
+
+}
+
+// fetch('https://api.imgur.com/3/image', {
+//   method: 'POST',
+//   body: JSON.stringify(data),
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+// })
+//   .then(res => res.json())
+//   .then(data => console.log(data))
+//   .catch(error => console.error(error))
+
 
 
 //----------------------//
@@ -732,22 +758,50 @@ isValidateImg = false;
 function uploadFile(event) {
   const inputElement = event.target;
   if (!inputElement.dataset.changeBound) {
-    inputElement.addEventListener('change', (e) => {
+    inputElement.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       // console.log("file:", file);
+
       if (checkFiles(file)) {
         changeFileName(file); // ---> return a guid
+        const fileReaderUrl = await fileReader(file) // ---> return a fileReaderUrl
         sendImgToServer(file, guid);
         inputElement.setAttribute('data-guid', guid);
+        inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
       }
 
     });
     inputElement.dataset.changeBound = true;
     // sendImgToServer(file, guid);
 
-
   }
 }
+
+
+// const fileName = file.name;
+// const newFileName = `${_generateGuid()}.${fileName.split('.').pop()}`;
+// // console.log("guid", newFileName);
+// return guid = newFileName;
+
+function fileReader(file) {
+  let fileReaderUrl = '';
+  return new Promise((resolve, reject) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        resolve(e.target.result); // 回傳圖片的 Data URL
+        return fileReaderUrl = e.target.result;
+      };
+      reader.onerror = function () {
+        reject(new Error("文件讀取失敗"));
+      };
+      reader.readAsDataURL(file);
+    } else {
+      reject(new Error("未提供文件"));
+    }
+  });
+}
+
 
 function checkFiles(file) {
   if (file) {
@@ -781,13 +835,14 @@ function checkFiles(file) {
 
 function changeFileName(file) {
   const fileName = file.name;
-  const newFileName = `${_generateGuid()}.${fileName.split('.').pop()}`;
+  const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/
+ ${_generateGuid()}.${fileName.split('.').pop()}`;
   // console.log("guid", newFileName);
   return guid = newFileName;
 }
 
 function sendImgToServer(file, guid) {
-  console.log("file:", file, 'guid:', guid);
+  // console.log("file:", file, 'guid:', guid);
   const formData = new FormData();
   formData.append('file', file);
   formData.append('fileName', guid);
@@ -805,8 +860,6 @@ function sendImgToServer(file, guid) {
 //----------------------//
 // $11. Save to LocalStorage
 //----------------------//
-
-
 
 
 function saveToLocalStorage() {
