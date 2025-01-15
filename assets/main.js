@@ -247,9 +247,15 @@ function sendHTML() {
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
   let container = iframeDoc.documentElement.outerHTML
+  container = HtmlStringify(container);
   console.log('sendHTML', container);
   return container;
 
+}
+
+function HtmlStringify(html){
+  const HtmlStringifyOutput = JSON.stringify(html);
+  return HtmlStringifyOutput;
 }
 
 function updateAnnouncement() {
