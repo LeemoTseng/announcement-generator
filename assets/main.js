@@ -739,10 +739,13 @@ function bindingBtnSend() {
   })
 }
 
-function sendToServer(guid, file) {
+function sendToServer(file ,guid) {
+  // console.log("sent-guid:", guid);
+  // console.log("sent-file:", file);
   const formdata = new FormData();
   formdata.append('Guid', guid); 
-  formdata.append('File', file); 
+  formdata.append('File', file);
+   
 
 // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
 // http://192.168.11.18:8291/api/NewEmployeeIntro/upload
@@ -783,14 +786,18 @@ function uploadFile(event) {
       // console.log("file:", file);
 
       if (checkFiles(file)) {
-        changeFileName(file); // ---> return a guid
+        // console.log('checkFile',file);
+        changeFileName(file); // ---> return 'guid', 'newFileName'
+        const guid = changeFileName(file).guid;
+        const newFileName = changeFileName(file).newFileName;
+          // console.log("sent-guid", guid);
+          // console.log("sent-newFileName:", newFileName);
         const fileReaderUrl = await fileReader(file) // ---> return a fileReaderUrl
-        // sendImgToServer(file, guid);
-        inputElement.setAttribute('data-guid', guid);
+        inputElement.setAttribute('data-guid', newFileName);
         inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
         sendToServer(file,guid);
-        console.log("guid:", guid);
-        console.log("file:", file);
+        // console.log("sent-guid:", guid);
+        // console.log("sent-file:", file);
       }
 
     });
@@ -858,9 +865,12 @@ function checkFiles(file) {
 
 function changeFileName(file) {
   const fileName = file.name;
-  const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/${_generateGuid()}.${fileName.split('.').pop()}`;
-  // console.log("guid", newFileName);
-  return guid = newFileName;
+  const guid = `${_generateGuid()}`
+  const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
+  // console.log("sent-guid", guid);
+  // console.log("sent-newFileName:", newFileName);
+  return { newFileName, guid };
+
 }
 
 // async function sendImgToServer(file, guid) {
