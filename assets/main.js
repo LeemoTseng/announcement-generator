@@ -739,7 +739,11 @@ function bindingBtnSend() {
   })
 }
 
-function sendToServer(formdata) {
+function sendToServer(guid, file) {
+  const formdata = new FormData();
+  formdata.append('Guid', guid); 
+  formdata.append('File', file); 
+
   fetch('http://192.168.11.18:8291/api/NewEmployeeIntro/upload', {
     method: 'POST',
     body: formdata, 
