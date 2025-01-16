@@ -740,7 +740,7 @@ function bindingBtnSend() {
 }
 
 function sendToServer(formdata) {
-  fetch('http://192.168.11.18:8291/api/NewEmployeeIntro/upload', {
+  fetch('http://127.0.0.1:8291/api/NewEmployeeIntro/upload', {
     method: 'POST',
     body: formdata, 
   })
