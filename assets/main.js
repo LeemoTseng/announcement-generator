@@ -744,7 +744,12 @@ function sendToServer(guid, file) {
   formdata.append('Guid', guid); 
   formdata.append('File', file); 
 
-  fetch('http://127.0.0.1:8291/api/NewEmployeeIntro/upload', {
+// https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
+// http://192.168.11.18:8291/api/NewEmployeeIntro/upload
+// http://127.0.0.1:8291/api/NewEmployeeIntro/upload
+
+
+  fetch('https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload', {
     method: 'POST',
     body: formdata, 
   })
