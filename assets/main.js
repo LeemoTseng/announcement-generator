@@ -253,7 +253,7 @@ function sendHTML() {
 
 }
 
-function HtmlStringify(html){
+function HtmlStringify(html) {
   const HtmlStringifyOutput = JSON.stringify(html);
   return HtmlStringifyOutput;
 }
@@ -279,6 +279,9 @@ function updateAnnouncement() {
     const btnSend = document.getElementById('btnSend');
     btnSend.style.backgroundColor = '#454545';
     btnSend.style.cursor = 'pointer';
+
+    // send to server
+    sendToServer();
 
     // update iframe
     const members = document.querySelectorAll('.member');
@@ -728,7 +731,7 @@ function bindingBtnSend() {
   // console.log("btnSend:", btnSend);
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
-      // sendToServer();
+      sendToServer();
       updateAnnouncement();
       sendHTML();
       saveToLocalStorage();
@@ -736,22 +739,22 @@ function bindingBtnSend() {
   })
 }
 
-function sendToServer() {
-
-
-
+function sendToServer(formdata) {
+  fetch('http://192.168.11.18:8291/api/NewEmployeeIntro/upload', {
+    method: 'POST',
+    body: formdata, 
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => console.log('上傳成功:', data))
+    .catch(error => console.error('上傳失敗:', error));
 }
 
-// fetch('https://api.imgur.com/3/image', {
-//   method: 'POST',
-//   body: JSON.stringify(data),
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-// })
-//   .then(res => res.json())
-//   .then(data => console.log(data))
-//   .catch(error => console.error(error))
+
 
 
 
@@ -765,13 +768,14 @@ function uploadFile(event) {
   const inputElement = event.target;
   if (!inputElement.dataset.changeBound) {
     inputElement.addEventListener('change', async (e) => {
+
       const file = e.target.files[0];
       // console.log("file:", file);
 
       if (checkFiles(file)) {
         changeFileName(file); // ---> return a guid
         const fileReaderUrl = await fileReader(file) // ---> return a fileReaderUrl
-        sendImgToServer(file, guid);
+        // sendImgToServer(file, guid);
         inputElement.setAttribute('data-guid', guid);
         inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
       }
@@ -846,20 +850,28 @@ function changeFileName(file) {
   return guid = newFileName;
 }
 
-function sendImgToServer(file, guid) {
-  // console.log("file:", file, 'guid:', guid);
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('fileName', guid);
+// async function sendImgToServer(file, guid) {
+//   // console.log("file:", file, 'guid:', guid);
+//   const formData = new FormData();
+//   formData.append('file', file);
+//   formData.append('fileName', guid);
 
-  // fetch('https://api.imgur.com/3/image', {
-  //   method: 'POST',
-  //   body: formData,
-  // })
-  //   .then(res => res.json())
-  //   .then(data => console.log(data))
-  //   .catch(error => console.error(error))
-}
+//   try {
+//     const response = await fetch('http://192.168.11.18:8291/api/NewEmployeeIntro/upload', {
+//       method: 'POST',
+//       body: formData, 
+//     });
+
+//     if (response.ok) {
+//       const result = await response.json();
+//       console.log('上傳成功:', result);
+//     } else {
+//       console.error('上傳失敗:', response.statusText);
+//     }
+//   } catch (error) {
+//     console.error('上傳時發生錯誤:', error);
+//   }
+// }
 
 
 //----------------------//
