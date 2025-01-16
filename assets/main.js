@@ -751,7 +751,8 @@ function sendToServer(guid, file) {
 
   fetch('https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload', {
     method: 'POST',
-    body: formdata, 
+    body: formdata,
+    mode: 'no-cors',
   })
     .then(res => {
       if (!res.ok) {
