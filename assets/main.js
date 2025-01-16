@@ -280,8 +280,8 @@ function updateAnnouncement() {
     btnSend.style.backgroundColor = '#454545';
     btnSend.style.cursor = 'pointer';
 
-    // send to server
-    sendToServer();
+    // // send to server
+    // sendToServer();
 
     // update iframe
     const members = document.querySelectorAll('.member');
@@ -731,7 +731,7 @@ function bindingBtnSend() {
   // console.log("btnSend:", btnSend);
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
-      sendToServer();
+      // sendToServer();
       updateAnnouncement();
       sendHTML();
       saveToLocalStorage();
@@ -749,10 +749,10 @@ function sendToServer(guid, file) {
 // http://127.0.0.1:8291/api/NewEmployeeIntro/upload
 
 
-  fetch('https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload', {
+  fetch('http://192.168.11.18:8291/api/NewEmployeeIntro/upload', {
     method: 'POST',
     body: formdata,
-    mode: 'no-cors',
+    // mode: 'no-cors',
   })
     .then(res => {
       if (!res.ok) {
@@ -788,6 +788,9 @@ function uploadFile(event) {
         // sendImgToServer(file, guid);
         inputElement.setAttribute('data-guid', guid);
         inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
+        sendToServer(file,guid);
+        console.log("guid:", guid);
+        console.log("file:", file);
       }
 
     });
