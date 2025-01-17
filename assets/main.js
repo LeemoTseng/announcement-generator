@@ -739,21 +739,21 @@ function bindingBtnSend() {
   })
 }
 
-function sendToServer(file ,guid) {
+function sendToServer(file, guid) {
   // console.log("sent-guid:", guid);
   // console.log("sent-file:", file);
   const formdata = new FormData();
-  formdata.append('Guid', guid); 
+  formdata.append('Guid', guid);
   formdata.append('File', file);
-   
 
-// https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
-// http://192.168.11.18:8291/api/NewEmployeeIntro/upload
-// http://127.0.0.1:8291/api/NewEmployeeIntro/upload
+  // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
+  // http://192.168.11.18:8291/api/NewEmployeeIntro/upload
+  // http://127.0.0.1:8291/api/NewEmployeeIntro/upload
 
 
-  fetch('http://192.168.11.18:8291/api/NewEmployeeIntro/upload', {
+  fetch('http://127.0.0.1:8291/api/NewEmployeeIntro/upload', {
     method: 'POST',
+    headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
     body: formdata,
     // mode: 'no-cors',
   })
@@ -763,9 +763,11 @@ function sendToServer(file ,guid) {
       }
       return res.json();
     })
-    .then(data => console.log('上傳成功:', data))
+    .then(res => console.log('上傳成功:', res))
     .catch(error => console.error('上傳失敗:', error));
 }
+
+
 
 
 
@@ -790,12 +792,12 @@ function uploadFile(event) {
         changeFileName(file); // ---> return 'guid', 'newFileName'
         const guid = changeFileName(file).guid;
         const newFileName = changeFileName(file).newFileName;
-          // console.log("sent-guid", guid);
-          // console.log("sent-newFileName:", newFileName);
+        // console.log("sent-guid", guid);
+        // console.log("sent-newFileName:", newFileName);
         const fileReaderUrl = await fileReader(file) // ---> return a fileReaderUrl
         inputElement.setAttribute('data-guid', newFileName);
         inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
-        sendToServer(file,guid);
+        sendToServer(file, guid);
         // console.log("sent-guid:", guid);
         // console.log("sent-file:", file);
       }
