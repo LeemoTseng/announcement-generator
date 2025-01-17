@@ -5,45 +5,64 @@
     <title>Upload Test</title>
   </head>
   <body>
-    <input type="file" id="fileInput" />
-    <button id="uploadBtn">上傳</button>
+    <!-- <input type="file" id="fileInput" />
+    <button id="uploadBtn">上傳</button> -->
+    <button onclick="getTest()">GET TEST</button>
 
     <script>
-      function uploadFileToServer(file, guid) {
-        const formData = new FormData();
-        formData.append("Guid", guid);
-        formData.append("File", file);
+      // function uploadFileToServer(file, guid) {
+      //   const formData = new FormData();
+      //   formData.append("Guid", guid);
+      //   formData.append("File", file);
 
-        fetch("http://192.168.11.18:8291/api/NewEmployeeIntro/upload", {
-          method: "POST",
-          body: formData,
+      //   fetch("http://192.168.11.18:8291/api/NewEmployeeIntro/upload", {
+      //     method: "POST",
+      //     body: formData,
+      //   })
+      //     .then((res) => {
+      //       if (!res.ok) {
+      //         throw new Error(`HTTP error! status: ${response.status}`);
+      //       }
+      //       return response.json();
+      //     })
+      //     .then((data) => {
+      //       console.log("上傳成功:", data);
+      //     })
+      //     .catch((error) => {
+      //       console.error("上傳失敗:", error);
+      //     });
+      // }
+
+      // 綁定按鈕點擊事件
+
+      function getTest() {
+        const apiUrl = "https://netapi.t3ex-group.com/api/fee/FeeTest";
+        const query = new URLSearchParams({ Name: "test" });
+
+        fetch(`${apiUrl}?${query.toString()}`, {
+          method: "GET",
         })
           .then((res) => {
             if (!res.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
+              throw new Error(`HTTP error! status: ${res.status}`);
             }
-            return response.json(); // 假設後端回傳 JSON
+            return res.json();
           })
-          .then((data) => {
-            console.log("上傳成功:", data);
-          })
-          .catch((error) => {
-            console.error("上傳失敗:", error);
-          });
+          .then((res) => console.log("請求成功:", res))
+          .catch((error) => console.error("請求失敗:", error));
       }
 
-      // 綁定按鈕點擊事件
-      document.getElementById("uploadBtn").addEventListener("click", () => {
-        const fileInput = document.getElementById("fileInput");
-        const file = fileInput.files[0];
-        const guid = "xxxx-xxxx-xxxx-xxxx"; // 測試用的 guid
+      // document.getElementById("uploadBtn").addEventListener("click", () => {
+      //   const fileInput = document.getElementById("fileInput");
+      //   const file = fileInput.files[0];
+      //   const guid = "xxxx-xxxx-xxxx-xxxx"; // 測試用的 guid
 
-        if (file) {
-          uploadFileToServer(file, guid);
-        } else {
-          console.log("請先選擇檔案");
-        }
-      });
+      //   if (file) {
+      //     uploadFileToServer(file, guid);
+      //   } else {
+      //     console.log("請先選擇檔案");
+      //   }
+      // });
     </script>
   </body>
 </html>
