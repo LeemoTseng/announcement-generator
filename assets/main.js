@@ -769,7 +769,7 @@ function bindingBtnSend() {
 //     .catch(error => console.error('上傳失敗:', error));
 // }
 
-function sendToServer() {
+function getTest() {
 
   const apiUrl = 'https://netapi.t3ex-group.com/api/fee/FeeTest';
   const query = new URLSearchParams({ Name: 'test' }); 
