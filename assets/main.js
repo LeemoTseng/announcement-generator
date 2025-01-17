@@ -739,32 +739,52 @@ function bindingBtnSend() {
   })
 }
 
-function sendToServer(file, guid) {
-  // console.log("sent-guid:", guid);
-  // console.log("sent-file:", file);
-  const formdata = new FormData();
-  formdata.append('Guid', guid);
-  formdata.append('File', file);
+// function sendToServer(file, guid) {
+//   // console.log("sent-guid:", guid);
+//   // console.log("sent-file:", file);
+//   const formdata = new FormData();
+//   formdata.append('Guid', guid);
+//   formdata.append('File', file);
 
-  // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
-  // http://192.168.11.18:8291/api/NewEmployeeIntro/upload
-  // http://127.0.0.1:8291/api/NewEmployeeIntro/upload
+//   // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
+//   // http://192.168.11.18:8291/api/NewEmployeeIntro/upload
+//   // http://127.0.0.1:8291/api/NewEmployeeIntro/upload
+//   // 測試用
+//   // https://netapi.t3ex-group.com/api/fee/FeeTest?Name=test
 
 
-  fetch('http://127.0.0.1:8291/api/NewEmployeeIntro/upload', {
-    method: 'POST',
-    headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
-    body: formdata,
-    // mode: 'no-cors',
+//   fetch('http://127.0.0.1:8291/api/NewEmployeeIntro/upload', {
+//     method: 'POST',
+//     headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
+//     body: formdata,
+//     // mode: 'no-cors',
+//   })
+//     .then(res => {
+//       if (!res.ok) {
+//         throw new Error(`HTTP error! status: ${res.status}`);
+//       }
+//       return res.json();
+//     })
+//     .then(res => console.log('上傳成功:', res))
+//     .catch(error => console.error('上傳失敗:', error));
+// }
+
+function sendToServer() {
+
+  const apiUrl = 'https://netapi.t3ex-group.com/api/fee/FeeTest';
+  const query = new URLSearchParams({ Name: 'test' }); 
+
+  fetch(`${apiUrl}?${query.toString()}`, {
+    method: 'GET', 
   })
     .then(res => {
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
-      return res.json();
+      return res.json(); 
     })
-    .then(res => console.log('上傳成功:', res))
-    .catch(error => console.error('上傳失敗:', error));
+    .then(res => console.log('請求成功:', res))
+    .catch(error => console.error('請求失敗:', error));
 }
 
 

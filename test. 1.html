@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Upload Test</title>
+  </head>
+  <body>
+    <input type="file" id="fileInput" />
+    <button id="uploadBtn">上傳</button>
+
+    <script>
+      function uploadFileToServer(file, guid) {
+        const formData = new FormData();
+        formData.append("Guid", guid);
+        formData.append("File", file);
+
+        fetch("http://192.168.11.18:8291/api/NewEmployeeIntro/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // 假設後端回傳 JSON
+          })
+          .then((data) => {
+            console.log("上傳成功:", data);
+          })
+          .catch((error) => {
+            console.error("上傳失敗:", error);
+          });
+      }
+
+      // 綁定按鈕點擊事件
+      document.getElementById("uploadBtn").addEventListener("click", () => {
+        const fileInput = document.getElementById("fileInput");
+        const file = fileInput.files[0];
+        const guid = "xxxx-xxxx-xxxx-xxxx"; // 測試用的 guid
+
+        if (file) {
+          uploadFileToServer(file, guid);
+        } else {
+          console.log("請先選擇檔案");
+        }
+      });
+    </script>
+  </body>
+</html>
