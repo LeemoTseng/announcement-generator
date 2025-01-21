@@ -732,10 +732,11 @@ function bindingBtnSend() {
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
       const yourEmail = document.getElementById('yourEmail').value;
+      const formDataEmail = {email: yourEmail} // 要改成物件
       // sendToServer();
       updateAnnouncement();
       sendHTML();
-      sendToEmail(yourEmail);
+      sendToEmail(formDataEmail);
       saveToLocalStorage();
       showToaster('公告已寄出', 'info', 2000);
     } else { }
