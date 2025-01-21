@@ -734,7 +734,9 @@ function bindingBtnSend() {
       // sendToServer();
       updateAnnouncement();
       sendHTML();
+      sendToEmail();
       saveToLocalStorage();
+      showToaster('公告已寄出', 'info', 2000);
     } else { }
   })
 }
@@ -743,7 +745,7 @@ function sendToServer(file, guid) {
   // console.log("sent-guid:", guid);
   // console.log("sent-file:", file);
   const formdata = new FormData();
-  formdata.append('sendToServer(file, guid):guid:', guid);
+  formdata.append('guid:', guid);
   formdata.append('File', file);
 
   // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
@@ -756,7 +758,7 @@ function sendToServer(file, guid) {
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
     method: 'POST',
     body: formdata,
-    // headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
+    // headers: {'Content-Type': 'multipart/form-data; charset=utf-8'}, //不能有header會出錯
     // mode: 'no-cors',
   })
     .then(res => {
@@ -767,6 +769,21 @@ function sendToServer(file, guid) {
     })
     .then(res => console.log('上傳成功:', res))
     .catch(error => console.error('上傳失敗:', error));
+}
+
+function sendToEmail(email) {
+  fetch('https://netapi-test.t3ex-group.com/api/Announcement/email', {
+    method: 'POST',
+    body: JSON(email),
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(res => console.log('寄送成功!!', res))
+    .catch(error => console.error('寄送失敗QQ', error));
 }
 
 
@@ -862,7 +879,7 @@ function checkFiles(file) {
 function changeFileName(file) {
   const fileName = file.name;
   const guid = `${_generateGuid()}`
-  const newFileName = `https://netapi.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
+  const newFileName = `https://netapi-test.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
   // const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
   // xxxxx.jpg
   // console.log("sent-guid", guid);
