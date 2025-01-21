@@ -743,7 +743,7 @@ function sendToServer(file, guid) {
   // console.log("sent-guid:", guid);
   // console.log("sent-file:", file);
   const formdata = new FormData();
-  formdata.append('Guid', guid);
+  formdata.append('sendToServer(file, guid):guid:', guid);
   formdata.append('File', file);
 
   // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
@@ -792,14 +792,14 @@ function uploadFile(event) {
         inputElement.setAttribute('data-guid', newFileName);
         inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
         sendToServer(file, guid);
-        // console.log("sent-guid2:", guid);
+        console.log("checkFiles(file):guid:", guid);
+        console.log("checkFiles(file):newFileName:", newFileName);
         // console.log("sent-file:", file);
       }
 
     });
     inputElement.dataset.changeBound = true;
     // sendImgToServer(file, guid);
-
   }
 }
 
