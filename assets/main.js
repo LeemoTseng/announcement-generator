@@ -20,7 +20,7 @@
 // $0. Tips
 //----------------------//
 
-
+/*
 const steps = [
   { element: "#step1", text: "1/5 - 於側邊欄選擇公告模板。" },
   { element: "#step2", text: "2/5 - 瀏覽公告模板。可點選中間箭頭拉伸畫面區域。" },
@@ -100,7 +100,7 @@ nextButton.addEventListener("click", () => {
 });
 
 closeButton.addEventListener("click", hideGuide);
-
+*/
 
 //----------------------//
 // $1. Resizer
@@ -642,7 +642,7 @@ function renderTypeForm(selectedType) {
   if (selectedType === "新進成員公告") {
     formContainer.innerHTML = newMemberTemplate;
     resetPoster();
-    updateItemStatus();
+    // updateItemStatus();
     bindingBtnSend();
     getFromLocalStorage();
 
@@ -786,17 +786,14 @@ function uploadFile(event) {
 
       if (checkFiles(file)) {
         // console.log('checkFile',file);
-        changeFileName(file); // ---> return 'guid', 'newFileName'
-        const guid = changeFileName(file).guid;
-        const newFileName = changeFileName(file).newFileName;
-        // console.log("sent-guid", guid);
+        const { guid, newFileName } = changeFileName(file); //---> return 'guid', 'newFileName'
         // console.log("sent-newFileName:", newFileName);
         const fileReaderUrl = await fileReader(file) // ---> return a fileReaderUrl
         inputElement.setAttribute('data-guid', newFileName);
         inputElement.setAttribute('data-fileReaderUrl', fileReaderUrl);
         sendToServer(file, guid);
-        console.log("sent-guid:", guid);
-        console.log("sent-file:", file);
+        // console.log("sent-guid2:", guid);
+        // console.log("sent-file:", file);
       }
 
     });
@@ -946,10 +943,10 @@ function getFromLocalStorage() {
       saveGreetingChecked.checked = saveGreetingCheckedFromLocalStorage;
       // console.log('greeting loaded:', greetingFromLocalStorage);
     } else {
-      // console.log('no greeting data');
+      console.log('no greeting data');
     }
   } else {
-    // console.log('no greeting data');
+    console.log('no greeting data');
   }
 
   // Get email
