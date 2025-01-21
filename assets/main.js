@@ -780,6 +780,9 @@ function sendToEmail(email, container) {
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/email', {
     method: 'POST',
     body: raw,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
   })
     .then(res => {
       if (!res.ok) {
