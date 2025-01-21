@@ -247,8 +247,7 @@ function sendHTML() {
   const iframe = document.getElementById('poster');
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
   let container = iframeDoc.documentElement.outerHTML
-  container = HtmlStringify(container);
-  // console.log('sendHTML', container);
+  console.log('sendHTML', container);
   return container;
 
 }
@@ -732,8 +731,6 @@ function bindingBtnSend() {
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
       const yourEmail = document.getElementById('yourEmail').value;
-      // const formDataEmail = {yourEmail};
-      // sendToServer();
       updateAnnouncement();
       const HtmlBody = sendHTML();
       sendToEmail(yourEmail, HtmlBody);
