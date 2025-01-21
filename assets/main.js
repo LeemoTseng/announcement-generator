@@ -753,10 +753,10 @@ function sendToServer(file, guid) {
   // https://netapi.t3ex-group.com/api/fee/FeeTest?Name=test
 
 
-  fetch('http://127.0.0.1:8291/api/NewEmployeeIntro/upload', {
+  fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
     method: 'POST',
-    headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
     body: formdata,
+    // headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
     // mode: 'no-cors',
   })
     .then(res => {
@@ -768,25 +768,6 @@ function sendToServer(file, guid) {
     .then(res => console.log('上傳成功:', res))
     .catch(error => console.error('上傳失敗:', error));
 }
-
-function getTest() {
-
-  const apiUrl = 'https://netapi.t3ex-group.com/api/fee/FeeTest';
-  const query = new URLSearchParams({ Name: 'test' }); 
-
-  fetch(`${apiUrl}?${query.toString()}`, {
-    method: 'GET', 
-  })
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      return res.json(); 
-    })
-    .then(res => console.log('請求成功:', res))
-    .catch(error => console.error('請求失敗:', error));
-}
-
 
 
 //----------------------//
@@ -884,7 +865,9 @@ function checkFiles(file) {
 function changeFileName(file) {
   const fileName = file.name;
   const guid = `${_generateGuid()}`
-  const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
+  const newFileName = `https://netapi.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
+  // const newFileName = `https://material.t3ex-group.com/announcement/newEmployee/${guid}.${fileName.split('.').pop()}`;
+  // xxxxx.jpg
   // console.log("sent-guid", guid);
   // console.log("sent-newFileName:", newFileName);
   return { newFileName, guid };
