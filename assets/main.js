@@ -732,6 +732,7 @@ function bindingBtnSend() {
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
       const yourEmail = document.getElementById('yourEmail').value;
+      // const formDataEmail = {yourEmail};
       // sendToServer();
       updateAnnouncement();
       const HtmlBody = sendHTML();
@@ -773,13 +774,15 @@ function sendToServer(file, guid) {
 }
 
 function sendToEmail(email, container) {
-  const formdata = new FormData();
-  formdata.append('email', email);
-  formdata.append('HtmlBody', container);
+
+  const raw = JSON.stringify({
+    "Email": email,
+    "HtmlBody": container
+  })
 
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/email', {
     method: 'POST',
-    body: formdata,
+    body: raw,
   })
     .then(res => {
       if (!res.ok) {
