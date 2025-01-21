@@ -248,7 +248,7 @@ function sendHTML() {
   const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
   let container = iframeDoc.documentElement.outerHTML
   container = HtmlStringify(container);
-  console.log('sendHTML', container);
+  // console.log('sendHTML', container);
   return container;
 
 }
@@ -732,11 +732,10 @@ function bindingBtnSend() {
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
       const yourEmail = document.getElementById('yourEmail').value;
-      const formDataEmail = {email: yourEmail} // 要改成物件
       // sendToServer();
       updateAnnouncement();
-      sendHTML();
-      sendToEmail(formDataEmail);
+      const HtmlBody = sendHTML();
+      sendToEmail(yourEmail, HtmlBody);
       saveToLocalStorage();
       showToaster('公告已寄出', 'info', 2000);
     } else { }
@@ -773,10 +772,14 @@ function sendToServer(file, guid) {
     .catch(error => console.error('上傳失敗:', error));
 }
 
-function sendToEmail(email) {
+function sendToEmail(email, container) {
+  const formdata = new FormData();
+  formdata.append('email', email);
+  formdata.append('HtmlBody', container);
+
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/email', {
     method: 'POST',
-    body: JSON.stringify(email),
+    body: formdata,
   })
     .then(res => {
       if (!res.ok) {
