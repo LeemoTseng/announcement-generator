@@ -731,10 +731,11 @@ function bindingBtnSend() {
   // console.log("btnSend:", btnSend);
   btnSend.addEventListener('click', () => {
     if (btnSend.style.cursor === 'pointer') {
+      const yourEmail = document.getElementById('yourEmail').value;
       // sendToServer();
       updateAnnouncement();
       sendHTML();
-      sendToEmail();
+      sendToEmail(yourEmail);
       saveToLocalStorage();
       showToaster('公告已寄出', 'info', 2000);
     } else { }
@@ -745,7 +746,7 @@ function sendToServer(file, guid) {
   // console.log("sent-guid:", guid);
   // console.log("sent-file:", file);
   const formdata = new FormData();
-  formdata.append('guid:', guid);
+  formdata.append('guid', guid);
   formdata.append('File', file);
 
   // https://api-18-8291.t3ex-group.com/api/NewEmployeeIntro/upload
@@ -774,7 +775,7 @@ function sendToServer(file, guid) {
 function sendToEmail(email) {
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/email', {
     method: 'POST',
-    body: JSON(email),
+    body: JSON.stringify(email),
   })
     .then(res => {
       if (!res.ok) {
