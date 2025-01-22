@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notice Template</title>
+    <link rel="icon" href="assets/favicon2.ico" />
+    <link rel="stylesheet" href="assets/output.css" />
+  </head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: default;
+    }
+  </style>
+
+  <body>
+    <!-- --------------- -->
+    <!------- INDEX ------->
+    <!-- --------------- -->
+    <!-- 
+    $01. Header 
+    $02. 
+    -->
+
+    <!---------- $01. Header------------>
+    <div class="header border-b">
+      <div
+        class="container flex items-center justify-between px-5 max-w-screen-xl mx-auto"
+      >
+        <div class="logo flex items-center">
+          <div class="imgbox w-[80px]">
+            <img src="assets/logo.svg" alt="logo" />
+          </div>
+          <p class="font-bold text-black/70 pl-2">公告模板</p>
+        </div>
+        <div class="menu border-b-2 border-blue-500 pb-2 pt-4">
+          <ul>
+            <li class="text-black/60 font-semibold">模板選擇</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- --------------------------- -->
+
+    <!---------- $02. Form ----------->
+    <div class="bg-gray-100 w-full h-full">
+      <div class="container max-w-screen-xl mx-auto">
+        <div class="title">
+          <p class="text-xl font-bold text-black/70">新進成員公告模板</p>
+          <p>Lorem</p>
+        </div>
+        <div class="frame drop-shadow-sm w-full h-fit bg-white p-10 rounded-lg">
+          <div class="form">
+            <div class="basicInfo flex flex-col gap-5">
+              <p class="font-bold text-lg">O 基本資料</p>
+              <div class="inputBox flex-col flex gap-2">
+                <label for="email" class="">您的信箱</label>
+                <input
+                  type="email"
+                  id="yourEmail"
+                  placeholder="公告信件將發送至此信箱"
+                  class="w-1/2 input-base"
+                />
+                <div class="check pl-2 flex items-center">
+                  <input type="checkbox" id="checkEmail" />
+                  <label for="checkEmail" class="text-black/50 text-sm pl-1">
+                    儲存此Email
+                  </label>
+                </div>
+              </div>
+
+              <div class="inputBox flex-col flex gap-2">
+                <label for="email" class="">公告介紹</label>
+                <textarea name="" id="" class="w-full input-base"></textarea>
+                <div class="check pl-2 flex items-center">
+                  <input type="checkbox" id="check" />
+                  <label for="check" class="text-black/50 text-sm pl-1">
+                    寄出後暫存此公告介紹
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="diver border my-10"></div>
+            <div class="noticeInfo flex flex-col gap-0">
+              <p class="font-bold text-lg">O 公告內容</p>
+              <div id="allMembers">
+                <!-- member -->
+                <div class="member pt-10">
+                  <p class="w-full font-semibold pb-3 text-lg">新成員(1) O</p>
+                  <div class="form-grid grid grid-cols-12 gap-y-5 gap-x-2">
+                    <div class="inputBox flex-col flex gap-2 col-span-3">
+                      <label for="email" class="">成員姓名</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="姓名Name"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-3">
+                      <label for="">Email</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="sample@t3ex-group.com"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-2">
+                      <label for="">報到日</label>
+                      <input
+                        type="date"
+                        id=""
+                        placeholder=""
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-2">
+                      <label for="">工作地點</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="台北12樓辦公室"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-2">
+                      <label for="">聯絡分機</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="000"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-4">
+                      <label for="">部門職位</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="公司_組別_職務"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-4">
+                      <label for="">部門主管</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="名字（管轄範圍）"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-4">
+                      <label for="">直屬主管</label>
+                      <input
+                        type="text"
+                        id=""
+                        placeholder="名字（管轄範圍）"
+                        class="input-base"
+                      />
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-12">
+                      <label for="">自我介紹區塊</label>
+                      <textarea
+                        name=""
+                        id=""
+                        class="w-full input-base"
+                      ></textarea>
+                    </div>
+                    <div class="inputBox flex-col flex gap-2 col-span-12">
+                      <label for="">圖片上傳</label>
+                      <p class="text-sm -my-2 text-gray-400">
+                        檔案可為png, jpeg或jpg，檔案大小不超過2MB
+                      </p>
+                      <input type="file" id="" class="w-fit pt-3 text-sm" />
+                    </div>
+                  </div>
+                </div>
+                <!-- add btn -->
+                <div class="my-5">
+                  <button
+                    class="border w-full border-gray-300 border-md border-dashed rounded-lg p-2 text-center text-md text-black/50 hover:bg-gray-100 transition-all"
+                  >
+                    新增成員
+                  </button>
+                </div>
+              </div>
+              <div class="btn">
+                <button class="btn-outline">更新瀏覽圖</button>
+                <button class="btn-default">寄出</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 檢視圖  -->
+        <div
+          class="frame drop-shadow-sm mt-5 w-full h-fit bg-white p-10 rounded-lg"
+        >
+          <p class="font-bold text-lg pb-5">O 瀏覽圖</p>
+          <div
+            class="img w-[800px] h-[800px] border border-red-500 mx-auto"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------------- -->
+
+    <!-- $99. Toaster -->
+    <div id="toaster-container" class="toaster-container"></div>
+    <script type="text/javascript" src="assets/main2.js" defer></script>
+  </body>
+</html>
