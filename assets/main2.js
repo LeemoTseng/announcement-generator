@@ -2,9 +2,9 @@
 // INDEX
 //----------------------//
 //
-// $0. template
+// $0. Template and variables
 // $1. Select model and render it
-//
+// $2. Insert new member
 //
 //
 //
@@ -12,11 +12,133 @@
 
 
 // ----------------------//
-// $0. template
+// $0. Template and variables
 // ----------------------//
 
+/* DOM elements and variables */
+let noticeRenderedPart = document.querySelector('#noticeRenderedPart')
 
-/* models template */
+let menuContainer = document.querySelector('#menuContainer')
+let selectedModel = ''
+let models = document.querySelectorAll('.model')
+
+
+// 新進成員
+let memberCount = 1;
+
+/* Models template */
+let memberTemplate = `
+<div class="member pt-8" data-member-id="${memberCount}">
+  <div class="title flex items-center gap-3 pb-3">
+    <p class="w-fit font-semibold text-lg">新成員<span>${memberCount}</span></p>
+    <div
+      class="icon hover:bg-gray-100 p-1 rounded-full cursor-pointer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ef4444"
+        class="cursor-pointer"
+      >
+        <path
+          d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div class="form-grid grid grid-cols-12 gap-y-5 gap-x-2">
+    <div class="inputBox flex-col flex gap-2 col-span-3">
+      <label for="memberName${memberCount}" class="">成員姓名</label>
+      <input
+        type="text"
+        id="memberName${memberCount}"
+        placeholder="姓名Name"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-3">
+      <label for="memberEmail${memberCount}">Email</label>
+      <input
+        type="text"
+        id="memberEmail${memberCount}"
+        placeholder="sample@t3ex-group.com"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-2">
+      <label for="memberDate${memberCount}">報到日</label>
+      <input
+        type="date"
+        id="memberDate${memberCount}"
+        placeholder=""
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-2">
+      <label for="location${memberCount}">工作地點</label>
+      <input
+        type="text"
+        id="location${memberCount}"
+        placeholder="台北12樓辦公室"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-2">
+      <label for="extension${memberCount}">聯絡分機</label>
+      <input
+        type="text"
+        id="extension${memberCount}"
+        placeholder="000"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-4">
+      <label for="position${memberCount}">部門職位</label>
+      <input
+        type="text"
+        id="position${memberCount}"
+        placeholder="公司_組別_職務"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-4">
+      <label for="supervisor${memberCount}">部門主管</label>
+      <input
+        type="text"
+        id="supervisor${memberCount}"
+        placeholder="名字（管轄範圍）"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-4">
+      <label for="dirSupervisor${memberCount}">直屬主管</label>
+      <input
+        type="text"
+        id="dirSupervisor${memberCount}"
+        placeholder="名字（管轄範圍）"
+        class="input-base"
+      />
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-12">
+      <label for="memberIntro${memberCount}">自我介紹區塊</label>
+      <textarea
+        name=""
+        id="memberIntro${memberCount}"
+        class="w-full input-base"
+      ></textarea>
+    </div>
+    <div class="inputBox flex-col flex gap-2 col-span-12">
+      <label for="memberImg${memberCount}">圖片上傳</label>
+      <p class="text-sm -my-2 text-gray-400">
+        檔案可為png, jpeg或jpg，檔案大小不超過2MB，比例1:1為佳。
+      </p>
+      <input type="file" id="memberImg${memberCount}" class="w-fit pt-3 text-sm" />
+    </div>
+  </div>
+</div>
+`
 const newMemberModelTemplate = `
           <div class="form frame drop-shadow-sm  h-fit bg-white p-10 rounded-lg">
             <div class="basicInfo flex flex-col gap-5">
@@ -50,7 +172,7 @@ const newMemberModelTemplate = `
                 <p class="font-bold text-xl">基本資料</p>
               </div>
               <div class="inputBox flex-col flex gap-2">
-                <label for="email" class="">您的信箱</label>
+                <label for="yourEmail" class="">您的信箱</label>
                 <input
                   type="email"
                   id="yourEmail"
@@ -66,8 +188,8 @@ const newMemberModelTemplate = `
               </div>
 
               <div class="inputBox flex-col flex gap-2">
-                <label for="email" class="">公告主旨</label>
-                <textarea name="" id="" class="w-full input-base"></textarea>
+                <label for="greetingText" class="">公告主旨</label>
+                <textarea name="" id="greetingText" class="w-full input-base"></textarea>
                 <div class="check pl-2 flex items-center">
                   <input type="checkbox" id="check" />
                   <label for="check" class="text-black/50 text-sm pl-1">
@@ -95,127 +217,21 @@ const newMemberModelTemplate = `
               <!-- $02.1 Template rendered part -->
               <div id="allMembers">
                 <!-- member -->
-                <div class="member pt-8">
-                  <div class="title flex items-center gap-3 pb-3">
-                    <p class="w-fit font-semibold text-lg">新成員(1)</p>
-                    <div
-                      class="icon hover:bg-gray-100 p-1 rounded-full cursor-pointer"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#ef4444"
-                        class="cursor-pointer"
-                      >
-                        <path
-                          d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="form-grid grid grid-cols-12 gap-y-5 gap-x-2">
-                    <div class="inputBox flex-col flex gap-2 col-span-3">
-                      <label for="email" class="">成員姓名</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="姓名Name"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-3">
-                      <label for="">Email</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="sample@t3ex-group.com"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-2">
-                      <label for="">報到日</label>
-                      <input
-                        type="date"
-                        id=""
-                        placeholder=""
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-2">
-                      <label for="">工作地點</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="台北12樓辦公室"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-2">
-                      <label for="">聯絡分機</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="000"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-4">
-                      <label for="">部門職位</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="公司_組別_職務"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-4">
-                      <label for="">部門主管</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="名字（管轄範圍）"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-4">
-                      <label for="">直屬主管</label>
-                      <input
-                        type="text"
-                        id=""
-                        placeholder="名字（管轄範圍）"
-                        class="input-base"
-                      />
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-12">
-                      <label for="">自我介紹區塊</label>
-                      <textarea
-                        name=""
-                        id=""
-                        class="w-full input-base"
-                      ></textarea>
-                    </div>
-                    <div class="inputBox flex-col flex gap-2 col-span-12">
-                      <label for="">圖片上傳</label>
-                      <p class="text-sm -my-2 text-gray-400">
-                        檔案可為png, jpeg或jpg，檔案大小不超過2MB
-                      </p>
-                      <input type="file" id="" class="w-fit pt-3 text-sm" />
-                    </div>
-                  </div>
-                </div>
-                <!-- add btn -->
+                ${memberTemplate}
+
+              </div>
+            </div>
+              <!-- add btn -->
                 <div class="my-5">
                   <button
+                    onClick="addMembers()"
+                    id="addMemberBtn"
                     class="border w-full border-gray-300 border-md border-dashed rounded-lg p-2 text-center text-md text-black/50 hover:bg-gray-100 transition-all"
                   >
                     新增成員
                   </button>
                 </div>
-              </div>
-            </div>
-              <!---------- $03. btn group------------>
+            <!---------- $03. btn group------------>
             <div class="btn pt-5">
               <button class="btn-outline">更新瀏覽圖</button>
               <button class="btn-default">寄出</button>
@@ -223,7 +239,9 @@ const newMemberModelTemplate = `
             <!-- --------------------------- -->
           </div>
           
+          
           `
+
 const testModelTemplate = `
 <div class="form frame drop-shadow-sm h-fit bg-white p-10 rounded-lg">
           <div class="basicInfo flex flex-col gap-5">
@@ -257,38 +275,34 @@ const viewerTemplate = `
     </div>
 `
 
-// ----------------------//
-// $1. Select model and render it
-// ----------------------//
-
-
-/* DOM elements and variables */
-let noticeRenderedPart = document.querySelector('#noticeRenderedPart')
-
-let menuContainer = document.querySelector('#menuContainer')
-let selectedModel = ''
-
-let models = document.querySelectorAll('.model')
+/* List */
 let modelList = [
   {
     name: '新進成員公告模板',
     active: true,
     template: newMemberModelTemplate,
-    viewer: viewerTemplate
+    viewer: viewerTemplate,
+    bindingElement: bindingAddMemberElement
   },
   {
     name: '測試模板',
     active: true,
     template: testModelTemplate,
-    viewer: viewerTemplate
+    viewer: viewerTemplate,
+    bindingElement: ''
   },
   {
     name: '未啟用的模板',
     active: false,
     template: testModelTemplate,
-    viewer: viewerTemplate
+    viewer: viewerTemplate,
   }
 ]
+
+// ----------------------//
+// $1. Select model and render it
+// ----------------------//
+
 
 /* MAIN ACTIONS */
 
@@ -299,12 +313,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function menuClicked() {
-  clearModel();
-  const models = document.querySelectorAll('.model');
+  const models = document.querySelectorAll('.model.model-active');
   models.forEach((model) => {
     model.addEventListener('click', () => {
+      clearModel();
       selectModel(model);
       renderModel(selectedModel);
+      bindingAddMemberElement();
     })
   })
 }
@@ -338,6 +353,7 @@ function renderModel(selectedModel) {
   if (model) {
     noticeRenderedPart.innerHTML = model.template;
     viewer.innerHTML = model.viewer;
+    model.bindingElement;
 
   } else {
     console.log('No matching model found');
@@ -348,6 +364,39 @@ function clearModel() {
   noticeRenderedPart.innerHTML = '';
   viewer.innerHTML = '';
 }
+
+// ----------------------//
+// $2. Insert new member
+// ----------------------//
+
+
+/* MAIN ACTIONS */
+
+
+function addMembers(){
+  memberCount++;
+  const NewMemberTemplate = `${memberTemplate}`
+  console.log(NewMemberTemplate);
+  console.log(memberCount); 
+  // allMembers.insertAdjacentHTML('beforeend',memberTemplate);
+  // console.log(memberCount)
+}
+
+
+
+/* Binding elements */
+function bindingAddMemberElement(){
+  const addMemberBtn = document.querySelector('#addMemberBtn');
+  const allMembers = document.querySelector('#allMembers');
+ return{ addMemberBtn,allMembers } 
+}
+
+
+
+
+
+
+
 
 
 
