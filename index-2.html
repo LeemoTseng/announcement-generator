@@ -10,6 +10,7 @@
     <title>Notice Template</title>
     <link rel="icon" href="assets/favicon2.ico" />
     <link rel="stylesheet" href="assets/output.css" />
+    <script src="assets/main2.js" defer></script>
   </head>
 
   <style>
@@ -17,9 +18,9 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      cursor: default;
     }
     p {
+      cursor: default;
       margin: 0;
       color: rgb(0, 0, 0, 0.8);
     }
@@ -28,7 +29,7 @@
   <body>
     <!-- --------------- -->
     <!------- INDEX ------->
-    <!-- --------------------------- 
+    <!-- -------------------- 
     $01. Header
     $02.1 Selected modal
     $02. Form
@@ -37,7 +38,7 @@
     $04. viewer
 
     $99. Toaster
-    ---------------------------- -->
+    --------------------- -->
 
     <!---------- $01. Header------------>
     <div class="header border-b">
@@ -78,12 +79,16 @@
       </div>
 
       <!---------- $04. Viewer ------------>
-      <div id="viewer" class="max-w-screen-xl mx-auto"></div>
+
+      <div class="max-w-screen-xl mx-auto">
+        <div class="drop-shadow-sm mt-5 w-full h-fit bg-white p-10 rounded-lg">
+          <div id="viewer"></div>
+        </div>
+      </div>
     </div>
     <!-- --------------------------- -->
 
     <!-- $99. Toaster -->
     <div id="toaster-container" class="toaster-container"></div>
-    <script type="text/javascript" src="assets/main2.js" defer></script>
   </body>
 </html>

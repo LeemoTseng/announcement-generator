@@ -1,68 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Upload Test</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
   </head>
   <body>
-    <!-- <input type="file" id="fileInput" />
-    <button id="uploadBtn">上傳</button> -->
-    <button onclick="getTest()">GET TEST</button>
-
-    <script>
-      // function uploadFileToServer(file, guid) {
-      //   const formData = new FormData();
-      //   formData.append("Guid", guid);
-      //   formData.append("File", file);
-
-      //   fetch("http://192.168.11.18:8291/api/NewEmployeeIntro/upload", {
-      //     method: "POST",
-      //     body: formData,
-      //   })
-      //     .then((res) => {
-      //       if (!res.ok) {
-      //         throw new Error(`HTTP error! status: ${response.status}`);
-      //       }
-      //       return response.json();
-      //     })
-      //     .then((data) => {
-      //       console.log("上傳成功:", data);
-      //     })
-      //     .catch((error) => {
-      //       console.error("上傳失敗:", error);
-      //     });
-      // }
-
-      // 綁定按鈕點擊事件
-
-      function getTest() {
-        const apiUrl = "https://netapi.t3ex-group.com/api/fee/FeeTest";
-        const query = new URLSearchParams({ Name: "test" });
-
-        fetch(`${apiUrl}?${query.toString()}`, {
-          method: "GET",
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-          })
-          .then((res) => console.log("請求成功:", res))
-          .catch((error) => console.error("請求失敗:", error));
-      }
-
-      // document.getElementById("uploadBtn").addEventListener("click", () => {
-      //   const fileInput = document.getElementById("fileInput");
-      //   const file = fileInput.files[0];
-      //   const guid = "xxxx-xxxx-xxxx-xxxx"; // 測試用的 guid
-
-      //   if (file) {
-      //     uploadFileToServer(file, guid);
-      //   } else {
-      //     console.log("請先選擇檔案");
-      //   }
-      // });
-    </script>
+    `
+    <div class="drop-shadow-sm mt-5 w-full h-fit bg-white p-10 rounded-lg">
+      <div class="title flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="#5f6368"
+        >
+          <path
+            d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-480H200v480Zm80-280v-80h400v80H280Zm0 160v-80h240v80H280Z"
+          />
+        </svg>
+        <p class="font-bold text-xl">瀏覽圖</p>
+      </div>
+      <div class="img w-[800px] h-[800px] border border-red-500 mx-auto"></div>
+    </div>
+    `
   </body>
 </html>
