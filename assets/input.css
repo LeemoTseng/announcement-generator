@@ -2,34 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-.input-base {
-  @apply bg-gray-100 outline-none rounded-md py-2 px-2;
+@layer components {
+  .input-base {
+    @apply bg-gray-100 outline-none rounded-md py-2 px-2;
+  }
 
-  &:placeholder {
-    @apply text-gray-500 text-sm;
+  .btn-default {
+    @apply bg-black/80 text-white text-sm rounded-full py-2 px-10 hover:bg-black/70 transition-all;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-black text-black text-sm rounded-full py-2 px-10 hover:bg-black/10 transition-all;
   }
 }
 
-.btn-default {
-  @apply bg-black/80 text-white text-sm rounded-full py-2 px-10 hover:bg-black/70 transition-all;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.btn-outline {
-  @apply bg-transparent border border-black text-black text-sm rounded-full py-2 px-10 hover:bg-black/10 transition-all;
-}
 
-.diver {
-  @apply border my-6;
-}
+@layer utilities {
+  .divider {
+    @apply border my-6;
+  }
 
-.absoluteCenter {
-  @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-}
+  .absolute-center {
+    @apply top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
 
-.toaster-info {
-  @apply bg-blue-500 border-l-4 border-blue-500 text-white;
-}
+  .toasterContainer {
+    @apply fixed top-2 right-2 z-50 flex flex-col items-end space-y-1 p-2;
 
-.toaster-error {
-  @apply bg-red-500 border-l-4 border-red-500 text-white;
+  }
+
+  .toaster {
+    @apply relative w-auto px-4 py-2 rounded-md shadow-md transition-transform duration-500 ease-in-out;
+  }
+
+  .toaster-show {
+    @apply right-5 opacity-100;
+  }
+
+  .toaster-hide {
+    @apply opacity-0;
+  }
+
+  .info {
+    @apply bg-sky-700/60 text-white;
+  }
+
+  .error {
+    @apply bg-red-600/60 text-white;
+  }
+
+  .loading-spinner {
+    @apply fixed top-0 left-0 w-full h-full bg-black/30 flex justify-center items-center z-50 hidden;
+  }
+
+
+
+  .spinner {
+    @apply w-10 h-10 border-4 border-transparent border-t-white rounded-full animate-spin;
+    animation: spin 1s linear infinite;
+  }
+
 }

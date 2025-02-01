@@ -10,293 +10,99 @@
     <title>Notice Template</title>
     <link rel="icon" href="assets/favicon2.ico" />
     <link rel="stylesheet" href="assets/output.css" />
+    <script src="assets/main.js" defer></script>
+
   </head>
-  <!-- INDEX -->
-  <!-- 1. header start -->
-  <!-- 1.1. sidebar start -->
-  <!-- 1.2. posterEdit start -->
 
-  <body>
-    <!-- step start -->
-    <!-- <div id="steps">
-      <div class="step-mask"></div>
-      <div class="step-highlight"></div>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    p {
+      cursor: default;
+      margin: 0;
+      color: rgb(0, 0, 0, 0.8);
+    }
+  </style>
 
-      <div class="step-tooltip" id="stepTooltip">
-        <p id="stepText"></p>
-        <div class="stepBtn" id="nextStep">下一步</div>
-        <div class="stepBtn" id="closeGuide">結束導覽</div>
-      </div>
-    </div> -->
-    <!-- step end -->
+  <body class="relative">
+    <!-- --------------- -->
+    <!------- INDEX ------->
+    <!-- -------------------- 
+    $00. Loading
+    $01. Header
+    $02.1 Selected modal
+    $02. Form
+    $02.1 Template rendered part
+    $03. btn group
+    $04. viewer
+    $99. Toaster
+    --------------------- -->
 
-    <!-- loading start -->
+    <!---------- $00. Loading ------------>
     <div id="loading" class="loading-spinner">
       <div class="spinner"></div>
     </div>
-    <!-- loading end -->
+    <!-- --------------------------- -->
 
-    <!-- 1. header start -->
-    <!-- <div class="header">
-      <div class="imgBox"><img src="assets/logo.svg" alt="" /></div>
-      <div class="Title"><p>Announcement generator</p></div>
-    </div> -->
-    <!-- header end -->
-    <div style="display: flex">
-      <!-- 1.1. sidebar start -->
-      <div id="sidebar2">
-        <div class="title">
-          <svg
-            id="iconOpened"
-            class="iconOpened iconFold size-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"
-            />
-          </svg>
-        </div>
-      </div>
-      <div id="sidebar" class="sidebar">
-        <div class="title step">
-          <img src="assets/logo.svg" alt="" />
-          <p>公告產生</p>
-          <svg
-            id="iconFold"
-            class="iconFold size-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"
-            />
-          </svg>
-        </div>
 
-        <!-- poster start -->
-
-        <div class="allPosters" id="step1">
-          <div class="poster">
-            <div class="title">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#5f6368"
-              >
-                <path
-                  d="M280-400q17 0 28.5-11.5T320-440q0-17-11.5-28.5T280-480q-17 0-28.5 11.5T240-440q0 17 11.5 28.5T280-400Zm0-120q17 0 28.5-11.5T320-560q0-17-11.5-28.5T280-600q-17 0-28.5 11.5T240-560q0 17 11.5 28.5T280-520Zm0-120q17 0 28.5-11.5T320-680q0-17-11.5-28.5T280-720q-17 0-28.5 11.5T240-680q0 17 11.5 28.5T280-640Zm120 240h200v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"
-                />
-              </svg>
-              <p>公告類型</p>
-            </div>
-            <ul id="announcementType">
-              <!-- $6. Annoucement types -->
-            </ul>
-            <div class="title">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#5f6368"
-              >
-                <path
-                  d="M280-400q17 0 28.5-11.5T320-440q0-17-11.5-28.5T280-480q-17 0-28.5 11.5T240-440q0 17 11.5 28.5T280-400Zm0-120q17 0 28.5-11.5T320-560q0-17-11.5-28.5T280-600q-17 0-28.5 11.5T240-560q0 17 11.5 28.5T280-520Zm0-120q17 0 28.5-11.5T320-680q0-17-11.5-28.5T280-720q-17 0-28.5 11.5T240-680q0 17 11.5 28.5T280-640Zm120 240h200v-80H400v80Zm0-120h320v-80H400v80Zm0-120h320v-80H400v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"
-                />
-              </svg>
-              <p>其他</p>
-            </div>
-            <ul>
-              <li id="guideButton" class="guideDisabled"><p></p></li>
-            </ul>
+    <!---------- $01. Header------------>
+    <div class="header border-b">
+      <div 
+        class="container flex items-center justify-between px-5 max-w-screen-xl mx-auto"
+      >
+        <div id="logo"  class="logo flex items-center">
+          <div class="imgbox w-[80px]">
+            <img src="assets/logo.svg" alt="logo" />
           </div>
+          <p class="font-bold text-black/70 pl-2 cursor-pointer">公告模板</p>
         </div>
-
-        <!-- poster end -->
-      </div>
-      <!-- sidebar end -->
-      <!-- select side menu start -->
-      <div id="selectSideMenu" style="display: block">
-        <img style="width: 220px" src="assets/select.svg" alt="" />
-        <p>請於左側選單選擇公告模板</p>
-      </div>
-      <!-- select side menu end -->
-      <!-- 1.2. posterEdit start -->
-      <div id="dragableContainer" class="mainContent" style="display: none">
-        <div class="tag">View</div>
-        <div id="topPanel" class="artBoard">
-          <div id="step2" class="posterReview">
-            <iframe id="poster" src="announcement-intro.html"></iframe>
-          </div>
-        </div>
-
-        <!-- $1. Resizer -->
-        <div class="resizer">
-          <!-- <div id="dragTrigger" class="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
+        <div class="menu relative border-b-2 border-blue-500 pb-2 pt-4">
+          <ul id="menu" class="cursor-pointer">
+            <li class="text-black/60 font-semibold">模板選擇</li>
+          </ul>
+          <!--   $02.1 Selected modal -->
+          <div class="absolute top-14 right-0 z-10">
+            <div
+              id="menuContainer"
+              class="menu-box hidden drop-shadow-md bg-white rounded-lg p-2"
             >
-              <path
-                d="M480-80 240-320l57-57 183 183 183-183 57 57L480-80ZM298-584l-58-56 240-240 240 240-58 56-182-182-182 182Z"
-              />
-            </svg>
-          </div> -->
-        </div>
+            <!-- menuContainer -->
 
-        <div id="bottomPanel" class="content">
-          <div id="announcementContainer">
-            <p id="typeTitle" class="title">測試</p>
-            <p id="typeDescription" class="description">測試</p>
           </div>
-
-          <!-- form start -->
-          <div id="formContainer">
-            <div id="step3">
-              <div class="formGrid">
-                <div class="inputBox" style="grid-column: span 5">
-                  <label for="email">您的信箱</label>
-                  <input
-                    type="email"
-                    id="yourEmail"
-                    placeholder="公告信件將發送至此信箱"
-                  />
-                </div>
-              </div>
-              <div style="grid-column: span 8"></div>
-              <div class="diver" style="grid-column: span 12"></div>
-              <div class="inputBox" style="grid-column: span 12">
-                <label for="greeting">主旨</label>
-                <textarea id="greeting" rows="4"></textarea>
-              </div>
-            </div>
-            <div id="members">
-              <div class="member formGrid" data-member-id="1">
-                <div
-                  style="
-                    grid-column: span 12;
-                    font-weight: 700;
-                    font-size: 16px;
-                  "
-                >
-                  <p style="display: inline-block">新成員(<span>1</span>)</p>
-                </div>
-                <div class="inputBox" style="grid-column: span 3">
-                  <label for="name">姓名</label>
-                  <input type="text" id="name-1" placeholder="姓名 Name" />
-                </div>
-                <div class="inputBox" style="grid-column: span 3">
-                  <label for="email">Email</label>
-                  <input
-                    type="email"
-                    id="email-1"
-                    placeholder="email@t3ex-thi.com"
-                  />
-                </div>
-                <div class="inputBox" style="grid-column: span 2">
-                  <label for="startDate">報到日</label>
-                  <input type="date" id="startDate-1" />
-                </div>
-                <div class="inputBox" style="grid-column: span 2">
-                  <label for="location">工作地點</label>
-                  <input
-                    type="text"
-                    id="location-1"
-                    placeholder="台北12樓辦公室"
-                  />
-                </div>
-                <div class="inputBox" style="grid-column: span 2">
-                  <label for="extension">聯絡分機</label>
-                  <input type="text" id="extension-1" placeholder="000" />
-                </div>
-                <div class="inputBox" style="grid-column: span 4">
-                  <label for="position">部門職位</label>
-                  <input
-                    type="text"
-                    id="position-1"
-                    placeholder="公司_組別_職務"
-                  />
-                </div>
-                <div class="inputBox" style="grid-column: span 4">
-                  <label for="supervisor">部門主管</label>
-                  <input
-                    type="text"
-                    id="supervisor-1"
-                    placeholder="名字（管轄範圍）"
-                  />
-                </div>
-                <div class="inputBox" style="grid-column: span 4">
-                  <label for="dirSupervisor">直屬主管</label>
-                  <input
-                    type="text"
-                    id="dirSupervisor-1"
-                    placeholder="名字（管轄範圍）"
-                  />
-                </div>
-                <div class="inputBox" style="grid-column: span 12">
-                  <label for="introduction">自我介紹</label>
-                  <textarea
-                    id="introduction-1"
-                    rows="3"
-                    placeholder="自我介紹區塊"
-                  ></textarea>
-                </div>
-                <div class="inputBox" style="grid-column: span 4">
-                  <label for="profile">圖片</label>
-                  <input
-                    type="file"
-                    id="profile-1"
-                    style="background: #ffffff"
-                  />
-                </div>
-              </div>
-              <!-- $2. Insert member's form -->
-            </div>
-            <button class="btnAddNewMember" id="btnAddNewMember">
-              新增成員
-            </button>
-
-            <div class="btnGroup" id="btnGroup">
-              <!-- $3. Update poster -->
-              <div class="btnGroup" id="btnGroup">
-                <button id="btnUpdate" class="btnOutlineDefault">
-                  更新公告
-                </button>
-                <!-- $3. Update poster -->
-                <button id="btnSend" class="btnDefault">寄出</button>
-                <div
-                  style="display: flex; padding-top: 10px; align-items: center"
-                >
-                  <input type="checkbox" id="save" style="margin: 0" />
-                  <label for="save" style="font-size: 14px; margin-left: 5px"
-                    >寄出後將資料暫存</label
-                  >
-                </div>
-              </div>
-            </div>
           </div>
-          <!-- form end -->
         </div>
       </div>
-      <!-- posterEdit end -->
     </div>
-    <!-- $99. Toaster -->
-    <div id="toaster-container" class="toaster-container"></div>
-    <script type="text/javascript" src="assets/main.js" defer></script>
+    <!-- --------------------------- -->
+
+    <!---------- $02. Form ----------->
+    <div class="bg-gray-100 w-full h-full py-10 px-3 mx-auto">
+      <div
+        id="noticeRenderedPart"
+        class="max-w-screen-xl mx-auto w-full h-full"
+      >
+        <div class="mx-auto w-full h-[100vh] relative">
+          <p class="text-black/30 font-bold text-center pt-5">
+            請於右上選單選擇公告模板
+          </p>
+        </div>
+      </div>
+
+      <!---------- $04. Viewer ------------>
+
+      <div class="max-w-screen-xl mx-auto">
+        <div class="">
+          <div id="viewer" class=" drop-shadow-sm mt-5 w-full h-fit   p-10 rounded-lg"></div>
+        </div>
+      </div>
+    </div>
+    <!-- --------------------------- -->
+
+    <!-- $7. Toaster -->
+    <div id="toaster-container" class="toasterContainer">
+    </div>
   </body>
 </html>
