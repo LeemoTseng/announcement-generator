@@ -771,16 +771,18 @@ function checkFiles(file) {
 };
 
 function sendToServer(file, guid) {
- const formData = new FormData();
- formData.append('guid', guid);
- formData.append('File', file);
- console.log(formData);
+ const formdata = new FormData();
+ formdata.append('guid', guid);
+ formdata.append('File', file);
+console.log("sent-guid:", guid);
+console.log("sent-file:", file);
+ console.log(formdata);
 
  
 fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
-  
+
  method: 'POST',
- body: formData,
+ body: formdata,
 
 }).then(res => {
  if (!res.ok) {
