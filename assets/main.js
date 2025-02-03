@@ -705,7 +705,7 @@ function membersForEach(members) {
                 alt=""
               />
             </td>
-            <td width="450" valign="top" style="padding: 20px; background-color: #fff";>
+            <td width="450" valign="top" style="padding: 25px; background-color: #fff";>
               <p style="padding: 0; margin: 0; font-family: '微軟正黑體', sans-serif; font-size: 16px; font-weight: 500;">自我介紹 Self-Introduction</p>
               <p style="padding: 0; margin: 0; margin-top: 10px; font-family: '微軟正黑體', sans-serif; font-size: 24px; font-weight: 800;">${name}</p>
               <p style="padding: 0; margin: 0; margin-top: 10px; font-family: '微軟正黑體', sans-serif; font-size: 18px;line-height: 32px">${introduction}</p>
