@@ -771,7 +771,6 @@ function checkFiles(file) {
 };
 
 function sendToServer(file, guid) {
-  /* 
  const formData = new FormData();
  formData.append('guid', guid);
  formData.append('File', file);
@@ -779,6 +778,7 @@ function sendToServer(file, guid) {
 
  
 fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
+  
  method: 'POST',
  body: formData,
 
@@ -790,7 +790,6 @@ fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
 })
  .then(res => console.log('上傳成功:', res))
  .catch(error => console.error('上傳失敗:', error));
-*/
 }
 
 
@@ -870,7 +869,6 @@ function sendBtn() {
 
 
 function sendToEmail(email, fullTemplate) {
-  /* 
   const raw = JSON.stringify({
     "Email": email,
     "HtmlBody": fullTemplate
@@ -891,7 +889,6 @@ function sendToEmail(email, fullTemplate) {
     })
     .then(res => console.log('寄送成功!!', res))
     .catch(error => console.error('寄送失敗QQ', error));
-    */
 }
 
 // ----------------------//
