@@ -739,7 +739,7 @@ function uploadFile(event) {
   if (isValidateImg) {
     const guid = _generateGuid();
     const img = document.getElementById(event.target.id);
-    const fileType = file.type.split('/').pop();
+    const fileType = file.name.split('.').pop();
     img.dataset.guid = guid;
     img.dataset.filetype = fileType;
 
@@ -752,13 +752,13 @@ function uploadFile(event) {
 
 function checkFiles(file) {
   if (file) {
-    const fileType = file.type;
+    const fileType = file.name.split('.').pop();
     const fileSize = file.size;
     // Check files size and yupe
     if (fileSize > 2000000) {
       showToaster("檔案須小於2mb", "error", 2000);
       return false;
-    } else if (fileType !== 'image/jpeg' && fileType !== 'image/png' && fileType !== 'image/jpg') {
+    } else if (fileType !== 'jpeg' && fileType !== 'png' && fileType !== 'jpg') {
       showToaster("檔案僅接受jpg, png, jpeg格式", "error", 2000);
       return false;
     } else {
@@ -857,7 +857,7 @@ function sendBtn() {
     imgs.forEach(img => {
       const guid = img.getAttribute('data-guid');
       const fileType = img.getAttribute('data-filetype');
-      const newSrc = `https://netapi.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileType}`
+      const newSrc = `https://netapi-test.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileType}`
       img.src = newSrc;
 
     })
