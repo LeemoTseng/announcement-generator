@@ -695,7 +695,7 @@ function membersForEach(members) {
               <!-- 300x320 -->
               <img
                 class="profileImg"
-                width="450px"
+                width="450"
                 height="auto"
                 style="border-radius: 10px;"
                 src="${imageSrc}"
