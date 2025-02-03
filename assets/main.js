@@ -859,6 +859,7 @@ function sendBtn() {
       const fileType = img.getAttribute('data-filetype');
       const newSrc = `https://netapi-test.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileType}`
       img.src = newSrc;
+      console.log('newSrc:', newSrc);
 
     })
     const fullTemplate = `${sendenTemplateStart}${sendedContent.outerHTML}${sendenTemplateEnd}`;
