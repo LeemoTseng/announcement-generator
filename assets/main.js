@@ -771,27 +771,28 @@ function checkFiles(file) {
 };
 
 function sendToServer(file, guid) {
- const formdata = new FormData();
- formdata.append('guid', guid);
- formdata.append('File', file);
-console.log("sent-guid:", guid);
-console.log("sent-file:", file);
- console.log(formdata);
+  const formdata = new FormData();
+  formdata.append('guid', guid);
+  formdata.append('File', file);
 
- 
-fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
+  console.log("sent-guid:", guid);
+  console.log("sent-file:", file);
+  console.log(formdata);
 
- method: 'POST',
- body: formdata,
 
-}).then(res => {
- if (!res.ok) {
-   throw new Error(`HTTP error! status: ${res.status}`);
- }
- return res.json();
-})
- .then(res => console.log('上傳成功:', res))
- .catch(error => console.error('上傳失敗:', error));
+  fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
+
+    method: 'POST',
+    body: formdata,
+
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    return res.json();
+  })
+    .then(res => console.log('上傳成功:', res))
+    .catch(error => console.error('上傳失敗:', error));
 }
 
 
@@ -856,7 +857,7 @@ function sendBtn() {
     imgs.forEach(img => {
       const guid = img.getAttribute('data-guid');
       const fileType = img.getAttribute('data-filetype');
-      const newSrc = `https://netapi-test.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileType}`
+      const newSrc = `https://netapi.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileType}`
       img.src = newSrc;
 
     })
@@ -864,7 +865,7 @@ function sendBtn() {
     const email = document.getElementById('yourEmail').value;
     sendToEmail(email, fullTemplate)
     showToaster('寄送成功!!', 'info', 2000);
-  } else{
+  } else {
     showToaster('請填寫完整資料', 'error', 2000);
   }
 }
@@ -957,7 +958,7 @@ function hideLoading() {
 const menu = document.getElementById('menu');
 
 menu.addEventListener('click', (event) => {
-  event.stopPropagation(); 
+  event.stopPropagation();
   menuContainer.classList.toggle('hidden');
 });
 
@@ -981,7 +982,7 @@ document.addEventListener('click', (event) => {
 
 
 function saveToLocalStorage() {
-  const yourEmail= document.getElementById('yourEmail')
+  const yourEmail = document.getElementById('yourEmail')
   const greetingText = document.getElementById('greetingText')
   const checkEmail = document.getElementById('checkEmail')
   const checkGreeting = document.getElementById('checkGreeting')
@@ -997,7 +998,7 @@ function saveToLocalStorage() {
   }
 
   // Save email
-  if (checkEmail?.checked) { 
+  if (checkEmail?.checked) {
     localStorage.setItem('yourEmail', yourEmail.value);
     localStorage.setItem('saveEmailChecked', true);
   } else {
