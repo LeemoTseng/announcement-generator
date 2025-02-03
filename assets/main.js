@@ -598,7 +598,7 @@ function renderPoster(members) {
               <td style="background-color: #f4f4f4"></td>
               <td style="background-color: #fff">
                 <img
-                  src="https://material.t3ex-group.com/announcement/header.png"
+                  src="https://netapi-test.t3ex-group.com/uploads/announcement/newEmployee/6ca3156b-d186-e000-9d7e-7b40f75a39aa.png"
                   alt=""
                 />
               </td>
