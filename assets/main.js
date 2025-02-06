@@ -12,8 +12,7 @@
 // $7. Toaster
 // $8. Logo
 // $9. Menu
-// $10.
-// $11.
+// $10. Save to LocalStorage
 //
 //
 //----------------------//
@@ -149,7 +148,7 @@ const newMemberModelTemplate = `
                   id="selectedModelDescription"
                   class="text-sm text-black/50 pt-2"
                 >
-                  請於左側選擇模板，並上下對照填妥下列表格，點選「更新公告」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。
+                  請選擇模板，並填妥模板表格；點選「更新公告」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。
                 </p>
               </div>
 
@@ -979,7 +978,7 @@ document.addEventListener('click', (event) => {
 
 
 //----------------------//
-// $11. Save to LocalStorage
+// $10. Save to LocalStorage
 //----------------------//
 
 
