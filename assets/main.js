@@ -148,7 +148,7 @@ const newMemberModelTemplate = `
                   id="selectedModelDescription"
                   class="text-sm text-black/50 pt-2"
                 >
-                  請選擇模板，並填妥模板表格；點選「更新公告」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。
+                  請選擇模板，並填妥模板表格；點選「更新瀏覽圖」查看目前填入狀況；點選「寄出」會將該公告寄送到您填寫的信箱。
                 </p>
               </div>
 
