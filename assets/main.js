@@ -512,10 +512,8 @@ function membersForEach(members) {
                   <td valign="top" align="justify" width="450" style="padding: 20px; background-color: #fff";>
                     <p style="padding: 0; margin: 0; font-family: '微軟正黑體', sans-serif; font-size: 16px; font-weight: 500;">自我介紹 Self-Introduction</p>
                     <p style="padding: 0; margin: 0; margin-top: 10px; font-family: '微軟正黑體', sans-serif; font-size: 24px; font-weight: 800;">${name}</p>
-                    <p style="padding: 0; margin: 0; margin-top: 10px; margin-bottom:40px; font-family: '微軟正黑體', sans-serif; font-size: 16px; line-height: 32px">${introduction}</p>
-                    <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-                      <tr><td height="1" style="background-color:#cccccc; line-height:1px; font-size:1px;">&nbsp;</td></tr>
-                    </table>
+                    <p style="padding: 0; margin: 0; margin-top: 10px; margin-bottom:10px; font-family: '微軟正黑體', sans-serif; font-size: 17px; line-height: 26px">${introduction}</p>
+
                   </td>
                 </tr>
                 <tr>
@@ -526,7 +524,8 @@ function membersForEach(members) {
                     <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">部門主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${supervisor}</span></p>
                     <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">工作地點 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${location}</span></p>
                     <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">聯絡分機 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${extension}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin-bottom: 10px; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">E-mail <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${email}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">E-mail <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${email}</span></p>
+                    <p style="margin: 10px></p>
                   </td>
                 </tr>
               </table>
@@ -611,7 +610,7 @@ function sendToServer(file, guid) {
       // http status code
       let statusCode = error.message.match(/\d+/) ? parseInt(error.message.match(/\d+/)[0]) : null;
 
-      if (statusCode === 400|| statusCode === 415) {
+      if (statusCode === 400 || statusCode === 415) {
         showToaster('格式錯誤', 'error', 3000);
       } else if (statusCode === 500 || statusCode === 502 || statusCode === 503 || statusCode === 504) {
         showToaster('伺服器錯誤，請聯絡管理人員', 'error', 3000);
@@ -711,14 +710,13 @@ const sendenTemplateEnd = `  </body>
 
 function sendBtn() {
   if (updateNotice()) {
-    // 移除 saveToLocalStorage(); 呼叫（不再儲存 Email/主旨於此處）
     const imgs = sendedContent.querySelectorAll('.profileImg');
     imgs.forEach(img => {
       const guid = img.getAttribute('data-guid');
       const fileType = img.getAttribute('data-filetype');
       const newSrc = `https://netapi-test.t3ex-group.com/uploads/announcement/newEmployee/${guid}.${fileType}`
       img.src = newSrc;
-      console.log('newSrc:', newSrc);
+      console.log('newSrc', newSrc);
     })
     const fullTemplate = `${sendenTemplateStart}${sendedContent.outerHTML}${sendenTemplateEnd}`;
     const email = document.getElementById('yourEmail').value;
@@ -757,7 +755,7 @@ function sendToEmail(email, fullTemplate) {
 
       // http status code
       let statusCode = error.message.match(/\d+/) ? parseInt(error.message.match(/\d+/)[0]) : null;
-      if (statusCode === 400|| statusCode === 415) {
+      if (statusCode === 400 || statusCode === 415) {
         showToaster('格式錯誤', 'error', 3000);
       } else if (statusCode === 500 || statusCode === 502 || statusCode === 503 || statusCode === 504) {
         showToaster('伺服器錯誤，請聯絡管理人員', 'error', 3000);
