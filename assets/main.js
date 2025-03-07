@@ -560,6 +560,7 @@ function uploadFile(event) {
     fileReader(file).then((res) => {
       img.src = res;
     });
+    console.log('圖片上傳', file, guid)
     sendToServer(file, guid);
   }
 }
@@ -584,11 +585,11 @@ function checkFiles(file) {
 };
 
 function sendToServer(file, guid) {
+  console.log('準備上傳:', file, guid);
   const formdata = new FormData();
   formdata.append('guid', guid);
   formdata.append('File', file);
 
-  console.log('準備上傳:', formdata);
 
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/file', {
     method: 'POST',
@@ -733,6 +734,7 @@ function sendToEmail(email, fullTemplate) {
     "Email": email,
     "HtmlBody": fullTemplate
   })
+  console.log('raw:', raw);
   fetch('https://netapi-test.t3ex-group.com/api/Announcement/email', {
     method: 'POST',
     body: raw,
