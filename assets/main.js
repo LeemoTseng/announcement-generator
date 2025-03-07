@@ -709,7 +709,7 @@ const sendenTemplateEnd = `  </body>
       </html>`
 
 function sendBtn() {
-  if (updateNotice()) {
+  if (validateInput(yourEmail) && validateInput(greetingText)) {
     const imgs = sendedContent.querySelectorAll('.profileImg');
     imgs.forEach(img => {
       const guid = img.getAttribute('data-guid');
