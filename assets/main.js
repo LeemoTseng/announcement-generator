@@ -520,13 +520,13 @@ function membersForEach(members) {
                 </tr>
                 <tr>
                   <td  valign="bottom" align="justify" width="450" style="display: table-cell; vertical-align: bottom; padding: 20px; background-color: #fff";>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">到職日期 <span style="color: rgb(134, 134, 134); padding-left: 10px; font-weight: 400">${startDate}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門職位 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${position}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">直屬主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${dirSupervisor}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${supervisor}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">工作地點 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${location}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">聯絡分機 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${extension}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin-bottom: 10px; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">E-mail <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${email}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">到職日期 <span style="color: rgb(134, 134, 134); padding-left: 10px; font-weight: 400">${startDate}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">部門職位 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${position}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">直屬主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${dirSupervisor}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">部門主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${supervisor}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">工作地點 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${location}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">聯絡分機 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${extension}</span></p>
+                    <p style="padding: 0; padding-bottom: 5px; margin-bottom: 10px; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 17px;">E-mail <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${email}</span></p>
                   </td>
                 </tr>
               </table>
@@ -603,7 +603,7 @@ function sendToServer(file, guid) {
     })
     .then((res) => {
       console.log('上傳成功:', res);
-      showToaster('寄出成功', 'info', 3000);
+      showToaster('上傳成功', 'info', 3000);
     })
     .catch((error) => {
       console.error('上傳失敗:', error);
