@@ -522,13 +522,28 @@ function membersForEach(members) {
                 </tr>
                 <tr>
                   <td  valign="bottom" align="justify" width="450" style="display: table-cell; vertical-align: bottom; padding: 20px; background-color: #fff";>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">到職日期 <span style="color: rgb(134, 134, 134); padding-left: 10px; font-weight: 400">${startDate}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門職位 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${position}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">直屬主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${dirSupervisor}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${supervisor}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">工作地點 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${location}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">聯絡分機 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${extension}</span></p>
-                    <p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">E-mail <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${email}</span></p>
+                    ${ startDate ?
+                      `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">到職日期 <span style="color: rgb(134, 134, 134); padding-left: 10px; font-weight: 400">${startDate}</span></p>` :
+                      ''
+                    }
+                    ${ position ? `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門職位 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${position}</span></p>` :
+                      ''
+                    }
+                    ${ dirSupervisor ? `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">直屬主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${dirSupervisor}</span></p>` :
+                      ''
+                    }
+                    ${ supervisor ? `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">部門主管 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${supervisor}</span></p>` :
+                      ''
+                    }
+                    ${ location ? `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">工作地點 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${location}</span></p>` :
+                      ''
+                    }
+                    ${ extension ? `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">聯絡分機 <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${extension}</span></p>` :
+                      ''
+                    }
+                    ${ email ? `<p style="padding: 0; padding-bottom: 5px; margin: 0; font-family: '微軟正黑體', sans-serif; color: rgb(70,70,70); font-weight: 600; font-size: 16px;">E-mail <span style="color: rgb(134, 134, 134); padding-left: 8px; font-weight: 400">${email}</span></p>` :
+                      ''
+                    }
                     <p style="margin: 10px"></p>
                   </td>
                 </tr>
@@ -552,25 +567,46 @@ isValidateImg = false
 /** */
 function uploadFile(event) {
   const file = event.target.files[0];
-  isValidateImg = checkFiles(file);
+  const isValidateImg = checkFiles(file);
+  const imgElement = document.getElementById(event.target.id);
 
   if (isValidateImg) {
-    // const guid = _generateGuid();
-    // fileReader(file).then((res) => {
-    //   img.src = res;
-    // });
-    const img = document.getElementById(event.target.id);
-    fileReader(file).then(base64Data => {
-      img.src = base64Data;
+    // 壓縮後再設定到 img
+    compressImage(file, 450)
+      .then((base64Data) => {
+        // 顯示壓縮後的圖片
+        imgElement.src = base64Data;
 
-      console.log('img.src', img.src);
-      const fileType = file.name.split('.').pop();
-      img.dataset.filetype = fileType;
-      img.dataset.srcBase64 = img.src;
-    });
-    // img.dataset.guid = guid;
-    // sendToServer(file, guid);
+        // 取檔名副檔名
+        const fileType = file.name.split('.').pop();
+        // 自訂 data-* 屬性
+        imgElement.dataset.filetype = fileType;
+        imgElement.dataset.srcBase64 = base64Data;
+
+        console.log('壓縮後的 Base64：', base64Data);
+      })
+      .catch((error) => {
+        console.error('圖片壓縮失敗：', error);
+      });
   }
+
+  // if (isValidateImg) {
+  //   // const guid = _generateGuid();
+  //   // fileReader(file).then((res) => {
+  //   //   img.src = res;
+  //   // });
+  //   const img = document.getElementById(event.target.id);
+  //   fileReader(file).then(base64Data => {
+  //     img.src = base64Data;
+
+  //     console.log('img.src', img.src);
+  //     const fileType = file.name.split('.').pop();
+  //     img.dataset.filetype = fileType;
+  //     img.dataset.srcBase64 = img.src;
+  //   });
+  //   // img.dataset.guid = guid;
+  //   // sendToServer(file, guid);
+  // }
 }
 
 function checkFiles(file) {
@@ -701,6 +737,48 @@ function compressImage(file) {
       };
     };
     reader.onerror = (error) => reject(error);
+  });
+}
+
+function compressImage(file, widthFixed) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (event) {
+      const img = new Image();
+      img.src = event.target.result;
+
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // 固定寬度，依照原圖比例計算高度
+        const targetWidth = widthFixed;
+        const aspectRatio = img.height / img.width;
+        const targetHeight = targetWidth * aspectRatio;
+
+        // 設定 canvas 尺寸
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        // 將圖片繪製到 canvas（等比縮放）
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+        // 將 canvas 轉為 Base64
+        // 第二個參數 (0~1) 表示壓縮品質，0.8 代表 80% 品質
+        // 若不想壓縮可改成 1，或使用 'image/png' 。
+        const newBase64 = canvas.toDataURL('image/jpeg', 0.8);
+
+        resolve(newBase64);
+      };
+
+      img.onerror = function (err) {
+        reject(err);
+      };
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
   });
 }
 
